@@ -53,7 +53,8 @@ export default function Portfolio() {
           <Image
             src="/portfolio.JPG"
             alt="Ali Khries"
-            fill
+            width={384}
+            height={384}
             className="rounded-2xl object-cover"
             priority
           />
@@ -62,8 +63,6 @@ export default function Portfolio() {
         {/* Download CV and Location */}
         <div className="flex items-center justify-between w-full max-w-[320px] md:max-w-[384px] mb-8">
           <Button 
-            variant="default" 
-            size="default"
             className="bg-black text-white hover:bg-black/90 rounded-lg px-4"
             asChild
           >
