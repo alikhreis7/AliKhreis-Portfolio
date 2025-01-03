@@ -4,7 +4,7 @@ import { motion } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Download, MapPin, Github, Linkedin, Mail } from 'lucide-react'
+import { Download, Github, Linkedin, Mail } from 'lucide-react'
 
 export default function Portfolio() {
   return (
@@ -78,10 +78,10 @@ export default function Portfolio() {
         {/* Introduction Text */}
         <div className="max-w-3xl mx-auto text-center space-y-4 mb-12 mt-16">
           <p className="text-gray-700 leading-relaxed">
-            I'm a software engineer with a strong background in full-stack development, GIS solutions, and data-driven problem-solving. As a graduate in Software Engineering, I've honed my skills in programming, web development, and project management. My academic journey has been enriched by practical experience and a passion for building innovative solutions that address real-world challenges.
+            I&apos;m a software engineer with a strong background in full-stack development, GIS solutions, and data-driven problem-solving. As a graduate in Software Engineering, I&apos;ve honed my skills in programming, web development, and project management. My academic journey has been enriched by practical experience and a passion for building innovative solutions that address real-world challenges.
           </p>
           <p className="text-gray-700 leading-relaxed">
-            Starting January 2025, I will begin my master's in Electrical and Computer Engineering (Applied Artificial Intelligence), with a focus on real-world applications to drive innovation and impact. I am passionate about leveraging AI, data, and technology to solve complex challenges and create meaningful solutions.
+            Starting January 2025, I will begin my master&apos;s in Electrical and Computer Engineering (Applied Artificial Intelligence), with a focus on real-world applications to drive innovation and impact. I am passionate about leveraging AI, data, and technology to solve complex challenges and create meaningful solutions.
           </p>
         </div>
 
