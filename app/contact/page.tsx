@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { Github, Linkedin, Mail, Phone, MapPin, MessageCircle, Download } from 'lucide-react'
 import Image from 'next/image'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import emailjs from '@emailjs/browser'
 
 export default function Contact() {
@@ -14,10 +14,6 @@ export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitSuccess, setSubmitSuccess] = useState(false)
   const [submitError, setSubmitError] = useState('')
-
-  useEffect(() => {
-    emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!)
-  }, [])
 
   const validateEmail = (value: string) => {
     if (!value) {
@@ -48,7 +44,7 @@ export default function Contact() {
     }
 
     setIsSubmitting(true)
-    setSubmitError('')  // Clear any previous errors
+    setSubmitError('')
 
     try {
       const templateParams = {
@@ -59,10 +55,10 @@ export default function Contact() {
       }
 
       await emailjs.send(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+        'service_pxm4vry',
+        'template_zrzpglu',
         templateParams,
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+        'BW12oiGgE44xMbpFa'
       )
       
       // Clear form and show success
