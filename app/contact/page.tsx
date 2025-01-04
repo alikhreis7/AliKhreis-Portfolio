@@ -13,6 +13,7 @@ export default function Contact() {
   const [emailError, setEmailError] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitSuccess, setSubmitSuccess] = useState(false)
+  const [submitError, setSubmitError] = useState('')
 
   useEffect(() => {
     emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!)
@@ -34,9 +35,21 @@ export default function Contact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    
+    // Validate all fields
+    if (!name.trim()) {
+      setSubmitError('Please enter your name')
+      return
+    }
     if (!validateEmail(email)) return
+    if (!message.trim()) {
+      setSubmitError('Please enter a message')
+      return
+    }
 
     setIsSubmitting(true)
+    setSubmitError('')  // Clear any previous errors
+
     try {
       const templateParams = {
         from_name: name,
@@ -63,6 +76,7 @@ export default function Contact() {
       }, 5000)
     } catch (error) {
       console.error('Error submitting form:', error)
+      setSubmitError('Failed to send message. Please try again.')
     } finally {
       setIsSubmitting(false)
     }
@@ -150,6 +164,12 @@ export default function Contact() {
           {submitSuccess && (
             <div className="mt-4 p-4 bg-green-100 text-green-700 rounded-xl">
               Thank you for your message! I&apos;ll get back to you soon.
+            </div>
+          )}
+
+          {submitError && (
+            <div className="mt-4 p-4 bg-red-100 text-red-700 rounded-xl">
+              {submitError}
             </div>
           )}
         </form>
