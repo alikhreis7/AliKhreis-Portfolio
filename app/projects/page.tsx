@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { Github, Linkedin, Mail, Folder } from 'lucide-react'
+import { Github, Linkedin, Mail, Folder, Download } from 'lucide-react'
 
 export default function Projects() {
   return (
@@ -130,6 +130,15 @@ export default function Projects() {
             className="p-3 rounded-full hover:bg-gray-100 transition-colors"
           >
             <Mail className="w-6 h-6" />
+          </Link>
+          <Link 
+            href="/Ali-K-Resume.pdf" 
+            target="_blank" 
+            download
+            className="p-3 rounded-full hover:bg-gray-100 transition-colors"
+            aria-label="Download Resume"
+          >
+            <Download className="w-6 h-6" />
           </Link>
         </div>
       </div>

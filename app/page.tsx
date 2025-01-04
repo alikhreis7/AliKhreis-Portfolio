@@ -65,12 +65,12 @@ export default function Portfolio() {
         {/* Download CV and Location */}
         <div className="flex flex-col md:flex-row items-center gap-4 md:justify-between w-full max-w-[320px] md:max-w-[384px] mb-8">
           <Button 
-            className="bg-black text-white hover:bg-black/90 rounded-lg px-4 w-full md:w-auto"
+            className="bg-black text-white hover:bg-black/90 rounded-lg px-4"
             asChild
           >
-            <Link href="/resume.pdf" target="_blank" download>
+            <Link href="/Ali-K-Resume.pdf" target="_blank" download>
               <Download className="mr-2 h-5 w-5 text-yellow-300" /> 
-              Download CV
+              Download Resume
             </Link>
           </Button>
           <div className="text-base">Ottawa, ON, Canada</div>

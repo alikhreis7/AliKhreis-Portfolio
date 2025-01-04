@@ -1,9 +1,10 @@
 'use client'
 
 import Link from 'next/link'
-import { Github, Linkedin, Mail, Phone, MapPin, MessageCircle } from 'lucide-react'
+import { Github, Linkedin, Mail, Phone, MapPin, MessageCircle, Download } from 'lucide-react'
 import Image from 'next/image'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import emailjs from '@emailjs/browser'
 
 export default function Contact() {
   const [email, setEmail] = useState('')
@@ -12,6 +13,10 @@ export default function Contact() {
   const [emailError, setEmailError] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitSuccess, setSubmitSuccess] = useState(false)
+
+  useEffect(() => {
+    emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!)
+  }, [])
 
   const validateEmail = (value: string) => {
     if (!value) {
@@ -33,17 +38,26 @@ export default function Contact() {
 
     setIsSubmitting(true)
     try {
-      // Here you would typically send the data to your backend
-      // For now, we'll simulate a submission
-      await new Promise(resolve => setTimeout(resolve, 1000))
+      const templateParams = {
+        from_name: name,
+        from_email: email,
+        message: message,
+        to_name: 'Ali Khries',
+      }
+
+      await emailjs.send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+        templateParams,
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+      )
       
-      // Clear form
+      // Clear form and show success
       setName('')
       setEmail('')
       setMessage('')
       setSubmitSuccess(true)
       
-      // Reset success message after 5 seconds
       setTimeout(() => {
         setSubmitSuccess(false)
       }, 5000)
@@ -180,6 +194,15 @@ export default function Contact() {
             className="p-3 rounded-full hover:bg-gray-100 transition-colors"
           >
             <Mail className="w-6 h-6" />
+          </Link>
+          <Link 
+            href="/Ali-K-Resume.pdf" 
+            target="_blank" 
+            download
+            className="p-3 rounded-full hover:bg-gray-100 transition-colors"
+            aria-label="Download Resume"
+          >
+            <Download className="w-6 h-6" />
           </Link>
         </div>
       </div>
