@@ -137,6 +137,11 @@ export default function Portfolio() {
                 </Link>
               </li>
               <li>
+                <Link href="/blog" className="px-4 py-2 rounded-full hover:bg-gray-100/80 text-gray-800 transition-colors font-medium">
+                  Blog
+                </Link>
+              </li>
+              <li>
                 <Link href="/contact" className="px-4 py-2 rounded-full hover:bg-gray-100/80 text-gray-800 transition-colors font-medium">
                   Contact
                 </Link>

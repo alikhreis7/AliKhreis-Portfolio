@@ -107,6 +107,13 @@ export default function ProjectDetail() {
         <div className="max-w-md w-full mx-4">
           <nav className="bg-gradient-to-b from-white/60 to-white/30 backdrop-blur-md rounded-full p-2 shadow-[0_4px_20px_-2px_rgba(0,0,0,0.1)] border border-white/20">
             <ul className="flex items-center justify-center w-full gap-6">
+              <Image
+                src="/portfolio.JPG"
+                alt="Ali Khries"
+                width={32}
+                height={32}
+                className="w-8 h-8 rounded-full object-cover"
+              />
               <li>
                 <Link href="/" className="px-4 py-2 rounded-full hover:bg-gray-100/80 text-gray-800 transition-colors font-medium">
                   About
@@ -115,6 +122,11 @@ export default function ProjectDetail() {
               <li>
                 <Link href="/projects" className="px-4 py-2 rounded-full hover:bg-gray-100/80 text-gray-800 transition-colors font-medium">
                   Projects
+                </Link>
+              </li>
+              <li>
+                <Link href="/blog" className="px-4 py-2 rounded-full hover:bg-gray-100/80 text-gray-800 transition-colors font-medium">
+                  Blog
                 </Link>
               </li>
               <li>

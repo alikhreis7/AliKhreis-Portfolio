@@ -2,9 +2,9 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { Github, Linkedin, Mail, Folder, Download } from 'lucide-react'
+import { Github, Linkedin, Mail, BookOpen, Download } from 'lucide-react'
 
-export default function Projects() {
+export default function Blog() {
   return (
     <div className="min-h-screen w-full bg-white">
       {/* Header */}
@@ -13,97 +13,21 @@ export default function Projects() {
           <span>← Back to home</span>
         </Link>
         <div className="flex items-center gap-2">
-          <Folder className="w-6 h-6 text-yellow-400" />
-          <span className="font-medium">My Projects</span>
+          <BookOpen className="w-6 h-6 text-yellow-400" />
+          <span className="font-medium">My Blog</span>
         </div>
       </div>
 
-      {/* Projects Grid */}
+      {/* Blog Content */}
       <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {/* Project 1 */}
-          <Link href="/projects/syllabussync" className="group cursor-pointer">
-            <div className="aspect-square rounded-3xl overflow-hidden mb-4">
-              <Image
-                src="/project1.jpg"
-                alt="Networking Project"
-                width={500}
-                height={500}
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <div className="space-y-2">
-              <span className="inline-block px-3 py-1 bg-yellow-100 rounded-full text-sm font-medium">
-                Full Stack Development
-              </span>
-              <h3 className="text-xl font-semibold">
-                SyllabusSync
-              </h3>
-            </div>
-          </Link>
-
-          {/* Project 2 */}
-          <Link href="/projects/calculator" className="group cursor-pointer">
-            <div className="aspect-square rounded-3xl overflow-hidden mb-4">
-              <Image
-                src="/calculator.jpg"
-                alt="Calculator Project"
-                width={500}
-                height={500}
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <div className="space-y-2">
-              <span className="inline-block px-3 py-1 bg-yellow-100 rounded-full text-sm font-medium">
-                Backend Development
-              </span>
-              <h3 className="text-xl font-semibold">
-                Calculator App
-              </h3>
-            </div>
-          </Link>
-
-          {/* Project 3 */}
-          <Link href="/projects/salon" className="group cursor-pointer">
-            <div className="aspect-square rounded-3xl overflow-hidden mb-4">
-              <Image
-                src="/salon.jpg"
-                alt="Salon Website"
-                width={500}
-                height={500}
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <div className="space-y-2">
-              <span className="inline-block px-3 py-1 bg-yellow-100 rounded-full text-sm font-medium">
-                Frontend Development
-              </span>
-              <h3 className="text-xl font-semibold">
-                Elegance Salon
-              </h3>
-            </div>
-          </Link>
-
-          {/* Project 4 */}
-          <Link href="/projects/portfolio" className="group cursor-pointer">
-            <div className="aspect-square rounded-3xl overflow-hidden mb-4">
-              <Image
-                src="/portfoliopic.jpg"
-                alt="Portfolio Website"
-                width={500}
-                height={500}
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <div className="space-y-2">
-              <span className="inline-block px-3 py-1 bg-yellow-100 rounded-full text-sm font-medium">
-                Frontend Development
-              </span>
-              <h3 className="text-xl font-semibold">
-                Personal Portfolio
-              </h3>
-            </div>
-          </Link>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          {/* Coming Soon Message */}
+          <div className="col-span-full text-center py-20">
+            <h1 className="text-4xl font-bold mb-4">Blog Coming Soon!</h1>
+            <p className="text-gray-600">
+              I&apos;m currently working on some interesting articles. Check back soon!
+            </p>
+          </div>
         </div>
       </div>
 
