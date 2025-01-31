@@ -106,31 +106,31 @@ export default function ProjectDetail() {
       <div className="fixed bottom-4 left-0 right-0 flex justify-center z-50">
         <div className="max-w-md w-full mx-4">
           <nav className="bg-gradient-to-b from-white/60 to-white/30 backdrop-blur-md rounded-full p-2 shadow-[0_4px_20px_-2px_rgba(0,0,0,0.1)] border border-white/20">
-            <ul className="flex items-center justify-center w-full gap-6">
+            <ul className="flex items-center justify-center w-full gap-2 md:gap-6">
               <Image
                 src="/portfolio.JPG"
                 alt="Ali Khries"
                 width={32}
                 height={32}
-                className="w-8 h-8 rounded-full object-cover"
+                className="w-6 h-6 md:w-8 md:h-8 rounded-full object-cover"
               />
               <li>
-                <Link href="/" className="px-4 py-2 rounded-full hover:bg-gray-100/80 text-gray-800 transition-colors font-medium">
+                <Link href="/" className="px-2 md:px-4 py-2 rounded-full hover:bg-gray-100/80 text-gray-800 transition-colors text-sm md:text-base font-medium">
                   About
                 </Link>
               </li>
               <li>
-                <Link href="/projects" className="px-4 py-2 rounded-full hover:bg-gray-100/80 text-gray-800 transition-colors font-medium">
+                <Link href="/projects" className="px-2 md:px-4 py-2 rounded-full hover:bg-gray-100/80 text-gray-800 transition-colors text-sm md:text-base font-medium">
                   Projects
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="px-4 py-2 rounded-full hover:bg-gray-100/80 text-gray-800 transition-colors font-medium">
+                <Link href="/blog" className="px-2 md:px-4 py-2 rounded-full hover:bg-gray-100/80 text-gray-800 transition-colors text-sm md:text-base font-medium">
                   Blog
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="px-4 py-2 rounded-full hover:bg-gray-100/80 text-gray-800 transition-colors font-medium">
+                <Link href="/contact" className="px-2 md:px-4 py-2 rounded-full hover:bg-gray-100/80 text-gray-800 transition-colors text-sm md:text-base font-medium">
                   Contact
                 </Link>
               </li>
