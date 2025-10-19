@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
 import { Client } from '@notionhq/client';
-import { NotionAPI } from 'notion-client';
 import type { 
   DatabaseObjectResponse,
   PageObjectResponse, 
@@ -22,8 +21,6 @@ const notion = new Client({
   auth: NOTION_TOKEN,
 });
 
-const notionX = new NotionAPI();
-
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
@@ -38,10 +35,11 @@ export async function GET(request: Request) {
     
     // Otherwise, fetch all posts
     return getAllPosts();
-  } catch (error: any) {
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     console.error('Error in main GET handler:', error);
     return NextResponse.json(
-      { error: 'Error processing request', message: error?.message || 'Unknown error' },
+      { error: 'Error processing request', message: errorMessage },
       { status: 500 }
     );
   }
@@ -77,8 +75,9 @@ async function getAllPosts() {
           : 'No title';
         console.log('Database title:', dbTitle);
         console.log('Database properties:', Object.keys(database.properties));
-      } catch (dbError: any) {
-        console.error('Failed to retrieve database:', dbError?.message, dbError?.code, dbError?.status);
+      } catch (dbError) {
+        const dbErrorMsg = dbError instanceof Error ? dbError.message : 'Unknown error';
+        console.error('Failed to retrieve database:', dbErrorMsg);
       }
       
       // Continue with original query
@@ -130,8 +129,9 @@ async function getAllPosts() {
               } else if ('created_time' in pageObj) {
                 date = pageObj.created_time;
               }
-            } catch (e: any) {
-              console.log('Error extracting date:', e?.message);
+            } catch (e) {
+              const msg = e instanceof Error ? e.message : 'Unknown error';
+              console.log('Error extracting date:', msg);
             }
             
             // Extract description
@@ -146,8 +146,9 @@ async function getAllPosts() {
                   description = descProp.rich_text[0].plain_text;
                 }
               }
-            } catch (e: any) {
-              console.log('Error extracting description:', e?.message);
+            } catch (e) {
+              const msg = e instanceof Error ? e.message : 'Unknown error';
+              console.log('Error extracting description:', msg);
             }
             
             // Get cover image if available
@@ -170,8 +171,9 @@ async function getAllPosts() {
                   }
                 }
               }
-            } catch (e: any) {
-              console.log('Error extracting cover:', e?.message);
+            } catch (e) {
+              const msg = e instanceof Error ? e.message : 'Unknown error';
+              console.log('Error extracting cover:', msg);
             }
 
             return {
@@ -182,7 +184,7 @@ async function getAllPosts() {
               cover,
               slug: title.toLowerCase().replace(/\s+/g, '-'),
             };
-          } catch (err: any) {
+          } catch (err) {
             console.error('Error processing page:', err);
             return {
               id: 'id' in page ? page.id : 'unknown',
@@ -197,25 +199,24 @@ async function getAllPosts() {
       );
 
       return NextResponse.json(posts);
-    } catch (queryError: any) {
+    } catch (queryError) {
+      const qerrMsg = queryError instanceof Error ? queryError.message : 'Unknown error';
       console.error('Notion query error:', queryError);
-      console.error('Error details:', queryError?.code, queryError?.status);
       
       // Return more detailed error info
       return NextResponse.json(
         { 
           error: 'Failed to query Notion database',
-          message: queryError?.message || 'Unknown error',
-          code: queryError?.code,
-          status: queryError?.status
+          message: qerrMsg
         }, 
         { status: 500 }
       );
     }
-  } catch (error: any) {
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     console.error('Error in getAllPosts:', error);
     return NextResponse.json(
-      { error: 'Failed to fetch posts', message: error?.message || 'Unknown error' }, 
+      { error: 'Failed to fetch posts', message: errorMessage }, 
       { status: 500 }
     );
   }
@@ -248,10 +249,11 @@ async function getPageContent(id: string) {
       page,
       blocks: blocks.results
     });
-  } catch (error: any) {
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     console.error('Error fetching page content:', error);
     return NextResponse.json(
-      { error: 'Failed to fetch post content', message: error?.message || 'Unknown error' }, 
+      { error: 'Failed to fetch post content', message: errorMessage }, 
       { status: 500 }
     );
   }

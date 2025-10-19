@@ -9,7 +9,7 @@ export default function TermsOfUse() {
             <h2 className="text-2xl font-semibold mb-4">Introduction</h2>
             <p>Last updated: {new Date().toLocaleDateString()}</p>
             <p className="mt-4">
-              These Terms of Use govern your access to and use of my blog at alikhreis.ca/blog ("the Blog").
+              These Terms of Use govern your access to and use of my blog at alikhreis.ca/blog (&quot;the Blog&quot;).
             </p>
           </section>
 
@@ -30,7 +30,7 @@ export default function TermsOfUse() {
           <section>
             <h2 className="text-2xl font-semibold mb-4">Changes to Terms</h2>
             <p>
-              I reserve the right to modify or replace these Terms of Use at any time. If a revision is material, I will try to provide at least 30 days' notice prior to any new terms taking effect.
+              I reserve the right to modify or replace these Terms of Use at any time. If a revision is material, I will try to provide at least 30 days&apos; notice prior to any new terms taking effect.
             </p>
           </section>
 

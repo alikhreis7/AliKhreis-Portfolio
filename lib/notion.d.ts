@@ -9,5 +9,5 @@ declare module '@/lib/notion' {
   }
 
   export function getNotionData(): Promise<NotionPost[]>;
-  export function getPageContent(pageId: string): Promise<any>;
+  export function getPageContent(pageId: string): Promise<unknown>;
 } 

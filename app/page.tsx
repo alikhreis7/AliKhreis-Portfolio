@@ -84,13 +84,19 @@ export default function Portfolio() {
             transition={{ delay: 0.1 }}
             className="relative group"
           >
-            <div className="bg-red-600 text-white rounded-full px-6 py-2 text-sm font-semibold shadow-md cursor-pointer hover:bg-red-700 transition-colors">
+            <button
+              onClick={() => {
+                const aboutSection = document.getElementById('about-me');
+                aboutSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }}
+              className="block bg-red-600 text-white rounded-full px-6 py-2 text-sm font-semibold shadow-md hover:bg-red-700 transition-colors cursor-pointer"
+            >
               🎓 uOttawa Alum | B.Eng
-            </div>
+            </button>
             {/* Tooltip */}
-            <div className="absolute top-full mt-2 left-1/2 -translate-x-1/2 w-64 bg-gray-900 text-white text-xs rounded-lg px-4 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 shadow-xl">
+            <div className="absolute top-full mt-2 left-1/2 -translate-x-1/2 w-64 bg-gray-900 text-white text-xs rounded-lg px-4 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 shadow-xl pointer-events-none">
               <div className="text-center">
-                Visit LinkedIn to view credentials under Education
+                Click to view education details
               </div>
               {/* Arrow */}
               <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-gray-900 rotate-45"></div>
@@ -142,7 +148,7 @@ export default function Portfolio() {
           transition={{ delay: 0.7 }}
           className="flex flex-wrap gap-3 justify-center mb-12"
         >
-          {['React', 'TypeScript', 'Next.js', 'Python', 'Java', 'TensorFlow', 'PyTorch', 'Scikit-learn'].map((tech, index) => (
+          {['React', 'TypeScript', 'Next.js', 'Python', 'Java', 'TensorFlow', 'PyTorch', 'Scikit-learn'].map((tech) => (
             <span 
               key={tech}
               className="px-4 py-2 bg-gray-100 rounded-full text-sm font-medium text-gray-800 hover:bg-gray-200 transition-colors"
@@ -227,7 +233,7 @@ export default function Portfolio() {
       </div>
 
       {/* About Section */}
-      <div className="relative z-10 bg-white py-20">
+      <div id="about-me" className="relative z-10 bg-white py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="grid md:grid-cols-2 gap-12 items-center mb-20">

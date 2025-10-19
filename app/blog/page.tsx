@@ -65,10 +65,11 @@ export default function Blog() {
         setPosts(data as Post[])
         setError(null)
         setErrorDetails(null)
-      } catch (error: any) {
+      } catch (error) {
+        const errorMsg = error instanceof Error ? error.message : 'Unknown error';
         console.error('Error fetching blog posts:', error)
         setError('Failed to load blog posts. Please try again later.')
-        setErrorDetails(error.message || 'Unknown error')
+        setErrorDetails(errorMsg)
       } finally {
         setLoading(false)
       }

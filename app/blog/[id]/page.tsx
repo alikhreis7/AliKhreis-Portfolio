@@ -6,13 +6,30 @@ import Image from 'next/image'
 import { useParams } from 'next/navigation'
 import { BookOpen, Github, Linkedin, Mail, Download } from 'lucide-react'
 
+type RichText = {
+  plain_text: string;
+}
+
 type NotionBlock = {
   type: string;
-  [key: string]: any;
+  id: string;
+  paragraph?: { rich_text: RichText[] };
+  heading_1?: { rich_text: RichText[] };
+  heading_2?: { rich_text: RichText[] };
+  heading_3?: { rich_text: RichText[] };
+  bulleted_list_item?: { rich_text: RichText[] };
+  numbered_list_item?: { rich_text: RichText[] };
+  quote?: { rich_text: RichText[] };
+  code?: { rich_text: RichText[] };
+  callout?: { rich_text: RichText[] };
+  [key: string]: unknown;
 }
 
 type BlogData = {
-  page: any;
+  page: {
+    id: string;
+    properties: Record<string, unknown>;
+  };
   blocks: NotionBlock[];
 }
 
@@ -54,36 +71,36 @@ export default function BlogPost() {
   }, [id])
 
   // Function to render different Notion block types
-  const renderBlock = (block: any) => {
+  const renderBlock = (block: NotionBlock) => {
     const { type } = block;
     
     switch (type) {
       case 'paragraph':
-        return <p className="text-gray-800">{block.paragraph?.rich_text?.map((t: any) => t.plain_text).join('') || ''}</p>;
-      
+        return <p className="text-gray-800">{block.paragraph?.rich_text?.map((t) => t.plain_text).join('') || ''}</p>;
+
       case 'heading_1':
-        return <h1 className="text-4xl font-bold mt-8 mb-4">{block.heading_1?.rich_text?.map((t: any) => t.plain_text).join('') || ''}</h1>;
-      
+        return <h1 className="text-4xl font-bold mt-8 mb-4">{block.heading_1?.rich_text?.map((t) => t.plain_text).join('') || ''}</h1>;
+
       case 'heading_2':
-        return <h2 className="text-3xl font-bold mt-6 mb-3">{block.heading_2?.rich_text?.map((t: any) => t.plain_text).join('') || ''}</h2>;
-      
+        return <h2 className="text-3xl font-bold mt-6 mb-3">{block.heading_2?.rich_text?.map((t) => t.plain_text).join('') || ''}</h2>;
+
       case 'heading_3':
-        return <h3 className="text-2xl font-bold mt-4 mb-2">{block.heading_3?.rich_text?.map((t: any) => t.plain_text).join('') || ''}</h3>;
-      
+        return <h3 className="text-2xl font-bold mt-4 mb-2">{block.heading_3?.rich_text?.map((t) => t.plain_text).join('') || ''}</h3>;
+
       case 'bulleted_list_item':
-        return <li className="ml-6 list-disc">{block.bulleted_list_item?.rich_text?.map((t: any) => t.plain_text).join('') || ''}</li>;
-      
+        return <li className="ml-6 list-disc">{block.bulleted_list_item?.rich_text?.map((t) => t.plain_text).join('') || ''}</li>;
+
       case 'numbered_list_item':
-        return <li className="ml-6 list-decimal">{block.numbered_list_item?.rich_text?.map((t: any) => t.plain_text).join('') || ''}</li>;
-      
+        return <li className="ml-6 list-decimal">{block.numbered_list_item?.rich_text?.map((t) => t.plain_text).join('') || ''}</li>;
+
       case 'quote':
-        return <blockquote className="border-l-4 border-yellow-400 pl-4 italic">{block.quote?.rich_text?.map((t: any) => t.plain_text).join('') || ''}</blockquote>;
-      
+        return <blockquote className="border-l-4 border-yellow-400 pl-4 italic">{block.quote?.rich_text?.map((t) => t.plain_text).join('') || ''}</blockquote>;
+
       case 'code':
-        return <pre className="bg-gray-100 p-4 rounded-lg overflow-x-auto"><code>{block.code?.rich_text?.map((t: any) => t.plain_text).join('') || ''}</code></pre>;
-      
+        return <pre className="bg-gray-100 p-4 rounded-lg overflow-x-auto"><code>{block.code?.rich_text?.map((t) => t.plain_text).join('') || ''}</code></pre>;
+
       case 'callout':
-        return <div className="bg-gray-50 border-l-4 border-blue-400 p-4 rounded">{block.callout?.rich_text?.map((t: any) => t.plain_text).join('') || ''}</div>;
+        return <div className="bg-gray-50 border-l-4 border-blue-400 p-4 rounded">{block.callout?.rich_text?.map((t) => t.plain_text).join('') || ''}</div>;
       
       default:
         return <p className="text-gray-400 text-sm">Unsupported block type: {type}</p>;
@@ -125,7 +142,7 @@ export default function BlogPost() {
             </div>
           ) : blogData ? (
             <div className="prose prose-lg max-w-none">
-              {blogData.blocks.map((block: any, index: number) => (
+              {blogData.blocks.map((block, index) => (
                 <div key={block.id || index} className="mb-4">
                   {renderBlock(block)}
                 </div>
@@ -135,7 +152,7 @@ export default function BlogPost() {
             <div className="text-center py-20">
               <h1 className="text-4xl font-bold mb-4">Post Not Found</h1>
               <p className="text-gray-600">
-                The post you're looking for doesn't exist or has been removed.
+                The post you&apos;re looking for doesn&apos;t exist or has been removed.
               </p>
             </div>
           )}

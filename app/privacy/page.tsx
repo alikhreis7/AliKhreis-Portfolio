@@ -9,14 +9,14 @@ export default function PrivacyPolicy() {
             <h2 className="text-2xl font-semibold mb-4">Introduction</h2>
             <p>Last updated: {new Date().toLocaleDateString()}</p>
             <p className="mt-4">
-              This Privacy Policy describes how your personal information is collected, used, and shared when you visit my blog at alikhreis.ca/blog ("the Blog").
+              This Privacy Policy describes how your personal information is collected, used, and shared when you visit my blog at alikhreis.ca/blog (&quot;the Blog&quot;).
             </p>
           </section>
 
           <section>
             <h2 className="text-2xl font-semibold mb-4">Information Collection</h2>
             <p>
-              The Blog does not directly collect any personal information. However, the Blog is hosted on Notion and may be subject to Notion's data collection practices. For more information, please refer to Notion's Privacy Policy.
+              The Blog does not directly collect any personal information. However, the Blog is hosted on Notion and may be subject to Notion&apos;s data collection practices. For more information, please refer to Notion&apos;s Privacy Policy.
             </p>
           </section>
 
