@@ -3,86 +3,99 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Github, Linkedin, Mail, BookOpen, Download } from 'lucide-react'
+import { useParams } from 'next/navigation'
+import { BookOpen, Github, Linkedin, Mail, Download } from 'lucide-react'
 
-// Define the Post type to fix type errors
-type Post = {
-  id: string;
-  title: string;
-  date: string;
-  description: string;
-  cover: string | null;
-  slug: string;
+type NotionBlock = {
+  type: string;
+  [key: string]: any;
 }
 
-type ErrorResponse = {
-  error: string;
-  message?: string;
-  code?: string;
-  status?: number;
+type BlogData = {
+  page: any;
+  blocks: NotionBlock[];
 }
 
-export default function Blog() {
-  const [posts, setPosts] = useState<Post[]>([])
+export default function BlogPost() {
+  const { id } = useParams()
+  const [blogData, setBlogData] = useState<BlogData | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-  const [errorDetails, setErrorDetails] = useState<string | null>(null)
 
   useEffect(() => {
-    async function fetchPosts() {
+    async function fetchPageContent() {
       try {
-        console.log('Fetching posts from API...')
-        const response = await fetch('/api/notion')
-        
-        console.log('Response status:', response.status, response.statusText)
+        console.log('Fetching page content for ID:', id)
+        const response = await fetch(`/api/notion?id=${id}`)
         
         if (!response.ok) {
-          const errorData = await response.json().catch(() => null) as ErrorResponse | null
-          console.error('Error response:', errorData)
-          
-          if (errorData) {
-            throw new Error(`${errorData.error}${errorData.message ? ': ' + errorData.message : ''}`)
-          } else {
-            throw new Error(`API returned ${response.status}: ${response.statusText}`)
-          }
+          throw new Error(`API returned ${response.status}: ${response.statusText}`)
         }
         
         const data = await response.json()
-        
-        console.log('Data type:', typeof data)
-        console.log('Is array:', Array.isArray(data))
-        console.log('Data preview:', data && Array.isArray(data) ? data.slice(0, 2) : data)
         
         if (data.error) {
           throw new Error(data.error)
         }
         
-        if (!Array.isArray(data)) {
-          console.error('Expected array but got:', data)
-          throw new Error('Invalid response format from API')
-        }
-        
-        setPosts(data as Post[])
+        setBlogData(data)
         setError(null)
-        setErrorDetails(null)
-      } catch (error: any) {
-        console.error('Error fetching blog posts:', error)
-        setError('Failed to load blog posts. Please try again later.')
-        setErrorDetails(error.message || 'Unknown error')
+      } catch (error) {
+        console.error('Error fetching page content:', error)
+        setError('Failed to load blog post. Please try again later.')
       } finally {
         setLoading(false)
       }
     }
 
-    fetchPosts()
-  }, [])
+    if (id) {
+      fetchPageContent()
+    }
+  }, [id])
+
+  // Function to render different Notion block types
+  const renderBlock = (block: any) => {
+    const { type } = block;
+    
+    switch (type) {
+      case 'paragraph':
+        return <p className="text-gray-800">{block.paragraph?.rich_text?.map((t: any) => t.plain_text).join('') || ''}</p>;
+      
+      case 'heading_1':
+        return <h1 className="text-4xl font-bold mt-8 mb-4">{block.heading_1?.rich_text?.map((t: any) => t.plain_text).join('') || ''}</h1>;
+      
+      case 'heading_2':
+        return <h2 className="text-3xl font-bold mt-6 mb-3">{block.heading_2?.rich_text?.map((t: any) => t.plain_text).join('') || ''}</h2>;
+      
+      case 'heading_3':
+        return <h3 className="text-2xl font-bold mt-4 mb-2">{block.heading_3?.rich_text?.map((t: any) => t.plain_text).join('') || ''}</h3>;
+      
+      case 'bulleted_list_item':
+        return <li className="ml-6 list-disc">{block.bulleted_list_item?.rich_text?.map((t: any) => t.plain_text).join('') || ''}</li>;
+      
+      case 'numbered_list_item':
+        return <li className="ml-6 list-decimal">{block.numbered_list_item?.rich_text?.map((t: any) => t.plain_text).join('') || ''}</li>;
+      
+      case 'quote':
+        return <blockquote className="border-l-4 border-yellow-400 pl-4 italic">{block.quote?.rich_text?.map((t: any) => t.plain_text).join('') || ''}</blockquote>;
+      
+      case 'code':
+        return <pre className="bg-gray-100 p-4 rounded-lg overflow-x-auto"><code>{block.code?.rich_text?.map((t: any) => t.plain_text).join('') || ''}</code></pre>;
+      
+      case 'callout':
+        return <div className="bg-gray-50 border-l-4 border-blue-400 p-4 rounded">{block.callout?.rich_text?.map((t: any) => t.plain_text).join('') || ''}</div>;
+      
+      default:
+        return <p className="text-gray-400 text-sm">Unsupported block type: {type}</p>;
+    }
+  };
 
   return (
     <div className="min-h-screen w-full bg-white">
       {/* Header */}
       <div className="container mx-auto px-4 py-8 flex justify-between items-center">
-        <Link href="/" className="flex items-center gap-2 text-black hover:text-gray-600">
-          <span>← Back to home</span>
+        <Link href="/blog" className="flex items-center gap-2 text-black hover:text-gray-600">
+          <span>← Back to blog</span>
         </Link>
         <div className="flex items-center gap-2">
           <BookOpen className="w-6 h-6 text-yellow-400" />
@@ -90,22 +103,17 @@ export default function Blog() {
         </div>
       </div>
 
-      {/* Blog Content */}
+      {/* Blog Post Content */}
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto">
           {loading ? (
             <div className="text-center py-20">
-              <p>Loading blog posts...</p>
+              <p>Loading post...</p>
             </div>
           ) : error ? (
             <div className="text-center py-20">
               <h1 className="text-2xl font-bold mb-4 text-red-600">Error</h1>
-              <p className="text-gray-700 mb-2">{error}</p>
-              {errorDetails && (
-                <p className="text-sm text-gray-500 mb-4 max-w-md mx-auto">
-                  Details: {errorDetails}
-                </p>
-              )}
+              <p className="text-gray-600">{error}</p>
               <p className="mt-4">
                 <button 
                   onClick={() => window.location.reload()} 
@@ -115,44 +123,19 @@ export default function Blog() {
                 </button>
               </p>
             </div>
-          ) : posts.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {posts.map((post) => (
-                <Link 
-                  href={`/blog/${post.id}`} 
-                  key={post.id}
-                  className="group"
-                >
-                  <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                    {post.cover && (
-                      <div className="aspect-video w-full overflow-hidden">
-                        <img 
-                          src={post.cover} 
-                          alt={post.title} 
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform"
-                        />
-                      </div>
-                    )}
-                    <div className="p-6">
-                      <p className="text-sm text-gray-500 mb-2">
-                        {new Date(post.date).toLocaleDateString()}
-                      </p>
-                      <h3 className="text-xl font-bold mb-2 group-hover:text-yellow-600 transition-colors">
-                        {post.title}
-                      </h3>
-                      <p className="text-gray-600 line-clamp-3">
-                        {post.description}
-                      </p>
-                    </div>
-                  </div>
-                </Link>
+          ) : blogData ? (
+            <div className="prose prose-lg max-w-none">
+              {blogData.blocks.map((block: any, index: number) => (
+                <div key={block.id || index} className="mb-4">
+                  {renderBlock(block)}
+                </div>
               ))}
             </div>
           ) : (
             <div className="text-center py-20">
-              <h1 className="text-4xl font-bold mb-4">No Blog Posts Found</h1>
+              <h1 className="text-4xl font-bold mb-4">Post Not Found</h1>
               <p className="text-gray-600">
-                Check back soon for new content!
+                The post you're looking for doesn't exist or has been removed.
               </p>
             </div>
           )}

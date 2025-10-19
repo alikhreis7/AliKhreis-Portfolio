@@ -98,13 +98,45 @@ export default function ProjectDetail() {
                 ))}
               </ul>
             </div>
+
+            {/* GitHub Link */}
+            {project.githubUrl && (
+              <div className="pt-4">
+                <Link 
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-black text-white rounded-full hover:bg-gray-800 transition-colors font-medium"
+                >
+                  <Github className="w-5 h-5" />
+                  View on GitHub
+                </Link>
+              </div>
+            )}
+
+            {/* Website Link */}
+            {project.websiteUrl && (
+              <div className="pt-4">
+                <Link 
+                  href={project.websiteUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-yellow-400 text-black rounded-full hover:bg-yellow-500 transition-colors font-medium"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                  </svg>
+                  Visit Live Website
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </div>
 
       {/* Sticky Navigation */}
       <div className="fixed bottom-4 left-0 right-0 flex justify-center z-50">
-        <div className="max-w-md w-full mx-4">
+        <div className="max-w-2xl w-full mx-4">
           <nav className="bg-gradient-to-b from-white/60 to-white/30 backdrop-blur-md rounded-full p-2 shadow-[0_4px_20px_-2px_rgba(0,0,0,0.1)] border border-white/20">
             <ul className="flex items-center justify-center w-full gap-2 md:gap-6">
               <Image
@@ -126,7 +158,7 @@ export default function ProjectDetail() {
               </li>
               <li>
                 <Link href="/blog" className="px-2 md:px-4 py-2 rounded-full hover:bg-gray-100/80 text-gray-800 transition-colors text-sm md:text-base font-medium">
-                  Blog
+                  Research & Blog
                 </Link>
               </li>
               <li>
