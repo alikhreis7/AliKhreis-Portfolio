@@ -76,6 +76,15 @@ const allProjects: Project[] = [
     image: '/agroclimate.jpg',
     company: 'Agriculture and Agri-Food Canada',
     projectType: 'company'
+  },
+  // Machine Learning Projects
+  {
+    slug: 'linearregression',
+    title: 'Linear Regression Machine Learning Model',
+    category: 'Machine Learning',
+    developmentType: 'Machine Learning',
+    image: '/linearregression.jpg',
+    projectType: 'ml'
   }
 ]
 

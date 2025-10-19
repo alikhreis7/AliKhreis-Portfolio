@@ -198,5 +198,32 @@ export const projectsData: Record<string, Project> = {
       "GIS Databases"
     ],
     longDescription: "Built and maintained GIS databases, automated data processing workflows, and developed web-based tools for improved accessibility. Conducted spatial analysis, created maps, and integrated data to support decision-making for agricultural climate impact assessment. Enhanced data accuracy and efficiency through ArcGIS/Survey123 and quality checks. Automated GIS data processing with Python, SQL, and JavaScript, boosting efficiency by 35%. Developed web-based mapping tools using JavaScript and React, increasing user engagement by 40% and improving data accuracy. The tool enables farmers and agricultural stakeholders to report agroclimate conditions across multiple locations, helping to build a comprehensive database for better agricultural planning and climate resilience."
+  },
+  linearregression: {
+    title: "Linear Regression Machine Learning Model",
+    category: "Machine Learning",
+    description: "A machine learning project implementing linear regression algorithms to predict outcomes based on training data.",
+    releaseDate: "January 2025",
+    location: "Ottawa, ON",
+    client: "Personal Project",
+    image: "/linearregression.jpg",
+    githubUrl: "https://github.com/alikhreis7/Linear-RegressionHW",
+    features: [
+      "Linear Regression Implementation",
+      "Data Preprocessing",
+      "Model Training & Testing",
+      "Performance Metrics",
+      "Data Visualization",
+      "Prediction Engine"
+    ],
+    technologies: [
+      "Python",
+      "NumPy",
+      "Pandas",
+      "Scikit-learn",
+      "Matplotlib",
+      "Jupyter Notebook"
+    ],
+    longDescription: "A comprehensive machine learning project focused on implementing and understanding linear regression algorithms. The project includes data preprocessing, feature engineering, model training, and evaluation using standard ML metrics. Built with Python and popular data science libraries, it demonstrates the fundamentals of supervised learning and predictive modeling. The implementation includes visualization of results and performance analysis to understand model behavior and accuracy."
   }
 } 
