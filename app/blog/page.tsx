@@ -127,6 +127,7 @@ export default function Blog() {
                   <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
                     {post.cover && (
                       <div className="aspect-video w-full overflow-hidden">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img 
                           src={post.cover} 
                           alt={post.title} 

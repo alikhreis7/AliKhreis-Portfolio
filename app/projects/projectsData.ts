@@ -1,4 +1,19 @@
-export const projectsData = {
+export type Project = {
+  title: string;
+  category: string;
+  description: string;
+  releaseDate: string;
+  location: string;
+  client: string;
+  image: string;
+  githubUrl?: string;
+  websiteUrl?: string;
+  features: string[];
+  technologies: string[];
+  longDescription: string;
+}
+
+export const projectsData: Record<string, Project> = {
   syllabussync: {
     title: "SyllabusSync",
     category: "Full Stack Development",
