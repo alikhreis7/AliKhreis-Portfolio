@@ -22,6 +22,8 @@ type NotionBlock = {
   quote?: { rich_text: RichText[] };
   code?: { rich_text: RichText[] };
   callout?: { rich_text: RichText[] };
+  image?: { file?: { url: string }, external?: { url: string } };
+  divider?: Record<string, never>;
   [key: string]: unknown;
 }
 
@@ -101,9 +103,26 @@ export default function BlogPost() {
 
       case 'callout':
         return <div className="bg-gray-50 border-l-4 border-blue-400 p-4 rounded">{block.callout?.rich_text?.map((t) => t.plain_text).join('') || ''}</div>;
+
+      case 'image':
+        // Handle Notion image blocks
+        const imageData = block.image as { file?: { url: string }, external?: { url: string } };
+        const imageUrl = imageData?.file?.url || imageData?.external?.url;
+        if (imageUrl) {
+          return (
+            <div className="my-6 flex justify-center">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={imageUrl} alt="Content" className="max-w-2xl w-full rounded-lg" />
+            </div>
+          );
+        }
+        return null;
+
+      case 'divider':
+        return <hr className="my-8 border-t-2 border-gray-200" />;
       
       default:
-        return <p className="text-gray-400 text-sm">Unsupported block type: {type}</p>;
+        return null; // Don't show unsupported block types
     }
   };
 
