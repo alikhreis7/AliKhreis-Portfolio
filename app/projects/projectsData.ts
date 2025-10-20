@@ -95,6 +95,7 @@ export const projectsData: Record<string, Project> = {
     client: "Personal Brand",
     image: "/portfoliopic.jpg",
     githubUrl: "https://github.com/alikhreis7/AliKhreis-Portfolio",
+    websiteUrl: "https://www.alikhreis.ca",
     features: [
       "Dynamic Project Showcase",
       "Responsive Design",
