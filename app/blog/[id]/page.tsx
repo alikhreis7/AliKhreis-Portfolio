@@ -110,9 +110,9 @@ export default function BlogPost() {
         const imageUrl = imageData?.file?.url || imageData?.external?.url;
         if (imageUrl) {
           return (
-            <div className="my-6">
+            <div className="my-6 flex justify-center">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={imageUrl} alt="Content" className="w-full rounded-lg" />
+              <img src={imageUrl} alt="Content" className="max-w-2xl w-full rounded-lg" />
             </div>
           );
         }
