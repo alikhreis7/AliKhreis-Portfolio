@@ -126,7 +126,7 @@ export default function Portfolio() {
         >
           <div className="h-px w-16 bg-gradient-to-r from-transparent to-blue-400"></div>
           <p className="text-xl md:text-2xl text-blue-600 font-semibold">
-            Software Engineer
+            Software Engineer 👨🏻‍💻
           </p>
           <div className="h-px w-16 bg-gradient-to-l from-transparent to-blue-400"></div>
         </motion.div>
@@ -138,7 +138,7 @@ export default function Portfolio() {
           transition={{ delay: 0.5 }}
           className="text-gray-700 text-lg max-w-3xl mb-8 leading-relaxed"
         >
-          Crafting innovative digital solutions with modern technologies and AI-driven insights
+          🚀 Crafting innovative digital solutions with modern technologies and AI-driven insights 🤖
         </motion.p>
 
         {/* Tech Stack Pills */}
@@ -148,12 +148,21 @@ export default function Portfolio() {
           transition={{ delay: 0.7 }}
           className="flex flex-wrap gap-3 justify-center mb-12"
         >
-          {['React', 'TypeScript', 'Next.js', 'Python', 'Java', 'TensorFlow', 'PyTorch', 'Scikit-learn'].map((tech) => (
+          {[
+            { name: 'React', emoji: '⚛️' },
+            { name: 'TypeScript', emoji: '📘' },
+            { name: 'Next.js', emoji: '▲' },
+            { name: 'Python', emoji: '🐍' },
+            { name: 'Java', emoji: '☕' },
+            { name: 'TensorFlow', emoji: '🧠' },
+            { name: 'PyTorch', emoji: '🔥' },
+            { name: 'Scikit-learn', emoji: '📊' }
+          ].map((tech) => (
             <span 
-              key={tech}
+              key={tech.name}
               className="px-4 py-2 bg-gray-100 rounded-full text-sm font-medium text-gray-800 hover:bg-gray-200 transition-colors"
             >
-              {tech}
+              {tech.emoji} {tech.name}
             </span>
           ))}
         </motion.div>
