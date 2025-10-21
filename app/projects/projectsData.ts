@@ -23,6 +23,7 @@ export const projectsData: Record<string, Project> = {
     client: "Capstone Engineering Project",
     image: "/project1.jpg",
     githubUrl: "https://github.com/rabi3daoudd/SyllabusSync",
+    websiteUrl: "https://ssync.ca",
     features: [
       "AI-Powered Scheduling",
       "Google Calendar Integration",
@@ -87,14 +88,15 @@ export const projectsData: Record<string, Project> = {
     longDescription: "Developed as part of the Analysis & Design of User Interfaces course (SEG3125), this salon website project focused on creating an intuitive user interface for service booking and business information access. The development process included creating initial prototypes, gathering user feedback, and implementing a high-fidelity version with improved human-machine interaction. The website allows users to easily book specific services with their preferred experts at convenient times, while also providing essential business information such as location, operating hours, and service pricing."
   },
   portfolio: {
-    title: "Personal Portfolio",
+    title: "Personal Portfolio 💼",
     category: "Frontend Development",
-    description: "A modern, responsive portfolio website showcasing professional work and skills with an emphasis on user experience and clean design.",
+    description: "👨‍💻 A modern, responsive portfolio website showcasing professional work and skills with an emphasis on user experience and clean design.",
     releaseDate: "January 2025",
     location: "Ottawa, ON",
     client: "Personal Brand",
     image: "/portfoliopic.jpg",
     githubUrl: "https://github.com/alikhreis7/AliKhreis-Portfolio",
+    websiteUrl: "https://www.alikhreis.ca",
     features: [
       "Dynamic Project Showcase",
       "Responsive Design",
