@@ -254,14 +254,8 @@ export default function Portfolio() {
                 className="space-y-6"
               >
                 <h2 className="text-4xl font-bold mb-6">About Me</h2>
-                <div className="flex gap-4 mb-8">
-                  <span className="px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold">📍 Ottawa, ON, Canada</span>
-                </div>
-                <p className="text-xl font-semibold text-gray-800">
+                <p className="text-xl font-semibold text-gray-800 mb-4">
                   Software Engineer - Software Developer Intern at Kinaxis
-                </p>
-                <p className="text-lg font-semibold text-blue-600">
-                  Aspiring Machine Learning Engineer
                 </p>
                 <p className="text-gray-700 text-lg leading-relaxed">
                   Currently balancing a full-time internship at Kinaxis while pursuing full-time graduate studies at the University of Ottawa. Working towards a Master of Engineering in Electrical and Computer Engineering, specializing in Applied Artificial Intelligence. Taking advanced courses in Applied Machine Learning and Machine Vision.
@@ -315,7 +309,7 @@ export default function Portfolio() {
                           <span className="text-xs font-semibold text-blue-600 bg-blue-100 px-2 py-1 rounded-full">Project</span>
                           <span className="text-xs text-gray-500 flex items-center gap-1">
                             <Calendar className="w-3 h-3" />
-                            Jan 2025
+                            Jan 2026
                           </span>
                         </div>
                         <h3 className="font-bold text-lg mb-1 group-hover:text-blue-600 transition-colors">

@@ -16,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <title>Ali Khries - New Grad Software Engineer</title>
+        <title>Ali Khreis - BASc, MEng (Applied AI/ML)</title>
       </head>
       <body className={poppins.className}>
         {children}
