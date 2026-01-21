@@ -3,97 +3,187 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Github, Linkedin, Mail, Folder, Download, ArrowRight, Code, Briefcase, Brain } from 'lucide-react'
+import { Github, Linkedin, Mail, Folder, Download, ArrowRight, Code, Briefcase, Brain, Eye } from 'lucide-react'
 import { motion } from 'framer-motion'
 
 type Project = {
   slug: string
   title: string
+  shortDescription: string
   category: string
   developmentType: string
   image: string
   company?: string
-  projectType: 'personal' | 'company' | 'ml'
+  projectType: 'personal' | 'company' | 'ml' | 'mv'
+  isPinned?: boolean
 }
 
 const allProjects: Project[] = [
-  // Personal & Academic Projects
+  // PINNED: Personal Portfolio - Always First
+  {
+    slug: 'portfolio',
+    title: 'Personal Portfolio 💼',
+    shortDescription: 'Personal website built to showcase my work and projects',
+    category: 'Frontend Development',
+    developmentType: 'Frontend Development',
+    image: '/portfoliopic.jpg',
+    projectType: 'personal',
+    isPinned: true
+  },
+  // January 2026 - Machine Learning Projects (Newest)
+  {
+    slug: 'unsupervisedlearning',
+    title: 'Neural Networks & Unsupervised Learning',
+    shortDescription: 'Project built during Masters in Applied AI/ML at uOttawa',
+    category: 'Machine Learning',
+    developmentType: 'Machine Learning',
+    image: '/unsupervisedlearning.jpg',
+    projectType: 'ml'
+  },
+  {
+    slug: 'neuralnetworks',
+    title: 'Neural Networks & Power Forecasting',
+    shortDescription: 'Project built during Masters in Applied AI/ML at uOttawa',
+    category: 'Machine Learning',
+    developmentType: 'Machine Learning',
+    image: '/neuralnetworks.jpg',
+    projectType: 'ml'
+  },
+  {
+    slug: 'logisticregression',
+    title: 'Logistic Regression Classification',
+    shortDescription: 'Project built during Masters in Applied AI/ML at uOttawa',
+    category: 'Machine Learning',
+    developmentType: 'Machine Learning',
+    image: '/logisticregression.jpg',
+    projectType: 'ml'
+  },
+  {
+    slug: 'linearregression',
+    title: 'Linear Regression Machine Learning Model',
+    shortDescription: 'Project built during Masters in Applied AI/ML at uOttawa',
+    category: 'Machine Learning',
+    developmentType: 'Machine Learning',
+    image: '/linearregression.jpg',
+    projectType: 'ml'
+  },
+  // January 2026 - Machine Vision Projects (Newest)
+  {
+    slug: 'mvchallenge',
+    title: 'Machine Vision Challenge',
+    shortDescription: 'Project built during Masters in Applied AI/ML at uOttawa',
+    category: 'Machine Vision',
+    developmentType: 'Machine Vision',
+    image: '/mvchallenge.jpg',
+    projectType: 'mv'
+  },
+  {
+    slug: 'motiondetection',
+    title: 'Motion Detection in Image Sequences',
+    shortDescription: 'Project built during Masters in Applied AI/ML at uOttawa',
+    category: 'Machine Vision',
+    developmentType: 'Machine Vision',
+    image: '/motiondetection.jpg',
+    projectType: 'mv'
+  },
+  {
+    slug: 'edgedetection',
+    title: 'Image Filtering & Edge Detection Study',
+    shortDescription: 'Project built during Masters in Applied AI/ML at uOttawa',
+    category: 'Machine Vision',
+    developmentType: 'Machine Vision',
+    image: '/edgedetection.jpg',
+    projectType: 'mv'
+  },
+  {
+    slug: 'pinholecamera',
+    title: 'Color Pinhole Camera Simulator',
+    shortDescription: 'Project built during Masters in Applied AI/ML at uOttawa',
+    category: 'Machine Vision',
+    developmentType: 'Machine Vision',
+    image: '/pinholecamera.jpg',
+    projectType: 'mv'
+  },
+  // December 2025
   {
     slug: 'syllabussync',
     title: 'SyllabusSync',
+    shortDescription: 'Capstone project built final year during Bachelors in Software Engineering',
     category: 'Full Stack Development',
     developmentType: 'Full Stack Development',
     image: '/project1.jpg',
     projectType: 'personal'
   },
-  {
-    slug: 'calculator',
-    title: 'Calculator App',
-    category: 'Backend Development',
-    developmentType: 'Backend Development',
-    image: '/calculator.jpg',
-    projectType: 'personal'
-  },
-  {
-    slug: 'salon',
-    title: 'Elegance Salon',
-    category: 'Frontend Development',
-    developmentType: 'Frontend Development',
-    image: '/salon.jpg',
-    projectType: 'personal'
-  },
-  {
-    slug: 'portfolio',
-    title: 'Personal Portfolio',
-    category: 'Frontend Development',
-    developmentType: 'Frontend Development',
-    image: '/portfoliopic.jpg',
-    projectType: 'personal'
-  },
-  // Company Projects
-  {
-    slug: 'fishingbc',
-    title: "FishingBC App - Fisheries and Oceans Canada",
-    category: 'Full Stack Development',
-    developmentType: 'Full Stack Development',
-    image: '/fishingbc.jpg',
-    company: 'Fisheries and Oceans Canada',
-    projectType: 'company'
-  },
-  {
-    slug: 'cira',
-    title: 'Internet Performance Test App - CIRA',
-    category: 'Frontend Development',
-    developmentType: 'Frontend Development',
-    image: '/cira.jpg',
-    company: 'CIRA',
-    projectType: 'company'
-  },
+  // May-November 2024
   {
     slug: 'agroclimate',
-    title: 'Agroclimate Impact Reporter App - Agriculture Canada',
+    title: 'Agroclimate Impact Reporter',
+    shortDescription: 'Built during CO-OP at Agriculture and Agri-Food Canada',
     category: 'Full Stack Development',
     developmentType: 'Full Stack Development',
     image: '/agroclimate.jpg',
     company: 'Agriculture and Agri-Food Canada',
     projectType: 'company'
   },
-  // Machine Learning Projects
+  // October 2023
   {
-    slug: 'linearregression',
-    title: 'Linear Regression Machine Learning Model',
-    category: 'Machine Learning',
-    developmentType: 'Machine Learning',
-    image: '/linearregression.jpg',
-    projectType: 'ml'
+    slug: 'calculator',
+    title: 'Calculator App',
+    shortDescription: 'App built second year during Bachelors in Software Engineering',
+    category: 'Backend Development',
+    developmentType: 'Backend Development',
+    image: '/calculator.jpg',
+    projectType: 'personal'
+  },
+  // May-September 2023
+  {
+    slug: 'cira',
+    title: 'Internet Performance Test',
+    shortDescription: 'Built during CO-OP at CIRA (Canadian Internet Registration Authority)',
+    category: 'Frontend Development',
+    developmentType: 'Frontend Development',
+    image: '/cira.jpg',
+    company: 'CIRA',
+    projectType: 'company'
+  },
+  // June 2023
+  {
+    slug: 'salon',
+    title: 'Elegance Salon',
+    shortDescription: 'Project built third year during Bachelors in Software Engineering',
+    category: 'Frontend Development',
+    developmentType: 'Frontend Development',
+    image: '/salon.jpg',
+    projectType: 'personal'
+  },
+  // September 2022 - April 2023
+  {
+    slug: 'fishingbc',
+    title: 'FishingBC App',
+    shortDescription: 'Built during CO-OP at Fisheries and Oceans Canada',
+    category: 'Full Stack Development',
+    developmentType: 'Full Stack Development',
+    image: '/fishingbc.jpg',
+    company: 'Fisheries and Oceans Canada',
+    projectType: 'company'
   }
 ]
 
 export default function Projects() {
   const [projectTypeFilter, setProjectTypeFilter] = useState<string>('all')
 
+  // Filter projects but keep pinned portfolio at top
   const filteredProjects = allProjects.filter(project => {
+    // Always include pinned projects when showing 'all' or their category
+    if (project.isPinned) {
+      return projectTypeFilter === 'all' || project.projectType === projectTypeFilter
+    }
     return projectTypeFilter === 'all' || project.projectType === projectTypeFilter
+  }).sort((a, b) => {
+    // Pinned projects always come first
+    if (a.isPinned && !b.isPinned) return -1
+    if (!a.isPinned && b.isPinned) return 1
+    return 0
   })
 
   const getCategoryBadgeColor = (projectType: string) => {
@@ -104,6 +194,8 @@ export default function Projects() {
         return 'bg-blue-100'
       case 'ml':
         return 'bg-purple-100'
+      case 'mv':
+        return 'bg-teal-100'
       default:
         return 'bg-gray-100'
     }
@@ -117,6 +209,8 @@ export default function Projects() {
         return <Briefcase className="w-5 h-5" />
       case 'ml':
         return <Brain className="w-5 h-5" />
+      case 'mv':
+        return <Eye className="w-5 h-5" />
       default:
         return <Folder className="w-5 h-5" />
     }
@@ -193,6 +287,17 @@ export default function Projects() {
               <Brain className="w-4 h-4" />
               Machine Learning
             </button>
+            <button
+              onClick={() => setProjectTypeFilter('mv')}
+              className={`px-6 py-3 rounded-full text-sm font-medium transition-all flex items-center gap-2 ${
+                projectTypeFilter === 'mv'
+                  ? 'bg-teal-500 text-white shadow-lg'
+                  : 'bg-white text-gray-700 hover:bg-teal-50 shadow-sm'
+              }`}
+            >
+              <Eye className="w-4 h-4" />
+              Machine Vision
+            </button>
           </div>
         </div>
 
@@ -231,11 +336,14 @@ export default function Projects() {
                               </span>
                             )}
                           </div>
-                          <h3 className="text-2xl md:text-3xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors mb-2">
+                          <h3 className="text-2xl md:text-3xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors mb-1">
                             {project.title}
                           </h3>
-                          <p className="text-gray-600 text-sm md:text-base">
-                            Click to view project details →
+                          <p className="text-gray-600 text-sm md:text-base mb-2">
+                            {project.shortDescription}
+                          </p>
+                          <p className="text-gray-400 text-xs md:text-sm">
+                            Click to view details →
                           </p>
                         </div>
                         <div className="flex items-center justify-end">

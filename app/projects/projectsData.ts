@@ -205,7 +205,7 @@ export const projectsData: Record<string, Project> = {
     title: "Linear Regression Machine Learning Model",
     category: "Machine Learning",
     description: "A machine learning project implementing linear regression algorithms to predict outcomes based on training data.",
-    releaseDate: "January 2025",
+    releaseDate: "January 2026",
     location: "Ottawa, ON",
     client: "Personal Project",
     image: "/linearregression.jpg",
@@ -227,5 +227,194 @@ export const projectsData: Record<string, Project> = {
       "Jupyter Notebook"
     ],
     longDescription: "A comprehensive machine learning project focused on implementing and understanding linear regression algorithms. The project includes data preprocessing, feature engineering, model training, and evaluation using standard ML metrics. Built with Python and popular data science libraries, it demonstrates the fundamentals of supervised learning and predictive modeling. The implementation includes visualization of results and performance analysis to understand model behavior and accuracy."
+  },
+  logisticregression: {
+    title: "Logistic Regression Classification",
+    category: "Machine Learning",
+    description: "Implementation of binary and multi-class logistic regression algorithms for classification tasks, including softmax regression from scratch.",
+    releaseDate: "January 2026",
+    location: "Ottawa, ON",
+    client: "ELG 5255 - Applied Machine Learning",
+    image: "/logisticregression.jpg",
+    githubUrl: "https://github.com/alikhreis7/Logistic-Regression",
+    features: [
+      "Binary Logistic Regression with Ridge Regularization",
+      "Softmax Regression (Multinomial) from Scratch",
+      "Feature Standardization (No Data Leakage)",
+      "Confusion Matrix Visualization",
+      "Cross-Entropy Loss Implementation",
+      "Gradient Descent Optimization"
+    ],
+    technologies: [
+      "Python",
+      "NumPy",
+      "Pandas",
+      "Statsmodels",
+      "Seaborn",
+      "Scikit-learn"
+    ],
+    longDescription: "A comprehensive implementation of logistic regression algorithms for binary and multi-class classification tasks as part of ELG 5255 - Applied Machine Learning coursework. The project includes two implementations: Binary Logistic Regression using statsmodels with L2 (ridge) regularization on the Sonar dataset for Rock vs Mine classification, and Softmax Regression implemented entirely from scratch using NumPy for multi-class classification on the Penguins dataset. Key features include proper feature standardization using only training set statistics to prevent data leakage, configurable hyperparameters, and comprehensive performance metrics including accuracy and confusion matrices."
+  },
+  neuralnetworks: {
+    title: "Neural Networks & Power Forecasting",
+    category: "Machine Learning",
+    description: "Implementation of neural network concepts including forward propagation and power generation forecasting using the Combined Cycle Power Plant dataset.",
+    releaseDate: "January 2026",
+    location: "Ottawa, ON",
+    client: "ELG 5255 - Applied Machine Learning",
+    image: "/neuralnetworks.jpg",
+    githubUrl: "https://github.com/alikhreis7/Regularization-Propagation-Neural-Networks",
+    features: [
+      "3-Layer Forward Propagation Implementation",
+      "Power Generation Forecasting (MLPRegressor)",
+      "93% R² Score Accuracy",
+      "L2 Regularization & Adam Optimizer",
+      "Comprehensive Data Visualization",
+      "Early Stopping with Patience"
+    ],
+    technologies: [
+      "Python",
+      "NumPy",
+      "Pandas",
+      "Scikit-learn",
+      "Matplotlib",
+      "Seaborn"
+    ],
+    longDescription: "A comprehensive implementation of neural network concepts including forward propagation through a 3-layer feedforward network and power generation forecasting using the Combined Cycle Power Plant dataset from UCI ML Repository. The forward propagation implementation demonstrates step-by-step calculations through input, hidden (sigmoid activation), and output layers. The power forecasting model uses scikit-learn's MLPRegressor with a 2-hidden-layer architecture (100 and 50 neurons with ReLU activation), achieving ~93% R² score with RMSE of ~3.8 MW. Features include data visualization, feature selection with statistical justification, standardization, and comprehensive performance evaluation with residual analysis."
+  },
+  unsupervisedlearning: {
+    title: "Neural Networks & Unsupervised Learning",
+    category: "Machine Learning",
+    description: "Neural network implementation with Keras/NumPy, K-means clustering, and Principal Component Analysis (PCA) for dimensionality reduction and pattern discovery.",
+    releaseDate: "January 2026",
+    location: "Ottawa, ON",
+    client: "ELG 5255 - Applied Machine Learning",
+    image: "/unsupervisedlearning.jpg",
+    githubUrl: "https://github.com/alikhreis7/Neural-Networks-and-Unsupervised-Learning",
+    features: [
+      "Neural Network with Keras & NumPy",
+      "K-Means Clustering Implementation",
+      "Principal Component Analysis (PCA)",
+      "Function Approximation",
+      "Clustering Visualization",
+      "Dimensionality Reduction Techniques"
+    ],
+    technologies: [
+      "Python",
+      "NumPy",
+      "TensorFlow/Keras",
+      "Scikit-learn",
+      "Matplotlib",
+      "Jupyter Notebook"
+    ],
+    longDescription: "A comprehensive exploration of neural networks and unsupervised learning techniques as part of ELG5255 coursework. The project includes neural network implementation using both Keras and pure NumPy (with fallback support), K-means clustering for pattern discovery and data segmentation, and Principal Component Analysis (PCA) for dimensionality reduction and variance analysis. Features include function approximation demonstrations, clustering visualization with clear cluster boundaries, and PCA variance analysis plots. The implementation is provided in Jupyter notebooks with executable Python code and comprehensive visualizations for each technique."
+  },
+  pinholecamera: {
+    title: "Color Pinhole Camera Simulator",
+    category: "Machine Vision",
+    description: "A MATLAB-based color pinhole camera simulator implementing fundamental computer vision principles including 3D-to-2D projection, camera calibration, and image formation.",
+    releaseDate: "January 2026",
+    location: "Ottawa, ON",
+    client: "ELG 5163 - Machine Vision",
+    image: "/pinholecamera.jpg",
+    githubUrl: "https://github.com/alikhreis7/MV-Color-Pinhole-Camera-Simulator",
+    features: [
+      "3D to 2D Projection",
+      "Camera Intrinsic Parameters",
+      "Extrinsic Calibration",
+      "Color Image Formation",
+      "Perspective Transformation",
+      "Multi-View Visualization"
+    ],
+    technologies: [
+      "MATLAB",
+      "Linear Algebra",
+      "Computer Vision",
+      "Image Processing",
+      "Camera Geometry",
+      "Matrix Operations"
+    ],
+    longDescription: "A comprehensive color pinhole camera simulator developed in MATLAB as part of ELG 5163 - Machine Vision coursework. The project implements the fundamental pinhole camera model to simulate how 3D world coordinates are projected onto a 2D image plane. Key features include camera intrinsic parameter configuration (focal length, principal point, pixel scaling), extrinsic parameter handling (rotation and translation), and color image formation. The simulator demonstrates core computer vision concepts including perspective projection, coordinate transformations, and the mathematical foundations of camera calibration. Multiple visualization outputs show the projection results from different perspectives and configurations."
+  },
+  edgedetection: {
+    title: "Image Filtering & Edge Detection Study",
+    category: "Machine Vision",
+    description: "A comprehensive study of image filtering techniques and edge detection algorithms in MATLAB, evaluating performance using PSNR and SSIM metrics across different noise conditions.",
+    releaseDate: "January 2026",
+    location: "Ottawa, ON",
+    client: "ELG 5163 - Machine Vision",
+    image: "/edgedetection.jpg",
+    githubUrl: "https://github.com/alikhreis7/MV-Study-of-Image-Filtering-and-Edge-Detection-Methods",
+    features: [
+      "Gaussian & Salt-Pepper Noise Analysis",
+      "Multiple Filter Implementations (Averaging, Gaussian, Median)",
+      "Edge Detection (Sobel, Prewitt, LoG, Canny)",
+      "PSNR & SSIM Performance Metrics",
+      "Comparative Analysis & Visualization",
+      "Automated Results Generation"
+    ],
+    technologies: [
+      "MATLAB",
+      "Image Processing Toolbox",
+      "Signal Processing",
+      "Computer Vision",
+      "Statistical Analysis",
+      "Digital Filtering"
+    ],
+    longDescription: "A comprehensive study investigating and comparing various image filtering techniques and edge detection algorithms developed for ELG 5163 - Machine Vision. The project evaluates filter performance using quantitative metrics (PSNR, SSIM) across different noise conditions including Gaussian and Salt & Pepper noise. Implemented filters include Flat Averaging (3×3, 7×7), Directional Averaging, Gaussian (7×7, σ=1.0), and Median filters. Edge detection methods include Sobel, Prewitt, Laplacian of Gaussian (LoG), and Canny algorithms. The study provides detailed comparative analysis with automated metrics generation, visual montages, and comprehensive performance evaluation for real-world image processing applications."
+  },
+  motiondetection: {
+    title: "Motion Detection in Image Sequences",
+    category: "Machine Vision",
+    description: "MATLAB implementation of motion detection techniques using temporal differentiation and adaptive background modeling for analyzing video sequences.",
+    releaseDate: "January 2026",
+    location: "Ottawa, ON",
+    client: "ELG 5163 - Machine Vision",
+    image: "/motiondetection.jpg",
+    githubUrl: "https://github.com/alikhreis7/MV-Motion-Detection-inimage-sequences",
+    features: [
+      "Temporal Frame Differentiation",
+      "Adaptive Background Modeling",
+      "Dynamic Background Updates (α=0.95)",
+      "Binary Motion Map Generation",
+      "150-Frame Video Sequence Analysis",
+      "Shadow & Noise Handling"
+    ],
+    technologies: [
+      "MATLAB",
+      "Image Processing Toolbox",
+      "Video Analysis",
+      "Computer Vision",
+      "Background Subtraction",
+      "Temporal Filtering"
+    ],
+    longDescription: "A MATLAB implementation of motion detection techniques for analyzing video sequences developed for ELG 5163 - Machine Vision. The project implements and compares two fundamental motion detection algorithms: Temporal Frame Differentiation (detecting motion through absolute differences between consecutive frames) and Adaptive Background Differentiation (maintaining a dynamically updated background model). Evaluated on a 150-frame outdoor traffic sequence containing vehicles, shadows, and vegetation. The adaptive background method uses recursive updates with α=0.95 and achieves significantly cleaner, more stable detections through temporal smoothing, successfully converging to a clean scene model by removing all transient objects."
+  },
+  mvchallenge: {
+    title: "Machine Vision Challenge - Object Detection & Classification",
+    category: "Machine Vision",
+    description: "A black-box computer vision solution for robotic manipulation that detects and classifies geometric shapes, outputting positions and orientations relative to a reference coordinate system.",
+    releaseDate: "January 2026",
+    location: "Ottawa, ON",
+    client: "ELG 5163 - Machine Vision",
+    image: "/mvchallenge.jpg",
+    githubUrl: "https://github.com/alikhreis7/Machine-Vision-Challenge",
+    features: [
+      "5-Shape Classification (Circle, Triangle, Square, Rectangle, Semicircle)",
+      "LAB & HSV Color Space Segmentation",
+      "Reference Frame Detection (RGB Markers)",
+      "Position & Orientation Output (mm, degrees)",
+      "Morphological Image Processing",
+      "Connected Component Analysis"
+    ],
+    technologies: [
+      "MATLAB",
+      "Image Processing Toolbox",
+      "Color Space Analysis",
+      "Shape Recognition",
+      "Coordinate Transformation",
+      "Robotic Vision"
+    ],
+    longDescription: "A black-box computer vision solution developed for the ELG 5163 Machine Vision Challenge. The system processes RGB images from an overhead camera to detect and classify geometric shapes on a robotic manipulation workspace. The algorithm identifies 5 shape categories (circle, triangle, square, rectangle, semicircle) using color-based segmentation in LAB and HSV color spaces to isolate orange and cyan objects. The system automatically detects colored reference markers (red=origin, blue=+X, green=+Y) to establish a coordinate system, then reports each object's label, position in mm, and orientation angle. The pipeline includes preprocessing, morphological cleaning, connected component analysis, and shape classification based on circularity, aspect ratio, extent, and solidity metrics."
   }
 } 
