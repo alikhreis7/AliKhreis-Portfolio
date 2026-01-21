@@ -4,7 +4,7 @@ import { motion } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Download, Github, Linkedin, Mail, ArrowDown } from 'lucide-react'
+import { Download, Github, Linkedin, Mail, ArrowDown, Calendar, Code, BookOpen, Award, TrendingUp } from 'lucide-react'
 
 export default function Portfolio() {
   return (
@@ -244,37 +244,19 @@ export default function Portfolio() {
       {/* About Section */}
       <div id="about-me" className="relative z-10 bg-white py-20">
         <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="grid md:grid-cols-2 gap-12 items-center mb-20">
-              {/* Image */}
+          <div className="max-w-7xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-start">
+              {/* Left Column - About Me */}
               <motion.div
-                initial={{ opacity: 0, x: -50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                className="relative"
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-purple-400 rounded-3xl blur-2xl opacity-30"></div>
-                <Image
-                  src="/portfolio.JPG"
-                  alt="Ali Khries"
-                  width={500}
-                  height={500}
-                  className="relative rounded-3xl shadow-2xl"
-                  priority
-                />
-                <div className="absolute -bottom-6 -right-6 bg-yellow-300 rounded-2xl p-4 shadow-xl">
-                  <p className="font-bold text-lg">📍 Ottawa, ON, Canada</p>
-                </div>
-              </motion.div>
-
-              {/* Text */}
-              <motion.div
-                initial={{ opacity: 0, x: 50 }}
+                initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 className="space-y-6"
               >
                 <h2 className="text-4xl font-bold mb-6">About Me</h2>
+                <div className="flex gap-4 mb-8">
+                  <span className="px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold">📍 Ottawa, ON, Canada</span>
+                </div>
                 <p className="text-xl font-semibold text-gray-800">
                   Software Engineer - Software Developer Intern at Kinaxis
                 </p>
@@ -290,15 +272,163 @@ export default function Portfolio() {
                 <p className="text-gray-700 leading-relaxed">
                   I am passionate about leveraging AI, data, and technology to solve complex challenges and create meaningful solutions. My focus is on real-world applications to drive innovation and impact through machine learning and artificial intelligence.
                 </p>
-                <Button 
-                  className="bg-black text-white hover:bg-gray-800 rounded-full px-6 py-6 mt-4"
-                  asChild
-                >
-                  <Link href="/Ali-K-Resume.pdf" target="_blank" download>
-                    <Download className="mr-2 h-5 w-5 text-yellow-300" /> 
-                    Download Resume
+                <div className="mt-8">
+                  <Button 
+                    className="bg-black text-white hover:bg-gray-800 rounded-full px-6 py-6"
+                    asChild
+                  >
+                    <Link href="/Ali-K-Resume.pdf" target="_blank" download>
+                      <Download className="mr-2 h-5 w-5 text-yellow-300" /> 
+                      Download Resume
+                    </Link>
+                  </Button>
+                </div>
+              </motion.div>
+
+              {/* Right Column - Recent Work/Updates */}
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="space-y-6"
+              >
+                <div className="flex items-center gap-3 mb-6">
+                  <TrendingUp className="w-6 h-6 text-blue-500" />
+                  <h2 className="text-4xl font-bold">Recent Work & Updates</h2>
+                </div>
+                
+                <div className="space-y-4">
+                  {/* Update Card 1 */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.1 }}
+                    className="bg-gradient-to-br from-blue-50 to-white rounded-2xl p-6 border border-blue-100 hover:shadow-lg transition-all cursor-pointer group"
+                  >
+                    <div className="flex items-start gap-4">
+                      <div className="p-3 bg-blue-500 rounded-xl group-hover:scale-110 transition-transform">
+                        <Code className="w-5 h-5 text-white" />
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2 mb-2">
+                          <span className="text-xs font-semibold text-blue-600 bg-blue-100 px-2 py-1 rounded-full">Project</span>
+                          <span className="text-xs text-gray-500 flex items-center gap-1">
+                            <Calendar className="w-3 h-3" />
+                            Jan 2025
+                          </span>
+                        </div>
+                        <h3 className="font-bold text-lg mb-1 group-hover:text-blue-600 transition-colors">
+                          Portfolio Website Redesign
+                        </h3>
+                        <p className="text-sm text-gray-600">
+                          Launched a new portfolio with Notion integration, improved UX, and modern design
+                        </p>
+                      </div>
+                    </div>
+                  </motion.div>
+
+                  {/* Update Card 2 */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.2 }}
+                    className="bg-gradient-to-br from-purple-50 to-white rounded-2xl p-6 border border-purple-100 hover:shadow-lg transition-all cursor-pointer group"
+                  >
+                    <div className="flex items-start gap-4">
+                      <div className="p-3 bg-purple-500 rounded-xl group-hover:scale-110 transition-transform">
+                        <BookOpen className="w-5 h-5 text-white" />
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2 mb-2">
+                          <span className="text-xs font-semibold text-purple-600 bg-purple-100 px-2 py-1 rounded-full">Blog</span>
+                          <span className="text-xs text-gray-500 flex items-center gap-1">
+                            <Calendar className="w-3 h-3" />
+                            Feb 2025
+                          </span>
+                        </div>
+                        <h3 className="font-bold text-lg mb-1 group-hover:text-purple-600 transition-colors">
+                          New Blog Post Published
+                        </h3>
+                        <p className="text-sm text-gray-600">
+                          &quot;Bridging the Bias: Ensuring Fairness in Large Language Models&quot;
+                        </p>
+                      </div>
+                    </div>
+                  </motion.div>
+
+                  {/* Update Card 3 */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.3 }}
+                    className="bg-gradient-to-br from-green-50 to-white rounded-2xl p-6 border border-green-100 hover:shadow-lg transition-all cursor-pointer group"
+                  >
+                    <div className="flex items-start gap-4">
+                      <div className="p-3 bg-green-500 rounded-xl group-hover:scale-110 transition-transform">
+                        <Award className="w-5 h-5 text-white" />
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2 mb-2">
+                          <span className="text-xs font-semibold text-green-600 bg-green-100 px-2 py-1 rounded-full">Achievement</span>
+                          <span className="text-xs text-gray-500 flex items-center gap-1">
+                            <Calendar className="w-3 h-3" />
+                            Ongoing
+                          </span>
+                        </div>
+                        <h3 className="font-bold text-lg mb-1 group-hover:text-green-600 transition-colors">
+                          Graduate Studies Progress
+                        </h3>
+                        <p className="text-sm text-gray-600">
+                          Pursuing M.Eng in ECE with focus on Applied AI and Machine Vision
+                        </p>
+                      </div>
+                    </div>
+                  </motion.div>
+
+                  {/* Update Card 4 */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.4 }}
+                    className="bg-gradient-to-br from-orange-50 to-white rounded-2xl p-6 border border-orange-100 hover:shadow-lg transition-all cursor-pointer group"
+                  >
+                    <div className="flex items-start gap-4">
+                      <div className="p-3 bg-orange-500 rounded-xl group-hover:scale-110 transition-transform">
+                        <Code className="w-5 h-5 text-white" />
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2 mb-2">
+                          <span className="text-xs font-semibold text-orange-600 bg-orange-100 px-2 py-1 rounded-full">Work</span>
+                          <span className="text-xs text-gray-500 flex items-center gap-1">
+                            <Calendar className="w-3 h-3" />
+                            Current
+                          </span>
+                        </div>
+                        <h3 className="font-bold text-lg mb-1 group-hover:text-orange-600 transition-colors">
+                          Software Developer Intern at Kinaxis
+                        </h3>
+                        <p className="text-sm text-gray-600">
+                          Building scalable solutions and contributing to enterprise software development
+                        </p>
+                      </div>
+                    </div>
+                  </motion.div>
+                </div>
+
+                {/* View More Link */}
+                <div className="pt-4">
+                  <Link 
+                    href="/projects" 
+                    className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-semibold group"
+                  >
+                    View All Projects
+                    <ArrowDown className="w-4 h-4 rotate-[-90deg] group-hover:translate-x-1 transition-transform" />
                   </Link>
-                </Button>
+                </div>
               </motion.div>
             </div>
 
@@ -311,12 +441,12 @@ export default function Portfolio() {
             >
               <h2 className="text-4xl font-bold text-center mb-16">Technical Expertise</h2>
               
-              <div className="grid md:grid-cols-3 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-7xl mx-auto">
                 {/* Frontend Development */}
-                <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-3xl p-8 shadow-lg hover:shadow-xl transition-shadow">
-                  <div className="flex items-center gap-3 mb-6">
-                    <span className="text-4xl">🎨</span>
-                    <h3 className="text-2xl font-bold">Frontend Development</h3>
+                <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-3xl p-6 lg:p-8 shadow-lg hover:shadow-xl transition-shadow flex flex-col min-w-0">
+                  <div className="flex items-start gap-3 mb-6">
+                    <span className="text-3xl lg:text-4xl flex-shrink-0">🎨</span>
+                    <h3 className="text-xl lg:text-2xl font-bold leading-tight break-words">Frontend Development</h3>
                   </div>
                   <div className="space-y-4">
                     {[
@@ -344,11 +474,43 @@ export default function Portfolio() {
                   </div>
                 </div>
 
+                {/* Backend Development */}
+                <div className="bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-3xl p-6 lg:p-8 shadow-lg hover:shadow-xl transition-shadow flex flex-col min-w-0">
+                  <div className="flex items-start gap-3 mb-6">
+                    <span className="text-3xl lg:text-4xl flex-shrink-0">⚙️</span>
+                    <h3 className="text-xl lg:text-2xl font-bold leading-tight break-words">Backend Development</h3>
+                  </div>
+                  <div className="space-y-4">
+                    {[
+                      { skill: 'Java', level: 90 },
+                      { skill: 'Python', level: 92 },
+                      { skill: 'Node.js', level: 90 },
+                      { skill: 'Server Architecture', level: 88 }
+                    ].map((item) => (
+                      <div key={item.skill}>
+                        <div className="flex justify-between mb-2">
+                          <span className="font-medium">{item.skill}</span>
+                          <span className="font-bold">{item.level}%</span>
+                        </div>
+                        <div className="h-2 bg-indigo-200 rounded-full overflow-hidden">
+                          <motion.div
+                            initial={{ width: 0 }}
+                            whileInView={{ width: `${item.level}%` }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 1, delay: 0.2 }}
+                            className="h-full bg-indigo-500 rounded-full"
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
                 {/* Backend & APIs */}
-                <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-3xl p-8 shadow-lg hover:shadow-xl transition-shadow">
-                  <div className="flex items-center gap-3 mb-6">
-                    <span className="text-4xl">⚡</span>
-                    <h3 className="text-2xl font-bold">Backend & APIs</h3>
+                <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-3xl p-6 lg:p-8 shadow-lg hover:shadow-xl transition-shadow flex flex-col min-w-0">
+                  <div className="flex items-start gap-3 mb-6">
+                    <span className="text-3xl lg:text-4xl flex-shrink-0">⚡</span>
+                    <h3 className="text-xl lg:text-2xl font-bold leading-tight break-words">Backend & APIs</h3>
                   </div>
                   <div className="space-y-4">
                     {[
@@ -376,35 +538,102 @@ export default function Portfolio() {
                   </div>
                 </div>
 
-                {/* Performance & DevOps */}
-                <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-3xl p-8 shadow-lg hover:shadow-xl transition-shadow">
-                  <div className="flex items-center gap-3 mb-6">
-                    <span className="text-4xl">🚀</span>
-                    <h3 className="text-2xl font-bold">Performance & DevOps</h3>
+                {/* Bottom row - Centered wrapper for last 2 cards */}
+                <div className="lg:col-span-3 flex flex-col md:flex-row justify-center gap-6 lg:gap-8">
+                  {/* Performance & DevOps */}
+                  <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-3xl p-6 lg:p-8 shadow-lg hover:shadow-xl transition-shadow flex flex-col min-w-0 md:max-w-sm">
+                    <div className="flex items-start gap-3 mb-6">
+                      <span className="text-3xl lg:text-4xl flex-shrink-0">🚀</span>
+                      <h3 className="text-xl lg:text-2xl font-bold leading-tight break-words">Performance & DevOps</h3>
+                    </div>
+                    <div className="space-y-4">
+                      {[
+                        { skill: 'Web Performance', level: 92 },
+                        { skill: 'CI/CD', level: 88 },
+                        { skill: 'Docker', level: 85 },
+                        { skill: 'AWS', level: 82 }
+                      ].map((item) => (
+                        <div key={item.skill}>
+                          <div className="flex justify-between mb-2">
+                            <span className="font-medium">{item.skill}</span>
+                            <span className="font-bold">{item.level}%</span>
+                          </div>
+                          <div className="h-2 bg-purple-200 rounded-full overflow-hidden">
+                            <motion.div
+                              initial={{ width: 0 }}
+                              whileInView={{ width: `${item.level}%` }}
+                              viewport={{ once: true }}
+                              transition={{ duration: 1, delay: 0.2 }}
+                              className="h-full bg-purple-500 rounded-full"
+                            />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                  <div className="space-y-4">
-                    {[
-                      { skill: 'Web Performance', level: 92 },
-                      { skill: 'CI/CD', level: 88 },
-                      { skill: 'Docker', level: 85 },
-                      { skill: 'AWS', level: 82 }
-                    ].map((item) => (
-                      <div key={item.skill}>
-                        <div className="flex justify-between mb-2">
-                          <span className="font-medium">{item.skill}</span>
-                          <span className="font-bold">{item.level}%</span>
+
+                  {/* Applied Machine Learning */}
+                  <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-3xl p-6 lg:p-8 shadow-lg hover:shadow-xl transition-shadow flex flex-col min-w-0 md:max-w-sm">
+                    <div className="flex items-start gap-3 mb-6">
+                      <span className="text-3xl lg:text-4xl flex-shrink-0">🧠</span>
+                      <h3 className="text-xl lg:text-2xl font-bold leading-tight break-words">Applied Machine Learning</h3>
+                    </div>
+                    <div className="space-y-4">
+                      {[
+                        { skill: 'TensorFlow & PyTorch', level: 88 },
+                        { skill: 'Scikit-learn', level: 90 },
+                        { skill: 'Data Science', level: 85 },
+                        { skill: 'Model Training', level: 87 }
+                      ].map((item) => (
+                        <div key={item.skill}>
+                          <div className="flex justify-between mb-2">
+                            <span className="font-medium">{item.skill}</span>
+                            <span className="font-bold">{item.level}%</span>
+                          </div>
+                          <div className="h-2 bg-orange-200 rounded-full overflow-hidden">
+                            <motion.div
+                              initial={{ width: 0 }}
+                              whileInView={{ width: `${item.level}%` }}
+                              viewport={{ once: true }}
+                              transition={{ duration: 1, delay: 0.2 }}
+                              className="h-full bg-orange-500 rounded-full"
+                            />
+                          </div>
                         </div>
-                        <div className="h-2 bg-purple-200 rounded-full overflow-hidden">
-                          <motion.div
-                            initial={{ width: 0 }}
-                            whileInView={{ width: `${item.level}%` }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 1, delay: 0.2 }}
-                            className="h-full bg-purple-500 rounded-full"
-                          />
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Cybersecurity */}
+                  <div className="bg-gradient-to-br from-red-50 to-red-100 rounded-3xl p-6 lg:p-8 shadow-lg hover:shadow-xl transition-shadow flex flex-col min-w-0 md:max-w-sm">
+                    <div className="flex items-start gap-3 mb-6">
+                      <span className="text-3xl lg:text-4xl flex-shrink-0">🔐</span>
+                      <h3 className="text-xl lg:text-2xl font-bold leading-tight break-words">Cybersecurity</h3>
+                    </div>
+                    <div className="space-y-4">
+                      {[
+                        { skill: 'Network Security', level: 85 },
+                        { skill: 'Encryption & Cryptography', level: 82 },
+                        { skill: 'Vulnerability Assessment', level: 80 },
+                        { skill: 'Security Protocols', level: 85 }
+                      ].map((item) => (
+                        <div key={item.skill}>
+                          <div className="flex justify-between mb-2">
+                            <span className="font-medium">{item.skill}</span>
+                            <span className="font-bold">{item.level}%</span>
+                          </div>
+                          <div className="h-2 bg-red-200 rounded-full overflow-hidden">
+                            <motion.div
+                              initial={{ width: 0 }}
+                              whileInView={{ width: `${item.level}%` }}
+                              viewport={{ once: true }}
+                              transition={{ duration: 1, delay: 0.2 }}
+                              className="h-full bg-red-500 rounded-full"
+                            />
+                          </div>
                         </div>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -451,8 +680,8 @@ export default function Portfolio() {
           <nav className="bg-gradient-to-b from-white/60 to-white/30 backdrop-blur-md rounded-full p-2 shadow-[0_4px_20px_-2px_rgba(0,0,0,0.1)] border border-white/20">
             <ul className="flex items-center justify-center w-full gap-2 md:gap-6">
               <Image
-                src="/portfolio.JPG"
-                alt="Ali Khries"
+                src="/profile-pic.png"
+                alt="Ali Khreis"
                 width={32}
                 height={32}
                 className="w-6 h-6 md:w-8 md:h-8 rounded-full object-cover"
@@ -469,7 +698,7 @@ export default function Portfolio() {
               </li>
               <li>
                 <Link href="/blog" className="px-2 md:px-4 py-2 rounded-full hover:bg-gray-100/80 text-gray-800 transition-colors text-sm md:text-base font-medium">
-                  Research & Blog
+                  Blogs & Research
                 </Link>
               </li>
               <li>

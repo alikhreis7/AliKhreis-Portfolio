@@ -3,7 +3,8 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Github, Linkedin, Mail, Folder, Download } from 'lucide-react'
+import { Github, Linkedin, Mail, Folder, Download, ArrowRight, Code, Briefcase, Brain } from 'lucide-react'
+import { motion } from 'framer-motion'
 
 type Project = {
   slug: string
@@ -108,103 +109,152 @@ export default function Projects() {
     }
   }
 
-  return (
-    <div className="min-h-screen w-full bg-white">
-      {/* Header */}
-      <div className="container mx-auto px-4 py-8 flex justify-between items-center">
-        <Link href="/" className="flex items-center gap-2 text-black hover:text-gray-600">
-          <span>← Back to home</span>
-        </Link>
-        <div className="flex items-center gap-2">
-          <Folder className="w-6 h-6 text-yellow-400" />
-          <span className="font-medium">My Projects</span>
-        </div>
-      </div>
+  const getProjectIcon = (projectType: string) => {
+    switch(projectType) {
+      case 'personal':
+        return <Code className="w-5 h-5" />
+      case 'company':
+        return <Briefcase className="w-5 h-5" />
+      case 'ml':
+        return <Brain className="w-5 h-5" />
+      default:
+        return <Folder className="w-5 h-5" />
+    }
+  }
 
-      {/* Filters Section */}
-      <div className="container mx-auto px-4 pb-8">
-        <div className="bg-gray-50 rounded-2xl p-6">
-          <h3 className="text-sm font-semibold text-gray-700 mb-3">Filter by Project Type</h3>
+  return (
+    <div className="min-h-screen w-full bg-gradient-to-br from-gray-50 via-white to-blue-50">
+      {/* Header */}
+      <div className="container mx-auto px-4 py-12">
+        <div className="flex justify-between items-center mb-8">
+          <Link href="/" className="flex items-center gap-2 text-gray-600 hover:text-black transition-colors">
+            <span className="text-lg">← Back to home</span>
+          </Link>
+          <div className="flex items-center gap-2">
+            <Folder className="w-6 h-6 text-blue-500" />
+            <span className="font-semibold text-xl">My Projects</span>
+          </div>
+        </div>
+
+        {/* Page Title */}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mb-12"
+        >
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">Projects</h1>
+          <p className="text-gray-600 text-lg">Explore my work across different domains and technologies</p>
+        </motion.div>
+
+        {/* Filters Section */}
+        <div className="mb-12">
+          <h3 className="text-sm font-semibold text-gray-700 mb-4">Filter by Project Type</h3>
           <div className="flex flex-wrap gap-3">
             <button
               onClick={() => setProjectTypeFilter('all')}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+              className={`px-6 py-3 rounded-full text-sm font-medium transition-all ${
                 projectTypeFilter === 'all'
-                  ? 'bg-black text-white'
-                  : 'bg-white text-gray-700 hover:bg-gray-100'
+                  ? 'bg-black text-white shadow-lg'
+                  : 'bg-white text-gray-700 hover:bg-gray-100 shadow-sm'
               }`}
             >
               All Projects
             </button>
             <button
               onClick={() => setProjectTypeFilter('personal')}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+              className={`px-6 py-3 rounded-full text-sm font-medium transition-all flex items-center gap-2 ${
                 projectTypeFilter === 'personal'
-                  ? 'bg-yellow-400 text-black'
-                  : 'bg-white text-gray-700 hover:bg-gray-100'
+                  ? 'bg-yellow-400 text-black shadow-lg'
+                  : 'bg-white text-gray-700 hover:bg-yellow-50 shadow-sm'
               }`}
             >
+              <Code className="w-4 h-4" />
               Personal & Academic
             </button>
             <button
               onClick={() => setProjectTypeFilter('company')}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+              className={`px-6 py-3 rounded-full text-sm font-medium transition-all flex items-center gap-2 ${
                 projectTypeFilter === 'company'
-                  ? 'bg-blue-400 text-white'
-                  : 'bg-white text-gray-700 hover:bg-gray-100'
+                  ? 'bg-blue-500 text-white shadow-lg'
+                  : 'bg-white text-gray-700 hover:bg-blue-50 shadow-sm'
               }`}
             >
+              <Briefcase className="w-4 h-4" />
               Company Projects
             </button>
             <button
               onClick={() => setProjectTypeFilter('ml')}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+              className={`px-6 py-3 rounded-full text-sm font-medium transition-all flex items-center gap-2 ${
                 projectTypeFilter === 'ml'
-                  ? 'bg-purple-400 text-white'
-                  : 'bg-white text-gray-700 hover:bg-gray-100'
+                  ? 'bg-purple-500 text-white shadow-lg'
+                  : 'bg-white text-gray-700 hover:bg-purple-50 shadow-sm'
               }`}
             >
+              <Brain className="w-4 h-4" />
               Machine Learning
             </button>
           </div>
         </div>
-      </div>
 
-      {/* Projects Grid */}
-      <div className="container mx-auto px-4 py-8">
-        {filteredProjects.length === 0 ? (
-          <div className="text-center py-20">
-            <p className="text-gray-500 text-lg">No projects match your filters</p>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredProjects.map((project) => (
-              <Link key={project.slug} href={`/projects/${project.slug}`} className="group cursor-pointer">
-                <div className="aspect-square rounded-3xl overflow-hidden mb-4">
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    width={500}
-                    height={500}
-                    className="w-full h-full object-cover transition-transform group-hover:scale-105"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <span className={`inline-block px-3 py-1 ${getCategoryBadgeColor(project.projectType)} rounded-full text-sm font-medium`}>
-                    {project.category}
-                  </span>
-                  <h3 className="text-xl font-semibold">
-                    {project.title}
-                  </h3>
-                </div>
-              </Link>
-            ))}
-          </div>
-        )}
+        {/* Projects List */}
+        <div className="max-w-4xl">
+          {filteredProjects.length === 0 ? (
+            <div className="text-center py-20">
+              <p className="text-gray-500 text-lg">No projects match your filters</p>
+            </div>
+          ) : (
+            <div className="space-y-4">
+              {filteredProjects.map((project, index) => (
+                <motion.div
+                  key={project.slug}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                >
+                  <Link 
+                    href={`/projects/${project.slug}`} 
+                    className="block group"
+                  >
+                    <div className="bg-white rounded-2xl p-6 md:p-8 shadow-sm hover:shadow-lg border border-gray-100 hover:border-gray-200 transition-all duration-300">
+                      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-3 mb-3">
+                            <div className={`p-2 rounded-lg ${getCategoryBadgeColor(project.projectType)}`}>
+                              {getProjectIcon(project.projectType)}
+                            </div>
+                            <span className={`px-3 py-1 ${getCategoryBadgeColor(project.projectType)} rounded-full text-xs font-semibold`}>
+                              {project.category}
+                            </span>
+                            {project.company && (
+                              <span className="text-sm text-gray-500">
+                                • {project.company}
+                              </span>
+                            )}
+                          </div>
+                          <h3 className="text-2xl md:text-3xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors mb-2">
+                            {project.title}
+                          </h3>
+                          <p className="text-gray-600 text-sm md:text-base">
+                            Click to view project details →
+                          </p>
+                        </div>
+                        <div className="flex items-center justify-end">
+                          <div className="p-4 rounded-full bg-gray-100 group-hover:bg-blue-100 group-hover:text-blue-600 transition-all">
+                            <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Get in touch */}
-      <div className="relative z-10 container mx-auto px-4 mb-20">
+      <div className="relative z-10 container mx-auto px-4 mb-20 mt-12">
         <div className="flex justify-center items-center gap-6">
           <span className="font-medium text-gray-800">Get in touch:</span>
           <Link 
@@ -245,8 +295,8 @@ export default function Projects() {
           <nav className="bg-gradient-to-b from-white/60 to-white/30 backdrop-blur-md rounded-full p-2 shadow-[0_4px_20px_-2px_rgba(0,0,0,0.1)] border border-white/20">
             <ul className="flex items-center justify-center w-full gap-2 md:gap-6">
               <Image
-                src="/portfolio.JPG"
-                alt="Ali Khries"
+                src="/profile-pic.png"
+                alt="Ali Khreis"
                 width={32}
                 height={32}
                 className="w-6 h-6 md:w-8 md:h-8 rounded-full object-cover"
@@ -263,7 +313,7 @@ export default function Projects() {
               </li>
               <li>
                 <Link href="/blog" className="px-2 md:px-4 py-2 rounded-full hover:bg-gray-100/80 text-gray-800 transition-colors text-sm md:text-base font-medium">
-                  Research & Blog
+                  Blogs & Research
                 </Link>
               </li>
               <li>
