@@ -229,8 +229,8 @@ export default function Contact() {
           <nav className="bg-gradient-to-b from-white/60 to-white/30 backdrop-blur-md rounded-full p-2 shadow-[0_4px_20px_-2px_rgba(0,0,0,0.1)] border border-white/20">
             <ul className="flex items-center justify-center w-full gap-2 md:gap-6">
               <Image
-                src="/portfolio.JPG"
-                alt="Ali Khries"
+                src="/profile-pic.png"
+                alt="Ali Khreis"
                 width={32}
                 height={32}
                 className="w-6 h-6 md:w-8 md:h-8 rounded-full object-cover"
@@ -247,7 +247,7 @@ export default function Contact() {
               </li>
               <li>
                 <Link href="/blog" className="px-2 md:px-4 py-2 rounded-full hover:bg-gray-100/80 text-gray-800 transition-colors text-sm md:text-base font-medium">
-                  Research & Blog
+                  Blogs & Research
                 </Link>
               </li>
               <li>
