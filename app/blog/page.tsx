@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Github, Linkedin, Mail, BookOpen, Download, FileText, FlaskConical } from 'lucide-react'
+import { Github, Linkedin, Mail, BookOpen, Download, FileText, FlaskConical, ExternalLink, Award } from 'lucide-react'
 import { motion } from 'framer-motion'
 
 // Define the Post type to fix type errors
@@ -43,6 +43,34 @@ export default function Blog() {
   // Default all Notion posts to Blogs unless explicitly research-focused
   const blogPosts = posts.filter(post => !isResearchPost(post))
   const researchPosts = posts.filter(post => isResearchPost(post))
+
+  // Published Research Papers (arXiv)
+  const publishedPapers = [
+    {
+      id: 'arxiv-2601-15539',
+      title: 'A Machine Vision Approach to Preliminary Skin Lesion Assessments',
+      authors: 'Ali Khreis, Ro\'Yah Radaideh, Quinn McGill',
+      date: 'January 21, 2026',
+      abstract: 'Early detection of malignant skin lesions is critical for improving patient outcomes in aggressive, metastatic skin cancers. This study evaluates a comprehensive system for preliminary skin lesion assessment that combines the clinically established ABCD rule of dermoscopy with machine learning classification.',
+      arxivId: '2601.15539',
+      arxivUrl: 'https://arxiv.org/abs/2601.15539',
+      pdfUrl: 'https://arxiv.org/pdf/2601.15539',
+      subjects: ['Image and Video Processing', 'Computer Vision', 'Machine Learning'],
+      venue: 'arXiv (eess.IV)'
+    },
+    {
+      id: 'arxiv-2601-11427',
+      title: 'Isotropy-Optimized Contrastive Learning for Semantic Course Recommendation',
+      authors: 'Ali Khreis, Anthony Nasr, Yusuf Hilal',
+      date: 'January 16, 2026',
+      abstract: 'This paper presents a semantic course recommendation system for students using a self-supervised contrastive learning approach built upon BERT. We propose a contrastive learning framework with data augmentation and isotropy regularization that produces more discriminative embeddings.',
+      arxivId: '2601.11427',
+      arxivUrl: 'https://arxiv.org/abs/2601.11427',
+      pdfUrl: 'https://arxiv.org/pdf/2601.11427',
+      subjects: ['Information Retrieval', 'Computation and Language'],
+      venue: 'arXiv (cs.IR)'
+    }
+  ]
 
   useEffect(() => {
     async function fetchPosts() {
@@ -150,7 +178,7 @@ export default function Blog() {
           </Link>
           <div className="flex items-center gap-2">
             <BookOpen className="w-6 h-6 text-blue-500" />
-            <span className="font-semibold text-xl">Blogs & Research</span>
+            <span className="font-semibold text-xl">Research</span>
           </div>
         </div>
 
@@ -160,7 +188,7 @@ export default function Blog() {
           animate={{ opacity: 1, y: 0 }}
           className="mb-12 text-center"
         >
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Blogs & Research</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">Research</h1>
           <p className="text-gray-600 text-lg">Explore my thoughts, insights, and research findings</p>
         </motion.div>
 
@@ -187,7 +215,7 @@ export default function Blog() {
               }`}
             >
               <FlaskConical className="w-5 h-5" />
-              Research ({researchPosts.length})
+              Research ({publishedPapers.length + researchPosts.length})
             </button>
           </div>
         </div>
@@ -242,17 +270,92 @@ export default function Blog() {
                 <div className="mb-8">
                   <h2 className="text-3xl font-bold mb-2 flex items-center gap-3">
                     <FlaskConical className="w-8 h-8 text-purple-500" />
-                    Research Papers & Studies
+                    Published Research Papers
                   </h2>
-                  <p className="text-gray-600">Academic research, analysis, and findings</p>
+                  <p className="text-gray-600">Peer-reviewed academic research and publications</p>
                 </div>
-                {researchPosts.length > 0 ? (
-                  renderPosts(researchPosts)
-                ) : (
-                  <div className="text-center py-20 bg-white rounded-2xl border border-gray-200">
-                    <FlaskConical className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-                    <h3 className="text-2xl font-bold mb-2 text-gray-700">No Research Posts Yet</h3>
-                    <p className="text-gray-500">Check back soon for new research content!</p>
+
+                {/* Published Papers Section */}
+                <div className="space-y-6 mb-12">
+                  {publishedPapers.map((paper, index) => (
+                    <motion.div
+                      key={paper.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                      className="bg-gradient-to-br from-purple-50 to-white rounded-2xl border border-purple-100 overflow-hidden hover:shadow-xl transition-all duration-300"
+                    >
+                      <div className="p-6 md:p-8">
+                        {/* Header with arXiv badge */}
+                        <div className="flex flex-wrap items-center gap-3 mb-4">
+                          <span className="px-3 py-1 bg-red-600 text-white text-xs font-bold rounded-full flex items-center gap-1">
+                            <Award className="w-3 h-3" />
+                            Published
+                          </span>
+                          <span className="px-3 py-1 bg-purple-100 text-purple-700 text-xs font-semibold rounded-full">
+                            {paper.venue}
+                          </span>
+                          <span className="text-xs text-gray-500">{paper.date}</span>
+                        </div>
+
+                        {/* Title */}
+                        <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 leading-tight">
+                          {paper.title}
+                        </h3>
+
+                        {/* Authors */}
+                        <p className="text-sm text-purple-600 font-medium mb-4">
+                          {paper.authors}
+                        </p>
+
+                        {/* Abstract */}
+                        <p className="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3">
+                          {paper.abstract}
+                        </p>
+
+                        {/* Subjects/Tags */}
+                        <div className="flex flex-wrap gap-2 mb-6">
+                          {paper.subjects.map((subject) => (
+                            <span key={subject} className="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-full">
+                              {subject}
+                            </span>
+                          ))}
+                        </div>
+
+                        {/* Action Buttons */}
+                        <div className="flex flex-wrap gap-3">
+                          <a
+                            href={paper.arxivUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 px-5 py-2.5 bg-purple-600 text-white rounded-full text-sm font-semibold hover:bg-purple-700 transition-colors"
+                          >
+                            <ExternalLink className="w-4 h-4" />
+                            View on arXiv
+                          </a>
+                          <a
+                            href={paper.pdfUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 px-5 py-2.5 bg-white border border-purple-200 text-purple-700 rounded-full text-sm font-semibold hover:bg-purple-50 transition-colors"
+                          >
+                            <Download className="w-4 h-4" />
+                            Download PDF
+                          </a>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+
+                {/* Other Research Posts from Notion */}
+                {researchPosts.length > 0 && (
+                  <div>
+                    <h3 className="text-2xl font-bold mb-4 flex items-center gap-3">
+                      <FileText className="w-6 h-6 text-purple-500" />
+                      Other Research Content
+                    </h3>
+                    {renderPosts(researchPosts)}
                   </div>
                 )}
               </div>
@@ -321,7 +424,7 @@ export default function Blog() {
               </li>
               <li>
                 <Link href="/blog" className="px-2 md:px-4 py-2 rounded-full hover:bg-gray-100/80 text-gray-800 transition-colors text-sm md:text-base font-medium">
-                  Blogs & Research
+                  Research
                 </Link>
               </li>
               <li>

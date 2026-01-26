@@ -4,84 +4,18 @@ import { motion } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Download, Github, Linkedin, Mail, ArrowDown, Calendar, Code, BookOpen, Award, TrendingUp } from 'lucide-react'
+import { Download, Github, Linkedin, Mail, ArrowDown } from 'lucide-react'
 
 export default function Portfolio() {
   return (
     <div className="min-h-screen w-full bg-gradient-to-br from-blue-50 via-white to-pink-50 relative overflow-hidden">
-      {/* Floating decorative elements */}
-      <motion.div 
-        className="absolute top-20 left-10 text-6xl"
-        animate={{ 
-          y: [0, -20, 0],
-          rotate: [0, 10, 0]
-        }}
-        transition={{ 
-          duration: 4, 
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      >
-        ⚙️
-      </motion.div>
-      <motion.div 
-        className="absolute top-32 right-20 text-5xl"
-        animate={{ 
-          y: [0, 20, 0],
-          rotate: [0, -10, 0]
-        }}
-        transition={{ 
-          duration: 3, 
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      >
-        🚀
-      </motion.div>
-      <motion.div 
-        className="absolute bottom-40 left-20 text-4xl"
-        animate={{ 
-          y: [0, -15, 0],
-        }}
-        transition={{ 
-          duration: 3.5, 
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      >
-        💻
-      </motion.div>
-      <motion.div 
-        className="absolute bottom-60 right-32 text-5xl"
-        animate={{ 
-          y: [0, 15, 0],
-          rotate: [0, 15, 0]
-        }}
-        transition={{ 
-          duration: 4.5, 
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      >
-        🔥
-      </motion.div>
-
       {/* Hero Section */}
       <div className="relative z-10 container mx-auto px-4 pt-20 pb-32 flex flex-col items-center text-center">
-        {/* Email and Alumni pills */}
+        {/* Alumni pill */}
         <div className="flex flex-wrap gap-4 justify-center mb-8">
           <motion.div 
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-yellow-300 rounded-full px-6 py-2 text-sm font-semibold shadow-md"
-          >
-            alikhreis12@gmail.com
-          </motion.div>
-          
-          <motion.div 
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
             className="relative group"
           >
             <button
@@ -91,7 +25,7 @@ export default function Portfolio() {
               }}
               className="block bg-red-600 text-white rounded-full px-6 py-2 text-sm font-semibold shadow-md hover:bg-red-700 transition-colors cursor-pointer"
             >
-              🎓 uOttawa Alum | B.Eng
+              🎓 uOttawa Alum | BASc
             </button>
             {/* Tooltip */}
             <div className="absolute top-full mt-2 left-1/2 -translate-x-1/2 w-64 bg-gray-900 text-white text-xs rounded-lg px-4 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 shadow-xl pointer-events-none">
@@ -126,7 +60,7 @@ export default function Portfolio() {
         >
           <div className="h-px w-16 bg-gradient-to-r from-transparent to-blue-400"></div>
           <p className="text-xl md:text-2xl text-blue-600 font-semibold">
-            Software Engineer 👨🏻‍💻
+            Software Engineer | MEng ECE (Applied AI/ML)
           </p>
           <div className="h-px w-16 bg-gradient-to-l from-transparent to-blue-400"></div>
         </motion.div>
@@ -138,34 +72,8 @@ export default function Portfolio() {
           transition={{ delay: 0.5 }}
           className="text-gray-700 text-lg max-w-3xl mb-8 leading-relaxed"
         >
-          🚀 Crafting innovative digital solutions with modern technologies and AI-driven insights 🤖
+          Crafting innovative digital solutions with modern technologies and AI-driven insights
         </motion.p>
-
-        {/* Tech Stack Pills */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.7 }}
-          className="flex flex-wrap gap-3 justify-center mb-12"
-        >
-          {[
-            { name: 'React', emoji: '⚛️' },
-            { name: 'TypeScript', emoji: '📘' },
-            { name: 'Next.js', emoji: '▲' },
-            { name: 'Python', emoji: '🐍' },
-            { name: 'Java', emoji: '☕' },
-            { name: 'TensorFlow', emoji: '🧠' },
-            { name: 'PyTorch', emoji: '🔥' },
-            { name: 'Scikit-learn', emoji: '📊' }
-          ].map((tech) => (
-            <span 
-              key={tech.name}
-              className="px-4 py-2 bg-gray-100 rounded-full text-sm font-medium text-gray-800 hover:bg-gray-200 transition-colors"
-            >
-              {tech.emoji} {tech.name}
-            </span>
-          ))}
-        </motion.div>
 
         {/* CTA Buttons */}
         <motion.div
@@ -242,196 +150,224 @@ export default function Portfolio() {
       </div>
 
       {/* About Section */}
-      <div id="about-me" className="relative z-10 bg-white py-20">
+      <div id="about-me" className="relative z-10 bg-gradient-to-b from-white via-gray-50 to-white py-24">
         <div className="container mx-auto px-4">
-          <div className="max-w-7xl mx-auto">
-            <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-start">
-              {/* Left Column - About Me */}
+          <div className="max-w-6xl mx-auto">
+            {/* Section Header */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-center mb-16"
+            >
+              <h2 className="text-5xl font-bold mb-4">About Me</h2>
+              <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                Software Engineer passionate about AI, Machine Learning, and building innovative solutions
+              </p>
+            </motion.div>
+
+            {/* Bento Grid Layout */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              
+              {/* Main Bio Card - Spans 2 columns */}
               <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="space-y-6"
+                transition={{ delay: 0.1 }}
+                className="md:col-span-2 bg-gradient-to-br from-slate-900 to-slate-800 rounded-3xl p-8 text-white relative overflow-hidden"
               >
-                <h2 className="text-4xl font-bold mb-6">About Me</h2>
-                <p className="text-xl font-semibold text-gray-800 mb-4">
-                  Software Engineer - Software Developer Intern at Kinaxis
-                </p>
-                <p className="text-gray-700 text-lg leading-relaxed">
-                  Currently balancing a full-time internship at Kinaxis while pursuing full-time graduate studies at the University of Ottawa. Working towards a Master of Engineering in Electrical and Computer Engineering, specializing in Applied Artificial Intelligence. Taking advanced courses in Applied Machine Learning and Machine Vision.
-                </p>
-                <p className="text-gray-700 leading-relaxed">
-                  I&apos;m a software engineer with a strong background in full-stack development, GIS solutions, and data-driven problem-solving. As a graduate in Software Engineering, I&apos;ve honed my skills in programming, web development, and project management. My academic journey has been enriched by practical experience and a passion for building innovative solutions that address real-world challenges.
-                </p>
-                <p className="text-gray-700 leading-relaxed">
-                  I am passionate about leveraging AI, data, and technology to solve complex challenges and create meaningful solutions. My focus is on real-world applications to drive innovation and impact through machine learning and artificial intelligence.
-                </p>
-                <div className="mt-8">
-                  <Button 
-                    className="bg-black text-white hover:bg-gray-800 rounded-full px-6 py-6"
-                    asChild
-                  >
-                    <Link href="/Ali-K-Resume.pdf" target="_blank" download>
-                      <Download className="mr-2 h-5 w-5 text-yellow-300" /> 
-                      Download Resume
-                    </Link>
-                  </Button>
+                <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl"></div>
+                <div className="absolute bottom-0 left-0 w-48 h-48 bg-purple-500/10 rounded-full blur-3xl"></div>
+                <div className="relative z-10">
+                  <div className="flex items-center gap-3 mb-4">
+                    <h3 className="text-2xl font-bold">Software Developer Intern</h3>
+                    <span className="text-xs bg-green-400/30 text-green-300 px-2 py-0.5 rounded-full flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></span>
+                      Ongoing
+                    </span>
+                  </div>
+                  <p className="text-gray-300 leading-relaxed mb-6">
+                    Currently balancing a full-time internship at Kinaxis while pursuing graduate studies at the University of Ottawa. Working towards a Master of Engineering in ECE, specializing in Applied Artificial Intelligence.
+                  </p>
+                  <p className="text-gray-400 leading-relaxed">
+                    I&apos;m passionate about leveraging AI, data, and technology to solve complex challenges. My focus is on real-world applications to drive innovation through machine learning and artificial intelligence.
+                  </p>
+                  <div className="mt-8">
+                    <Button 
+                      className="bg-white text-black hover:bg-gray-100 rounded-full px-6 py-6 font-semibold"
+                      asChild
+                    >
+                      <Link href="/Ali-K-Resume.pdf" target="_blank" download>
+                        <Download className="mr-2 h-5 w-5" /> 
+                        Download Resume
+                      </Link>
+                    </Button>
+                  </div>
                 </div>
               </motion.div>
 
-              {/* Right Column - Recent Work/Updates */}
+              {/* Current Work Card */}
               <motion.div
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="space-y-6"
+                transition={{ delay: 0.2 }}
+                className="bg-gradient-to-br from-orange-500 to-amber-500 rounded-3xl p-6 text-white relative overflow-hidden group hover:scale-[1.02] transition-transform"
               >
-                <div className="flex items-center gap-3 mb-6">
-                  <TrendingUp className="w-6 h-6 text-blue-500" />
-                  <h2 className="text-4xl font-bold">Recent Work & Updates</h2>
+                <div className="absolute -right-4 -bottom-4 text-8xl opacity-20">💼</div>
+                <div className="relative z-10">
+                  <span className="text-xs font-semibold bg-white/20 px-3 py-1 rounded-full">Current Role</span>
+                  <h3 className="text-xl font-bold mt-4 mb-2">Kinaxis</h3>
+                  <p className="text-orange-100 text-sm">Software Developer Intern</p>
+                  <p className="text-orange-100/80 text-xs mt-3">Building scalable enterprise solutions as part of the Application Excellence team. Advanced development on ServiceNow, Atlassian, agentic applications, and ML platforms!</p>
+                </div>
+              </motion.div>
+
+              {/* Education Card */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3 }}
+                className="bg-gradient-to-br from-blue-600 to-indigo-600 rounded-3xl p-6 text-white relative overflow-hidden group hover:scale-[1.02] transition-transform"
+              >
+                <div className="absolute -right-4 -bottom-4 text-8xl opacity-20">🎓</div>
+                <div className="relative z-10">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-semibold bg-white/20 px-3 py-1 rounded-full">Education</span>
+                    <span className="text-xs bg-green-400/30 text-green-200 px-2 py-0.5 rounded-full flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></span>
+                      Ongoing
+                    </span>
+                  </div>
+                  <h3 className="text-xl font-bold mt-4 mb-2">M.Eng in ECE</h3>
+                  <p className="text-blue-100 text-sm">University of Ottawa</p>
+                  <p className="text-blue-100/80 text-xs mt-3">Applied Artificial Intelligence</p>
+                </div>
+              </motion.div>
+
+              {/* Advanced Courses Card - NEW */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4 }}
+                className="bg-gradient-to-br from-purple-600 to-pink-600 rounded-3xl p-6 text-white relative overflow-hidden group hover:scale-[1.02] transition-transform"
+              >
+                <div className="absolute -right-4 -bottom-4 text-8xl opacity-20">🧠</div>
+                <div className="relative z-10">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-semibold bg-white/20 px-3 py-1 rounded-full">Coursework</span>
+                    <span className="text-xs bg-green-400/30 text-green-200 px-2 py-0.5 rounded-full flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></span>
+                      Ongoing
+                    </span>
+                  </div>
+                  <h3 className="text-lg font-bold mt-4 mb-2">Advanced AI Courses</h3>
+                  <ul className="text-purple-100 text-xs space-y-1">
+                    <li>• Deep Learning</li>
+                    <li>• Reinforcement Learning</li>
+                    <li>• Cybersecurity in Applied AI</li>
+                  </ul>
+                </div>
+              </motion.div>
+
+              {/* Portfolio Update Card */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.5 }}
+                className="bg-gradient-to-br from-emerald-500 to-teal-500 rounded-3xl p-6 text-white relative overflow-hidden group hover:scale-[1.02] transition-transform"
+              >
+                <div className="absolute -right-4 -bottom-4 text-8xl opacity-20">🚀</div>
+                <div className="relative z-10">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-semibold bg-white/20 px-3 py-1 rounded-full">Project</span>
+                    <span className="text-xs text-emerald-200">Jan 2026</span>
+                  </div>
+                  <h3 className="text-lg font-bold mt-4 mb-2">Portfolio Redesign</h3>
+                  <p className="text-emerald-100 text-xs">New design with Notion integration & modern UX</p>
+                </div>
+              </motion.div>
+
+              {/* Skills Quick View - Auto-scrolling Tech Stack */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.6 }}
+                className="md:col-span-2 lg:col-span-3 bg-gradient-to-br from-slate-900 to-slate-800 rounded-3xl p-8 overflow-hidden"
+              >
+                <div className="text-center mb-6">
+                  <h3 className="text-xl font-bold text-white mb-2">What I&apos;m Working With</h3>
+                  <p className="text-gray-400 text-sm">Technologies & tools I use daily</p>
                 </div>
                 
-                <div className="space-y-4">
-                  {/* Update Card 1 */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.1 }}
-                    className="bg-gradient-to-br from-blue-50 to-white rounded-2xl p-6 border border-blue-100 hover:shadow-lg transition-all cursor-pointer group"
-                  >
-                    <div className="flex items-start gap-4">
-                      <div className="p-3 bg-blue-500 rounded-xl group-hover:scale-110 transition-transform">
-                        <Code className="w-5 h-5 text-white" />
-                      </div>
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-2">
-                          <span className="text-xs font-semibold text-blue-600 bg-blue-100 px-2 py-1 rounded-full">Project</span>
-                          <span className="text-xs text-gray-500 flex items-center gap-1">
-                            <Calendar className="w-3 h-3" />
-                            Jan 2026
-                          </span>
-                        </div>
-                        <h3 className="font-bold text-lg mb-1 group-hover:text-blue-600 transition-colors">
-                          Portfolio Website Redesign
-                        </h3>
-                        <p className="text-sm text-gray-600">
-                          Launched a new portfolio with Notion integration, improved UX, and modern design
-                        </p>
-                      </div>
-                    </div>
-                  </motion.div>
-
-                  {/* Update Card 2 */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.2 }}
-                    className="bg-gradient-to-br from-purple-50 to-white rounded-2xl p-6 border border-purple-100 hover:shadow-lg transition-all cursor-pointer group"
-                  >
-                    <div className="flex items-start gap-4">
-                      <div className="p-3 bg-purple-500 rounded-xl group-hover:scale-110 transition-transform">
-                        <BookOpen className="w-5 h-5 text-white" />
-                      </div>
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-2">
-                          <span className="text-xs font-semibold text-purple-600 bg-purple-100 px-2 py-1 rounded-full">Blog</span>
-                          <span className="text-xs text-gray-500 flex items-center gap-1">
-                            <Calendar className="w-3 h-3" />
-                            Feb 2025
-                          </span>
-                        </div>
-                        <h3 className="font-bold text-lg mb-1 group-hover:text-purple-600 transition-colors">
-                          New Blog Post Published
-                        </h3>
-                        <p className="text-sm text-gray-600">
-                          &quot;Bridging the Bias: Ensuring Fairness in Large Language Models&quot;
-                        </p>
-                      </div>
-                    </div>
-                  </motion.div>
-
-                  {/* Update Card 3 */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.3 }}
-                    className="bg-gradient-to-br from-green-50 to-white rounded-2xl p-6 border border-green-100 hover:shadow-lg transition-all cursor-pointer group"
-                  >
-                    <div className="flex items-start gap-4">
-                      <div className="p-3 bg-green-500 rounded-xl group-hover:scale-110 transition-transform">
-                        <Award className="w-5 h-5 text-white" />
-                      </div>
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-2">
-                          <span className="text-xs font-semibold text-green-600 bg-green-100 px-2 py-1 rounded-full">Achievement</span>
-                          <span className="text-xs text-gray-500 flex items-center gap-1">
-                            <Calendar className="w-3 h-3" />
-                            Ongoing
-                          </span>
-                        </div>
-                        <h3 className="font-bold text-lg mb-1 group-hover:text-green-600 transition-colors">
-                          Graduate Studies Progress
-                        </h3>
-                        <p className="text-sm text-gray-600">
-                          Pursuing M.Eng in ECE with focus on Applied AI and Machine Vision
-                        </p>
-                      </div>
-                    </div>
-                  </motion.div>
-
-                  {/* Update Card 4 */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.4 }}
-                    className="bg-gradient-to-br from-orange-50 to-white rounded-2xl p-6 border border-orange-100 hover:shadow-lg transition-all cursor-pointer group"
-                  >
-                    <div className="flex items-start gap-4">
-                      <div className="p-3 bg-orange-500 rounded-xl group-hover:scale-110 transition-transform">
-                        <Code className="w-5 h-5 text-white" />
-                      </div>
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-2">
-                          <span className="text-xs font-semibold text-orange-600 bg-orange-100 px-2 py-1 rounded-full">Work</span>
-                          <span className="text-xs text-gray-500 flex items-center gap-1">
-                            <Calendar className="w-3 h-3" />
-                            Current
-                          </span>
-                        </div>
-                        <h3 className="font-bold text-lg mb-1 group-hover:text-orange-600 transition-colors">
-                          Software Developer Intern at Kinaxis
-                        </h3>
-                        <p className="text-sm text-gray-600">
-                          Building scalable solutions and contributing to enterprise software development
-                        </p>
-                      </div>
-                    </div>
-                  </motion.div>
+                {/* Row 1 - Languages & Frameworks - Scrolls Left */}
+                <div className="relative mb-4 overflow-hidden">
+                  <div className="flex gap-3 animate-scroll-left">
+                    {[...['Python', 'TypeScript', 'JavaScript', 'Java', 'C++', 'SQL', 'MATLAB', 'R', 'Bash', 'HTML/CSS'], ...['Python', 'TypeScript', 'JavaScript', 'Java', 'C++', 'SQL', 'MATLAB', 'R', 'Bash', 'HTML/CSS']].map((skill, idx) => (
+                      <span key={`${skill}-${idx}`} className="flex-shrink-0 px-4 py-2 bg-blue-500/20 border border-blue-500/30 text-blue-300 rounded-full text-sm font-medium whitespace-nowrap">
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
                 </div>
 
-                {/* View More Link */}
-                <div className="pt-4">
-                  <Link 
-                    href="/projects" 
-                    className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-semibold group"
-                  >
-                    View All Projects
-                    <ArrowDown className="w-4 h-4 rotate-[-90deg] group-hover:translate-x-1 transition-transform" />
-                  </Link>
+                {/* Row 2 - AI/ML & Data - Scrolls Right */}
+                <div className="relative mb-4 overflow-hidden">
+                  <div className="flex gap-3 animate-scroll-right">
+                    {[...['TensorFlow', 'PyTorch', 'Scikit-learn', 'Keras', 'NumPy', 'Pandas', 'OpenCV', 'Hugging Face', 'LangChain', 'OpenAI API'], ...['TensorFlow', 'PyTorch', 'Scikit-learn', 'Keras', 'NumPy', 'Pandas', 'OpenCV', 'Hugging Face', 'LangChain', 'OpenAI API']].map((skill, idx) => (
+                      <span key={`${skill}-${idx}`} className="flex-shrink-0 px-4 py-2 bg-purple-500/20 border border-purple-500/30 text-purple-300 rounded-full text-sm font-medium whitespace-nowrap">
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Row 3 - Tools & Platforms - Scrolls Left */}
+                <div className="relative overflow-hidden">
+                  <div className="flex gap-3 animate-scroll-left-slow">
+                    {[...['React', 'Next.js', 'Node.js', 'Spring Boot', 'PostgreSQL', 'MongoDB', 'Docker', 'AWS', 'Git', 'Vercel', 'ServiceNow', 'Atlassian'], ...['React', 'Next.js', 'Node.js', 'Spring Boot', 'PostgreSQL', 'MongoDB', 'Docker', 'AWS', 'Git', 'Vercel', 'ServiceNow', 'Atlassian']].map((skill, idx) => (
+                      <span key={`${skill}-${idx}`} className="flex-shrink-0 px-4 py-2 bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 rounded-full text-sm font-medium whitespace-nowrap">
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </motion.div>
             </div>
 
-            {/* Technical Expertise Section */}
+            {/* View Projects CTA */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.7 }}
+              className="text-center mt-12"
+            >
+              <Link 
+                href="/projects" 
+                className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-semibold group"
+              >
+                View All Projects
+                <ArrowDown className="w-4 h-4 rotate-[-90deg] group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </motion.div>
+          </div>
+        </div>
+      </div>
+
+      {/* Technical Expertise Section */}
+      <div className="relative z-10 bg-white py-20">
+        <div className="container mx-auto px-4">
+          <div className="max-w-7xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="mt-32"
             >
               <h2 className="text-4xl font-bold text-center mb-16">Technical Expertise</h2>
               
@@ -692,7 +628,7 @@ export default function Portfolio() {
               </li>
               <li>
                 <Link href="/blog" className="px-2 md:px-4 py-2 rounded-full hover:bg-gray-100/80 text-gray-800 transition-colors text-sm md:text-base font-medium">
-                  Blogs & Research
+                  Research
                 </Link>
               </li>
               <li>

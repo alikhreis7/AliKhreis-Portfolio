@@ -13,3 +13,34 @@ body {
   font-feature-settings: "ss01" 1, "ss02" 1, "cv01" 1, "cv03" 1;
 }
 
+/* Auto-scrolling animations for tech stack */
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes scroll-right {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.animate-scroll-left {
+  animation: scroll-left 20s linear infinite;
+}
+
+.animate-scroll-right {
+  animation: scroll-right 20s linear infinite;
+}
+
+.animate-scroll-left-slow {
+  animation: scroll-left 25s linear infinite;
+}
+

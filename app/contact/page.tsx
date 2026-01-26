@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { Github, Linkedin, Mail, Phone, MapPin, MessageCircle, Download } from 'lucide-react'
+import { Github, Linkedin, Mail, MapPin, MessageCircle, Download } from 'lucide-react'
 import Image from 'next/image'
 import { useState } from 'react'
 import emailjs from '@emailjs/browser'
@@ -171,11 +171,7 @@ export default function Contact() {
         </form>
 
         {/* Contact Info */}
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="flex items-center gap-3">
-            <Phone className="w-5 h-5" />
-            <span>+1 (613) 400-0892</span>
-          </div>
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-2xl mx-auto">
           <div className="flex items-center gap-3">
             <Mail className="w-5 h-5" />
             <span>alikhreis12@gmail.com</span>
@@ -247,7 +243,7 @@ export default function Contact() {
               </li>
               <li>
                 <Link href="/blog" className="px-2 md:px-4 py-2 rounded-full hover:bg-gray-100/80 text-gray-800 transition-colors text-sm md:text-base font-medium">
-                  Blogs & Research
+                  Research
                 </Link>
               </li>
               <li>

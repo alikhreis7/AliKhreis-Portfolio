@@ -158,7 +158,7 @@ export default function ProjectDetail() {
               </li>
               <li>
                 <Link href="/blog" className="px-2 md:px-4 py-2 rounded-full hover:bg-gray-100/80 text-gray-800 transition-colors text-sm md:text-base font-medium">
-                  Blogs & Research
+                  Research
                 </Link>
               </li>
               <li>
