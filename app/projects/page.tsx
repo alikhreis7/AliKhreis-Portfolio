@@ -263,7 +263,7 @@ export default function Projects() {
               }`}
             >
               <Code className="w-4 h-4" />
-              Personal & Academic
+              For Fun
             </button>
             <button
               onClick={() => setProjectTypeFilter('company')}
@@ -421,7 +421,7 @@ export default function Projects() {
               </li>
               <li>
                 <Link href="/blog" className="px-2 md:px-4 py-2 rounded-full hover:bg-gray-100/80 text-gray-800 transition-colors text-sm md:text-base font-medium">
-                  Blogs & Research
+                  Research
                 </Link>
               </li>
               <li>
