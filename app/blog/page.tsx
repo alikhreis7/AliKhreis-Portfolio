@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Github, Linkedin, Mail, BookOpen, Download, FileText, FlaskConical, ExternalLink, Award } from 'lucide-react'
+import { Github, Linkedin, Mail, BookOpen, Download, FileText, FlaskConical, ExternalLink, Award, GraduationCap } from 'lucide-react'
 import { motion } from 'framer-motion'
 
 // Define the Post type to fix type errors
@@ -190,6 +190,60 @@ export default function Blog() {
         >
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Research</h1>
           <p className="text-gray-600 text-lg">Explore my thoughts, insights, and research findings</p>
+        </motion.div>
+
+        {/* Google Scholar Banner */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="max-w-4xl mx-auto mb-12"
+        >
+          <a
+            href="https://scholar.google.com/citations?user=GG73TBgAAAAJ"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group block"
+          >
+            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-600 p-6 md:p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-[1.02]">
+              {/* Background decoration */}
+              <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2" />
+              <div className="absolute bottom-0 left-0 w-32 h-32 bg-white/10 rounded-full translate-y-1/2 -translate-x-1/2" />
+              
+              <div className="relative flex flex-col md:flex-row items-center gap-6">
+                {/* Icon */}
+                <div className="flex-shrink-0 w-16 h-16 md:w-20 md:h-20 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center">
+                  <GraduationCap className="w-10 h-10 md:w-12 md:h-12 text-white" />
+                </div>
+                
+                {/* Content */}
+                <div className="flex-1 text-center md:text-left">
+                  <h3 className="text-xl md:text-2xl font-bold text-white mb-2">
+                    Google Scholar Profile
+                  </h3>
+                  <p className="text-blue-100 text-sm md:text-base mb-3">
+                    View my complete academic publication history, citations, and research metrics
+                  </p>
+                  <div className="flex flex-wrap gap-3 justify-center md:justify-start">
+                    <span className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-white text-xs font-medium">
+                      Machine Learning
+                    </span>
+                    <span className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-white text-xs font-medium">
+                      Artificial Intelligence
+                    </span>
+                    <span className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-white text-xs font-medium">
+                      University of Ottawa
+                    </span>
+                  </div>
+                </div>
+                
+                {/* Arrow */}
+                <div className="flex-shrink-0 w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:bg-white/30 transition-colors">
+                  <ExternalLink className="w-6 h-6 text-white group-hover:scale-110 transition-transform" />
+                </div>
+              </div>
+            </div>
+          </a>
         </motion.div>
 
         {/* Tabs */}
