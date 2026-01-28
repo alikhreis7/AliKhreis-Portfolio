@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Github, Linkedin, Mail, Folder, Download, ArrowRight, Code, Briefcase, Brain, Eye } from 'lucide-react'
+import { Github, Linkedin, Mail, Folder, Download, ArrowRight, Code, Briefcase, Brain, Eye, Bot } from 'lucide-react'
 import { motion } from 'framer-motion'
 
 type Project = {
@@ -14,7 +14,7 @@ type Project = {
   developmentType: string
   image: string
   company?: string
-  projectType: 'personal' | 'company' | 'ml' | 'mv'
+  projectType: 'personal' | 'company' | 'ml' | 'mv' | 'genai'
   isPinned?: boolean
 }
 
@@ -29,6 +29,35 @@ const allProjects: Project[] = [
     image: '/portfoliopic.jpg',
     projectType: 'personal',
     isPinned: true
+  },
+  // January 2026 - GenAI & Agents Projects (Newest)
+  {
+    slug: 'sra-intelligence',
+    title: 'SRA Intelligence Agent',
+    shortDescription: 'AI-powered Security Risk Assessment agent built at Kinaxis Hackathon 2025',
+    category: 'GenAI & Agents',
+    developmentType: 'GenAI & Agents',
+    image: '/sra-intelligence.jpg',
+    company: 'Kinaxis',
+    projectType: 'genai'
+  },
+  {
+    slug: 'code-review-agent',
+    title: 'AI Code Review Agent',
+    shortDescription: 'Multi-agent GenAI system using GPT-4o and LangGraph for automated PR analysis',
+    category: 'GenAI & Agents',
+    developmentType: 'GenAI & Agents',
+    image: '/code-review-agent.jpg',
+    projectType: 'genai'
+  },
+  {
+    slug: 'genai-policy-agents',
+    title: 'Enterprise Policy Intelligence Agent',
+    shortDescription: 'Multi-agent GenAI system using RAG and LangGraph for policy decision support',
+    category: 'GenAI & Agents',
+    developmentType: 'GenAI & Agents',
+    image: '/genai-policy-agents.jpg',
+    projectType: 'genai'
   },
   // January 2026 - Machine Learning Projects (Newest)
   {
@@ -178,6 +207,10 @@ export default function Projects() {
     if (project.isPinned) {
       return projectTypeFilter === 'all' || project.projectType === projectTypeFilter
     }
+    // Show projects with company field under both their projectType AND 'company' filter
+    if (projectTypeFilter === 'company' && project.company) {
+      return true
+    }
     return projectTypeFilter === 'all' || project.projectType === projectTypeFilter
   }).sort((a, b) => {
     // Pinned projects always come first
@@ -196,6 +229,8 @@ export default function Projects() {
         return 'bg-purple-100'
       case 'mv':
         return 'bg-teal-100'
+      case 'genai':
+        return 'bg-red-100'
       default:
         return 'bg-gray-100'
     }
@@ -211,6 +246,8 @@ export default function Projects() {
         return <Brain className="w-5 h-5" />
       case 'mv':
         return <Eye className="w-5 h-5" />
+      case 'genai':
+        return <Bot className="w-5 h-5" />
       default:
         return <Folder className="w-5 h-5" />
     }
@@ -263,7 +300,7 @@ export default function Projects() {
               }`}
             >
               <Code className="w-4 h-4" />
-              For Fun
+              Academic
             </button>
             <button
               onClick={() => setProjectTypeFilter('company')}
@@ -297,6 +334,17 @@ export default function Projects() {
             >
               <Eye className="w-4 h-4" />
               Machine Vision
+            </button>
+            <button
+              onClick={() => setProjectTypeFilter('genai')}
+              className={`px-6 py-3 rounded-full text-sm font-medium transition-all flex items-center gap-2 ${
+                projectTypeFilter === 'genai'
+                  ? 'bg-red-500 text-white shadow-lg'
+                  : 'bg-white text-gray-700 hover:bg-red-50 shadow-sm'
+              }`}
+            >
+              <Bot className="w-4 h-4" />
+              GenAI & Agents
             </button>
           </div>
         </div>

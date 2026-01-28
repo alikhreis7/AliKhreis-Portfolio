@@ -6,6 +6,7 @@ export type Project = {
   location: string;
   client: string;
   image: string;
+  additionalImages?: string[];
   githubUrl?: string;
   websiteUrl?: string;
   features: string[];
@@ -416,5 +417,88 @@ export const projectsData: Record<string, Project> = {
       "Robotic Vision"
     ],
     longDescription: "A black-box computer vision solution developed for the ELG 5163 Machine Vision Challenge. The system processes RGB images from an overhead camera to detect and classify geometric shapes on a robotic manipulation workspace. The algorithm identifies 5 shape categories (circle, triangle, square, rectangle, semicircle) using color-based segmentation in LAB and HSV color spaces to isolate orange and cyan objects. The system automatically detects colored reference markers (red=origin, blue=+X, green=+Y) to establish a coordinate system, then reports each object's label, position in mm, and orientation angle. The pipeline includes preprocessing, morphological cleaning, connected component analysis, and shape classification based on circularity, aspect ratio, extent, and solidity metrics."
+  },
+  "sra-intelligence": {
+    title: "SRA Intelligence Agent",
+    category: "GenAI & Agents",
+    description: "AI-powered Security Risk Assessment (SRA) agent with queue orchestration, weighted scoring, and human-in-the-loop review - built at the 2025 Kinaxis Hackathon.",
+    releaseDate: "November 2025",
+    location: "Ottawa, ON",
+    client: "Kinaxis Hackathon 2025",
+    image: "/sra-intelligence.jpg",
+    additionalImages: ["/sra-hackathon-badge.jpg"],
+    features: [
+      "AI-Assisted Risk Assessment with Weighted Scoring",
+      "Queue Orchestration for Evidence Collection",
+      "Document Ingestion & Metadata Parsing",
+      "Human-in-the-Loop Review Workflow",
+      "Bulk Assessment Capabilities",
+      "Real-Time Analytics Dashboard"
+    ],
+    technologies: [
+      "C#/.NET Services",
+      "React/Vite UI",
+      "SQL Database",
+      "Azure OpenAI",
+      "Google Gemini",
+      "Microsoft Copilot"
+    ],
+    longDescription: "SRA Intelligence is a modern, AI-assisted Security Risk Assessment agent developed end-to-end during the 2025 Kinaxis Hackathon (Theme: KXS Secret Agents). The agent features queue orchestration that pulls together evidence from multiple sources, applies a weighted scoring model, and routes assessments to human review with AI-generated summaries and risk scores. Built with C#/.NET services for the backend, React/Vite for a responsive UI, and SQL database for consistent and accurate assessments. The AI pipeline leverages Azure OpenAI and Google Gemini with Microsoft Copilot integration to process applications by ingesting and parsing documents and metadata, then applying a weighted model to produce consistent, accurate risk assessment scores. This project demonstrates practical application of ML/LLM concepts that deliver measurable business impact in enterprise security workflows."
+  },
+  "code-review-agent": {
+    title: "AI Code Review Agent",
+    category: "GenAI & Agents",
+    description: "Multi-agent GenAI system using GPT-4o and LangGraph to automatically review PRs for security vulnerabilities, bugs, code quality issues, and best practice violations.",
+    releaseDate: "January 2026",
+    location: "Ottawa, ON",
+    client: "Personal Project",
+    image: "/code-review-agent.jpg",
+    githubUrl: "https://github.com/alikhreis7/code-review-agent",
+    features: [
+      "6 Specialized AI Agents (Security, Style, Bug, Performance, Docs, Test)",
+      "Parallel Agent Execution with LangGraph",
+      "GitHub Webhook Integration",
+      "Real-Time Analysis Dashboard",
+      "Severity-Based Findings Organization",
+      "Inline Code Suggestions"
+    ],
+    technologies: [
+      "Python 3.11+",
+      "OpenAI GPT-4o",
+      "LangGraph",
+      "LangChain",
+      "FastAPI",
+      "Pydantic",
+      "Celery + Redis"
+    ],
+    longDescription: "A sophisticated multi-agent GenAI system that automatically reviews pull requests for security vulnerabilities, code quality issues, and best practice violations. The system deploys 6 specialized AI agents running in parallel: Security Agent (detects SQL injection, XSS, hardcoded secrets), Style Agent (code quality and best practices), Bug Agent (null references, race conditions), Performance Agent (N+1 queries, memory leaks), Docs Agent (missing documentation), and Test Agent (coverage gaps). Features a modern glassmorphism web dashboard with real-time status updates, GitHub webhook support for automatic PR reviews, and structured feedback with severity ratings and fix suggestions."
+  },
+  "genai-policy-agents": {
+    title: "Enterprise Policy Intelligence Agent",
+    category: "GenAI & Agents",
+    description: "Multi-agent GenAI system for enterprise policy lookup and decision support using RAG, LangGraph orchestration, and structured outputs with citations and confidence scoring.",
+    releaseDate: "January 2026",
+    location: "Ottawa, ON",
+    client: "Personal Project",
+    image: "/genai-policy-agents.jpg",
+    githubUrl: "https://github.com/alikhreis7/genai-policy-agents",
+    features: [
+      "Multi-Agent Orchestration (Router, RAG, Synthesis, Confidence)",
+      "RAG over Enterprise Policies & ADRs",
+      "Citations Linking Claims to Sources",
+      "Confidence Scoring & Human Escalation",
+      "Section-Based Document Chunking",
+      "Demo Mode (No API Keys Required)"
+    ],
+    technologies: [
+      "Python 3.11+",
+      "OpenAI API",
+      "LangGraph",
+      "LangChain",
+      "Pydantic",
+      "FAISS",
+      "Rich CLI"
+    ],
+    longDescription: "A multi-agent GenAI decision-support system that uses RAG over enterprise policies, architectural decision records (ADRs), and historical discussions to answer questions like 'Is this allowed?', 'Has this been done before?', and 'What are the risks?'. Built with citations, confidence scoring, and human escalation to demonstrate production-grade GenAI engineering practices. Features include Intent Router Agent for query classification, Policy RAG Agent for document retrieval, Synthesis Agent for answer generation with citations, and Confidence Agent for grounding verification. The system treats LLMs as unreliable components that must be orchestrated, validated, and constrained—reducing code review bottlenecks by 40-60% while catching issues before human review."
   }
 } 
