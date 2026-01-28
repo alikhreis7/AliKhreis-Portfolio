@@ -31,14 +31,32 @@ export default function ProjectDetail() {
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Left Column - Image */}
-          <div className="aspect-square rounded-3xl overflow-hidden">
-            <Image
-              src={project.image}
-              alt={project.title}
-              width={800}
-              height={800}
-              className="w-full h-full object-cover"
-            />
+          <div className="space-y-4">
+            <div className="aspect-square rounded-3xl overflow-hidden">
+              <Image
+                src={project.image}
+                alt={project.title}
+                width={800}
+                height={800}
+                className="w-full h-full object-cover"
+              />
+            </div>
+            {/* Additional Images */}
+            {project.additionalImages && project.additionalImages.length > 0 && (
+              <div className="grid grid-cols-2 gap-4">
+                {project.additionalImages.map((img, index) => (
+                  <div key={index} className="aspect-square rounded-2xl overflow-hidden">
+                    <Image
+                      src={img}
+                      alt={`${project.title} - Image ${index + 2}`}
+                      width={400}
+                      height={400}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Right Column - Project Details */}
