@@ -500,5 +500,33 @@ export const projectsData: Record<string, Project> = {
       "Rich CLI"
     ],
     longDescription: "A multi-agent GenAI decision-support system that uses RAG over enterprise policies, architectural decision records (ADRs), and historical discussions to answer questions like 'Is this allowed?', 'Has this been done before?', and 'What are the risks?'. Built with citations, confidence scoring, and human escalation to demonstrate production-grade GenAI engineering practices. Features include Intent Router Agent for query classification, Policy RAG Agent for document retrieval, Synthesis Agent for answer generation with citations, and Confidence Agent for grounding verification. The system treats LLMs as unreliable components that must be orchestrated, validated, and constrained—reducing code review bottlenecks by 40-60% while catching issues before human review."
+  },
+  "fair-ai-data": {
+    title: "Fair AI Data Preprocessing Toolkit",
+    category: "GenAI & Agents",
+    description: "A comprehensive implementation of bias mitigation techniques for fair machine learning, addressing data biases to build ethical AI systems.",
+    releaseDate: "February 2025",
+    location: "Ottawa, ON",
+    client: "ELG 5195 - Cybersecurity in Applied AI",
+    image: "/fair-ai-data.jpg",
+    githubUrl: "https://github.com/QuinnMcGill/makeyourdatafair",
+    features: [
+      "Reweighing Algorithm for Bias Correction",
+      "Data Massaging Techniques",
+      "Attribute Suppression Methods",
+      "Uniform Sampling Implementation",
+      "Disparate Impact Analysis",
+      "Group & Individual Fairness Metrics",
+      "Counterfactual Fairness Evaluation"
+    ],
+    technologies: [
+      "Python",
+      "Jupyter Notebook",
+      "Pandas & NumPy",
+      "Scikit-learn",
+      "Fairness Metrics Libraries",
+      "Statistical Analysis"
+    ],
+    longDescription: "An implementation and expansion of techniques from the research paper 'Make your data fair: A survey of data preprocessing techniques that address biases in data towards fair AI'. This project tackles one of the most critical challenges in modern AI: ensuring fairness and eliminating bias in machine learning systems. The toolkit implements multiple preprocessing techniques including reweighing (adjusting instance weights to balance protected groups), massaging (strategically modifying labels to reduce discrimination), suppression (removing sensitive attributes), and uniform sampling (balancing dataset representation). The project also implements comprehensive fairness metrics including disparate impact ratio, group fairness, individual fairness, counterfactual fairness, and equality of opportunity—enabling practitioners to measure and improve the fairness of their ML pipelines. Developed collaboratively as part of ELG 5195 coursework at the University of Ottawa."
   }
 } 
