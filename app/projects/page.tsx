@@ -59,6 +59,15 @@ const allProjects: Project[] = [
     image: '/genai-policy-agents.jpg',
     projectType: 'genai'
   },
+  {
+    slug: 'fair-ai-data',
+    title: 'Fair AI Data Preprocessing Toolkit',
+    shortDescription: 'Bias mitigation techniques for fair machine learning - ELG 5195 Research Project',
+    category: 'GenAI & Agents',
+    developmentType: 'GenAI & Agents',
+    image: '/fair-ai-data.jpg',
+    projectType: 'genai'
+  },
   // January 2026 - Machine Learning Projects (Newest)
   {
     slug: 'unsupervisedlearning',
