@@ -1,10 +1,12 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { useSearchParams, useRouter } from 'next/navigation'
 import { Github, Linkedin, Mail, Folder, Download, ArrowRight, Code, Briefcase, Brain, Eye, Bot } from 'lucide-react'
 import { motion } from 'framer-motion'
+import { ThemeToggle } from '../components/ThemeToggle'
 
 type Project = {
   slug: string
@@ -208,7 +210,37 @@ const allProjects: Project[] = [
 ]
 
 export default function Projects() {
-  const [projectTypeFilter, setProjectTypeFilter] = useState<string>('all')
+  const searchParams = useSearchParams()
+  const router = useRouter()
+  
+  // Initialize filter directly from URL params (no delay)
+  const getInitialFilter = () => {
+    const filterParam = searchParams.get('filter')
+    if (filterParam && ['all', 'personal', 'company', 'ml', 'mv', 'genai'].includes(filterParam)) {
+      return filterParam
+    }
+    return 'all'
+  }
+  
+  const [projectTypeFilter, setProjectTypeFilter] = useState<string>(getInitialFilter)
+
+  // Sync state when URL changes (for browser back/forward)
+  useEffect(() => {
+    const filterParam = searchParams.get('filter')
+    const newFilter = filterParam && ['all', 'personal', 'company', 'ml', 'mv', 'genai'].includes(filterParam) 
+      ? filterParam 
+      : 'all'
+    if (newFilter !== projectTypeFilter) {
+      setProjectTypeFilter(newFilter)
+    }
+  }, [searchParams, projectTypeFilter])
+
+  // Update URL when filter changes
+  const handleFilterChange = (filter: string) => {
+    setProjectTypeFilter(filter)
+    const newUrl = filter === 'all' ? '/projects' : `/projects?filter=${filter}`
+    router.replace(newUrl, { scroll: false })
+  }
 
   // Filter projects but keep pinned portfolio at top
   const filteredProjects = allProjects.filter(project => {
@@ -231,17 +263,17 @@ export default function Projects() {
   const getCategoryBadgeColor = (projectType: string) => {
     switch(projectType) {
       case 'personal':
-        return 'bg-yellow-100'
+        return 'bg-yellow-100 dark:bg-yellow-900/40 text-yellow-800 dark:text-yellow-200'
       case 'company':
-        return 'bg-blue-100'
+        return 'bg-blue-100 dark:bg-blue-900/40 text-blue-800 dark:text-blue-200'
       case 'ml':
-        return 'bg-purple-100'
+        return 'bg-purple-100 dark:bg-purple-900/40 text-purple-800 dark:text-purple-200'
       case 'mv':
-        return 'bg-teal-100'
+        return 'bg-teal-100 dark:bg-teal-900/40 text-teal-800 dark:text-teal-200'
       case 'genai':
-        return 'bg-red-100'
+        return 'bg-red-100 dark:bg-red-900/40 text-red-800 dark:text-red-200'
       default:
-        return 'bg-gray-100'
+        return 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200'
     }
   }
 
@@ -263,16 +295,16 @@ export default function Projects() {
   }
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-gray-50 via-white to-blue-50">
+    <div className="min-h-screen w-full bg-gradient-to-br from-gray-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-colors duration-300">
       {/* Header */}
       <div className="container mx-auto px-4 py-12">
         <div className="flex justify-between items-center mb-8">
-          <Link href="/" className="flex items-center gap-2 text-gray-600 hover:text-black transition-colors">
+          <Link href="/" className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">
             <span className="text-lg">← Back to home</span>
           </Link>
           <div className="flex items-center gap-2">
             <Folder className="w-6 h-6 text-blue-500" />
-            <span className="font-semibold text-xl">My Projects</span>
+            <span className="font-semibold text-xl dark:text-white">My Projects</span>
           </div>
         </div>
 
@@ -282,74 +314,74 @@ export default function Projects() {
           animate={{ opacity: 1, y: 0 }}
           className="mb-12"
         >
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Projects</h1>
-          <p className="text-gray-600 text-lg">Explore my work across different domains and technologies</p>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 dark:text-white">Projects</h1>
+          <p className="text-gray-600 dark:text-gray-400 text-lg">Explore my work across different domains and technologies</p>
         </motion.div>
 
         {/* Filters Section */}
         <div className="mb-12">
-          <h3 className="text-sm font-semibold text-gray-700 mb-4">Filter by Project Type</h3>
+          <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-4">Filter by Project Type</h3>
           <div className="flex flex-wrap gap-3">
             <button
-              onClick={() => setProjectTypeFilter('all')}
+              onClick={() => handleFilterChange('all')}
               className={`px-6 py-3 rounded-full text-sm font-medium transition-all ${
                 projectTypeFilter === 'all'
-                  ? 'bg-black text-white shadow-lg'
-                  : 'bg-white text-gray-700 hover:bg-gray-100 shadow-sm'
+                  ? 'bg-black dark:bg-white text-white dark:text-black shadow-lg'
+                  : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 shadow-sm'
               }`}
             >
               All Projects
             </button>
             <button
-              onClick={() => setProjectTypeFilter('personal')}
+              onClick={() => handleFilterChange('personal')}
               className={`px-6 py-3 rounded-full text-sm font-medium transition-all flex items-center gap-2 ${
                 projectTypeFilter === 'personal'
                   ? 'bg-yellow-400 text-black shadow-lg'
-                  : 'bg-white text-gray-700 hover:bg-yellow-50 shadow-sm'
+                  : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-yellow-50 dark:hover:bg-yellow-900/30 shadow-sm'
               }`}
             >
               <Code className="w-4 h-4" />
               Academic
             </button>
             <button
-              onClick={() => setProjectTypeFilter('company')}
+              onClick={() => handleFilterChange('company')}
               className={`px-6 py-3 rounded-full text-sm font-medium transition-all flex items-center gap-2 ${
                 projectTypeFilter === 'company'
                   ? 'bg-blue-500 text-white shadow-lg'
-                  : 'bg-white text-gray-700 hover:bg-blue-50 shadow-sm'
+                  : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900/30 shadow-sm'
               }`}
             >
               <Briefcase className="w-4 h-4" />
               Company Projects
             </button>
             <button
-              onClick={() => setProjectTypeFilter('ml')}
+              onClick={() => handleFilterChange('ml')}
               className={`px-6 py-3 rounded-full text-sm font-medium transition-all flex items-center gap-2 ${
                 projectTypeFilter === 'ml'
                   ? 'bg-purple-500 text-white shadow-lg'
-                  : 'bg-white text-gray-700 hover:bg-purple-50 shadow-sm'
+                  : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-purple-50 dark:hover:bg-purple-900/30 shadow-sm'
               }`}
             >
               <Brain className="w-4 h-4" />
               Machine Learning
             </button>
             <button
-              onClick={() => setProjectTypeFilter('mv')}
+              onClick={() => handleFilterChange('mv')}
               className={`px-6 py-3 rounded-full text-sm font-medium transition-all flex items-center gap-2 ${
                 projectTypeFilter === 'mv'
                   ? 'bg-teal-500 text-white shadow-lg'
-                  : 'bg-white text-gray-700 hover:bg-teal-50 shadow-sm'
+                  : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-teal-50 dark:hover:bg-teal-900/30 shadow-sm'
               }`}
             >
               <Eye className="w-4 h-4" />
               Machine Vision
             </button>
             <button
-              onClick={() => setProjectTypeFilter('genai')}
+              onClick={() => handleFilterChange('genai')}
               className={`px-6 py-3 rounded-full text-sm font-medium transition-all flex items-center gap-2 ${
                 projectTypeFilter === 'genai'
                   ? 'bg-red-500 text-white shadow-lg'
-                  : 'bg-white text-gray-700 hover:bg-red-50 shadow-sm'
+                  : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-red-50 dark:hover:bg-red-900/30 shadow-sm'
               }`}
             >
               <Bot className="w-4 h-4" />
@@ -362,7 +394,7 @@ export default function Projects() {
         <div className="max-w-4xl">
           {filteredProjects.length === 0 ? (
             <div className="text-center py-20">
-              <p className="text-gray-500 text-lg">No projects match your filters</p>
+              <p className="text-gray-500 dark:text-gray-400 text-lg">No projects match your filters</p>
             </div>
           ) : (
             <div className="space-y-4">
@@ -374,10 +406,10 @@ export default function Projects() {
                   transition={{ delay: index * 0.1 }}
                 >
                   <Link 
-                    href={`/projects/${project.slug}`} 
+                    href={`/projects/${project.slug}${projectTypeFilter !== 'all' ? `?from=${projectTypeFilter}` : ''}`} 
                     className="block group"
                   >
-                    <div className="bg-white rounded-2xl p-6 md:p-8 shadow-sm hover:shadow-lg border border-gray-100 hover:border-gray-200 transition-all duration-300">
+                    <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 md:p-8 shadow-sm hover:shadow-lg dark:shadow-gray-900/30 border border-gray-100 dark:border-gray-700 hover:border-gray-200 dark:hover:border-gray-600 transition-all duration-300">
                       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                         <div className="flex-1">
                           <div className="flex items-center gap-3 mb-3">
@@ -388,23 +420,23 @@ export default function Projects() {
                               {project.category}
                             </span>
                             {project.company && (
-                              <span className="text-sm text-gray-500">
+                              <span className="text-sm text-gray-500 dark:text-gray-400">
                                 • {project.company}
                               </span>
                             )}
                           </div>
-                          <h3 className="text-2xl md:text-3xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors mb-1">
+                          <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors mb-1">
                             {project.title}
                           </h3>
-                          <p className="text-gray-600 text-sm md:text-base mb-2">
+                          <p className="text-gray-600 dark:text-gray-400 text-sm md:text-base mb-2">
                             {project.shortDescription}
                           </p>
-                          <p className="text-gray-400 text-xs md:text-sm">
+                          <p className="text-gray-400 dark:text-gray-500 text-xs md:text-sm">
                             Click to view details →
                           </p>
                         </div>
                         <div className="flex items-center justify-end">
-                          <div className="p-4 rounded-full bg-gray-100 group-hover:bg-blue-100 group-hover:text-blue-600 transition-all">
+                          <div className="p-4 rounded-full bg-gray-100 dark:bg-gray-700 group-hover:bg-blue-100 dark:group-hover:bg-blue-900 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-all">
                             <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
                           </div>
                         </div>
@@ -420,27 +452,36 @@ export default function Projects() {
 
       {/* Get in touch */}
       <div className="relative z-10 container mx-auto px-4 mb-20 mt-12">
-        <div className="flex justify-center items-center gap-6">
-          <span className="font-medium text-gray-800">Get in touch:</span>
+        <div className="flex flex-wrap justify-center items-center gap-4">
+          <span className="font-medium text-gray-800 dark:text-gray-300">Get in touch:</span>
           <Link 
             href="https://github.com/alikhreis7" 
             target="_blank"
-            className="p-3 rounded-full hover:bg-gray-100 transition-colors"
+            className="p-3 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
           >
-            <Github className="w-6 h-6" />
+            <Github className="w-6 h-6 text-gray-700 dark:text-white" />
           </Link>
           <Link 
             href="https://www.linkedin.com/in/alikhreis/" 
             target="_blank"
-            className="p-3 rounded-full hover:bg-gray-100 transition-colors"
+            className="p-3 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
           >
-            <Linkedin className="w-6 h-6" />
+            <Linkedin className="w-6 h-6 text-gray-700 dark:text-white" />
           </Link>
           <Link 
             href="mailto:alikhreis12@gmail.com"
-            className="p-3 rounded-full hover:bg-gray-100 transition-colors"
+            className="p-3 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
           >
-            <Mail className="w-6 h-6" />
+            <Mail className="w-6 h-6 text-gray-700 dark:text-white" />
+          </Link>
+          <Link 
+            href="/Ali-K-Resume.pdf"
+            target="_blank"
+            download
+            className="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-medium transition-all hover:scale-105"
+          >
+            <Download className="w-5 h-5" />
+            Download Resume
           </Link>
           <Link 
             href="/Ali-K-Resume.pdf" 
@@ -457,8 +498,8 @@ export default function Projects() {
       {/* Sticky Navigation */}
       <div className="fixed bottom-4 left-0 right-0 flex justify-center z-50">
         <div className="max-w-2xl w-full mx-4">
-          <nav className="bg-gradient-to-b from-white/60 to-white/30 backdrop-blur-md rounded-full p-2 shadow-[0_4px_20px_-2px_rgba(0,0,0,0.1)] border border-white/20">
-            <ul className="flex items-center justify-center w-full gap-2 md:gap-6">
+          <nav className="bg-gradient-to-b from-white/60 to-white/30 dark:from-gray-800/60 dark:to-gray-900/30 backdrop-blur-md rounded-full p-2 shadow-[0_4px_20px_-2px_rgba(0,0,0,0.1)] dark:shadow-[0_4px_20px_-2px_rgba(0,0,0,0.4)] border border-white/20 dark:border-gray-700/30">
+            <ul className="flex items-center justify-center w-full gap-2 md:gap-4">
               <Image
                 src="/profile-pic.png"
                 alt="Ali Khreis"
@@ -467,24 +508,27 @@ export default function Projects() {
                 className="w-6 h-6 md:w-8 md:h-8 rounded-full object-cover"
               />
               <li>
-                <Link href="/" className="px-2 md:px-4 py-2 rounded-full hover:bg-gray-100/80 text-gray-800 transition-colors text-sm md:text-base font-medium">
+                <Link href="/" className="px-2 md:px-4 py-2 rounded-full hover:bg-gray-100/80 dark:hover:bg-gray-700/80 text-gray-800 dark:text-gray-200 transition-colors text-sm md:text-base font-medium">
                   About
                 </Link>
               </li>
               <li>
-                <Link href="/projects" className="px-2 md:px-4 py-2 rounded-full hover:bg-gray-100/80 text-gray-800 transition-colors text-sm md:text-base font-medium">
+                <Link href="/projects" className="px-2 md:px-4 py-2 rounded-full hover:bg-gray-100/80 dark:hover:bg-gray-700/80 text-gray-800 dark:text-gray-200 transition-colors text-sm md:text-base font-medium">
                   Projects
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="px-2 md:px-4 py-2 rounded-full hover:bg-gray-100/80 text-gray-800 transition-colors text-sm md:text-base font-medium">
+                <Link href="/blog" className="px-2 md:px-4 py-2 rounded-full hover:bg-gray-100/80 dark:hover:bg-gray-700/80 text-gray-800 dark:text-gray-200 transition-colors text-sm md:text-base font-medium">
                   Research
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="px-2 md:px-4 py-2 rounded-full hover:bg-gray-100/80 text-gray-800 transition-colors text-sm md:text-base font-medium">
+                <Link href="/contact" className="px-2 md:px-4 py-2 rounded-full hover:bg-gray-100/80 dark:hover:bg-gray-700/80 text-gray-800 dark:text-gray-200 transition-colors text-sm md:text-base font-medium">
                   Contact
                 </Link>
+              </li>
+              <li>
+                <ThemeToggle />
               </li>
             </ul>
           </nav>

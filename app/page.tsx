@@ -5,10 +5,11 @@ import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Download, Github, Linkedin, Mail, ArrowDown } from 'lucide-react'
+import { ThemeToggle } from './components/ThemeToggle'
 
 export default function Portfolio() {
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-blue-50 via-white to-pink-50 relative overflow-hidden">
+    <div className="min-h-screen w-full bg-gradient-to-br from-blue-50 via-white to-pink-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 relative overflow-hidden transition-colors duration-300">
       {/* Hero Section */}
       <div className="relative z-10 container mx-auto px-4 pt-20 pb-32 flex flex-col items-center text-center">
         {/* Alumni pill */}
@@ -46,7 +47,7 @@ export default function Portfolio() {
           className="relative mb-6"
         >
           <div className="absolute inset-0 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 blur-3xl opacity-50 rounded-full"></div>
-          <h1 className="relative text-6xl md:text-8xl font-black mb-4">
+          <h1 className="relative text-6xl md:text-8xl font-black mb-4 text-gray-900 dark:text-white">
             Ali Khreis
           </h1>
         </motion.div>
@@ -70,7 +71,7 @@ export default function Portfolio() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
-          className="text-gray-700 text-lg max-w-3xl mb-8 leading-relaxed"
+          className="text-gray-700 dark:text-gray-300 text-lg max-w-3xl mb-8 leading-relaxed"
         >
           Crafting innovative digital solutions with modern technologies and AI-driven insights
         </motion.p>
@@ -92,7 +93,7 @@ export default function Portfolio() {
           </Button>
           <Button 
             variant="outline"
-            className="border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white rounded-full px-8 py-6 text-lg font-semibold transition-all"
+            className="border-2 border-gray-800 dark:border-gray-300 text-gray-800 dark:text-gray-200 hover:bg-gray-800 dark:hover:bg-gray-200 hover:text-white dark:hover:text-gray-900 rounded-full px-8 py-6 text-lg font-semibold transition-all"
             asChild
           >
             <Link href="/contact">
@@ -111,30 +112,22 @@ export default function Portfolio() {
           <Link 
             href="https://github.com/alikhreis7" 
             target="_blank"
-            className="p-4 rounded-full bg-white shadow-md hover:shadow-lg hover:scale-110 transition-all"
+            className="p-4 rounded-full bg-white dark:bg-gray-800 shadow-md hover:shadow-lg hover:scale-110 transition-all"
           >
-            <Github className="w-6 h-6" />
+            <Github className="w-6 h-6 dark:text-white" />
           </Link>
           <Link 
             href="https://www.linkedin.com/in/alikhreis/" 
             target="_blank"
-            className="p-4 rounded-full bg-white shadow-md hover:shadow-lg hover:scale-110 transition-all"
+            className="p-4 rounded-full bg-white dark:bg-gray-800 shadow-md hover:shadow-lg hover:scale-110 transition-all"
           >
-            <Linkedin className="w-6 h-6" />
+            <Linkedin className="w-6 h-6 dark:text-white" />
           </Link>
           <Link 
             href="mailto:alikhreis12@gmail.com"
-            className="p-4 rounded-full bg-white shadow-md hover:shadow-lg hover:scale-110 transition-all"
+            className="p-4 rounded-full bg-white dark:bg-gray-800 shadow-md hover:shadow-lg hover:scale-110 transition-all"
           >
-            <Mail className="w-6 h-6" />
-          </Link>
-          <Link 
-            href="/Ali-K-Resume.pdf"
-            target="_blank"
-            download
-            className="p-4 rounded-full bg-white shadow-md hover:shadow-lg hover:scale-110 transition-all"
-          >
-            <Download className="w-6 h-6" />
+            <Mail className="w-6 h-6 dark:text-white" />
           </Link>
         </motion.div>
 
@@ -142,7 +135,7 @@ export default function Portfolio() {
         <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
-          className="flex flex-col items-center text-gray-500"
+          className="flex flex-col items-center text-gray-500 dark:text-gray-400"
         >
           <span className="text-sm mb-2">Scroll to explore</span>
           <ArrowDown className="w-5 h-5" />
@@ -150,7 +143,7 @@ export default function Portfolio() {
       </div>
 
       {/* About Section */}
-      <div id="about-me" className="relative z-10 bg-gradient-to-b from-white via-gray-50 to-white py-24">
+      <div id="about-me" className="relative z-10 bg-gradient-to-b from-white via-gray-50 to-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 py-24">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             {/* Section Header */}
@@ -160,8 +153,8 @@ export default function Portfolio() {
               viewport={{ once: true }}
               className="text-center mb-16"
             >
-              <h2 className="text-5xl font-bold mb-4">About Me</h2>
-              <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              <h2 className="text-5xl font-bold mb-4 dark:text-white">About Me</h2>
+              <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
                 Software Engineer passionate about AI, Machine Learning, and building innovative solutions
               </p>
             </motion.div>
@@ -194,15 +187,15 @@ export default function Portfolio() {
                     I&apos;m passionate about leveraging AI, data, and technology to solve complex challenges. My focus is on real-world applications to drive innovation through machine learning and artificial intelligence.
                   </p>
                   <div className="mt-8">
-                    <Button 
-                      className="bg-white text-black hover:bg-gray-100 rounded-full px-6 py-6 font-semibold"
-                      asChild
+                    <Link 
+                      href="/Ali-K-Resume.pdf" 
+                      target="_blank" 
+                      download
+                      className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-semibold transition-all hover:scale-105 shadow-lg"
                     >
-                      <Link href="/Ali-K-Resume.pdf" target="_blank" download>
-                        <Download className="mr-2 h-5 w-5" /> 
-                        Download Resume
-                      </Link>
-                    </Button>
+                      <Download className="w-5 h-5" /> 
+                      Download Resume
+                    </Link>
                   </div>
                 </div>
               </motion.div>
@@ -361,7 +354,7 @@ export default function Portfolio() {
       </div>
 
       {/* Technical Expertise Section */}
-      <div className="relative z-10 bg-white py-20">
+      <div className="relative z-10 bg-white dark:bg-gray-900 py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-7xl mx-auto">
             <motion.div
@@ -369,14 +362,14 @@ export default function Portfolio() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-4xl font-bold text-center mb-16">Technical Expertise</h2>
+              <h2 className="text-4xl font-bold text-center mb-16 dark:text-white">Technical Expertise</h2>
               
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-7xl mx-auto">
                 {/* Frontend Development */}
-                <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-3xl p-6 lg:p-8 shadow-lg hover:shadow-xl transition-shadow flex flex-col min-w-0">
+                <div className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/30 dark:to-blue-800/30 rounded-3xl p-6 lg:p-8 shadow-lg hover:shadow-xl transition-shadow flex flex-col min-w-0">
                   <div className="flex items-start gap-3 mb-6">
                     <span className="text-3xl lg:text-4xl flex-shrink-0">🎨</span>
-                    <h3 className="text-xl lg:text-2xl font-bold leading-tight break-words">Frontend Development</h3>
+                    <h3 className="text-xl lg:text-2xl font-bold leading-tight break-words dark:text-white">Frontend Development</h3>
                   </div>
                   <div className="space-y-4">
                     {[
@@ -387,10 +380,10 @@ export default function Portfolio() {
                     ].map((item) => (
                       <div key={item.skill}>
                         <div className="flex justify-between mb-2">
-                          <span className="font-medium">{item.skill}</span>
-                          <span className="font-bold">{item.level}%</span>
+                          <span className="font-medium dark:text-gray-200">{item.skill}</span>
+                          <span className="font-bold dark:text-white">{item.level}%</span>
                         </div>
-                        <div className="h-2 bg-blue-200 rounded-full overflow-hidden">
+                        <div className="h-2 bg-blue-200 dark:bg-blue-900/50 rounded-full overflow-hidden">
                           <motion.div
                             initial={{ width: 0 }}
                             whileInView={{ width: `${item.level}%` }}
@@ -405,10 +398,10 @@ export default function Portfolio() {
                 </div>
 
                 {/* Backend Development */}
-                <div className="bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-3xl p-6 lg:p-8 shadow-lg hover:shadow-xl transition-shadow flex flex-col min-w-0">
+                <div className="bg-gradient-to-br from-indigo-50 to-indigo-100 dark:from-indigo-900/30 dark:to-indigo-800/30 rounded-3xl p-6 lg:p-8 shadow-lg hover:shadow-xl transition-shadow flex flex-col min-w-0">
                   <div className="flex items-start gap-3 mb-6">
                     <span className="text-3xl lg:text-4xl flex-shrink-0">⚙️</span>
-                    <h3 className="text-xl lg:text-2xl font-bold leading-tight break-words">Backend Development</h3>
+                    <h3 className="text-xl lg:text-2xl font-bold leading-tight break-words dark:text-white">Backend Development</h3>
                   </div>
                   <div className="space-y-4">
                     {[
@@ -419,10 +412,10 @@ export default function Portfolio() {
                     ].map((item) => (
                       <div key={item.skill}>
                         <div className="flex justify-between mb-2">
-                          <span className="font-medium">{item.skill}</span>
-                          <span className="font-bold">{item.level}%</span>
+                          <span className="font-medium dark:text-gray-200">{item.skill}</span>
+                          <span className="font-bold dark:text-white">{item.level}%</span>
                         </div>
-                        <div className="h-2 bg-indigo-200 rounded-full overflow-hidden">
+                        <div className="h-2 bg-indigo-200 dark:bg-indigo-900/50 rounded-full overflow-hidden">
                           <motion.div
                             initial={{ width: 0 }}
                             whileInView={{ width: `${item.level}%` }}
@@ -437,10 +430,10 @@ export default function Portfolio() {
                 </div>
 
                 {/* Backend & APIs */}
-                <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-3xl p-6 lg:p-8 shadow-lg hover:shadow-xl transition-shadow flex flex-col min-w-0">
+                <div className="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/30 dark:to-green-800/30 rounded-3xl p-6 lg:p-8 shadow-lg hover:shadow-xl transition-shadow flex flex-col min-w-0">
                   <div className="flex items-start gap-3 mb-6">
                     <span className="text-3xl lg:text-4xl flex-shrink-0">⚡</span>
-                    <h3 className="text-xl lg:text-2xl font-bold leading-tight break-words">Backend & APIs</h3>
+                    <h3 className="text-xl lg:text-2xl font-bold leading-tight break-words dark:text-white">Backend & APIs</h3>
                   </div>
                   <div className="space-y-4">
                     {[
@@ -451,10 +444,10 @@ export default function Portfolio() {
                     ].map((item) => (
                       <div key={item.skill}>
                         <div className="flex justify-between mb-2">
-                          <span className="font-medium">{item.skill}</span>
-                          <span className="font-bold">{item.level}%</span>
+                          <span className="font-medium dark:text-gray-200">{item.skill}</span>
+                          <span className="font-bold dark:text-white">{item.level}%</span>
                         </div>
-                        <div className="h-2 bg-green-200 rounded-full overflow-hidden">
+                        <div className="h-2 bg-green-200 dark:bg-green-900/50 rounded-full overflow-hidden">
                           <motion.div
                             initial={{ width: 0 }}
                             whileInView={{ width: `${item.level}%` }}
@@ -471,10 +464,10 @@ export default function Portfolio() {
                 {/* Bottom row - Centered wrapper for last 2 cards */}
                 <div className="lg:col-span-3 flex flex-col md:flex-row justify-center gap-6 lg:gap-8">
                   {/* Performance & DevOps */}
-                  <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-3xl p-6 lg:p-8 shadow-lg hover:shadow-xl transition-shadow flex flex-col min-w-0 md:max-w-sm">
+                  <div className="bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/30 dark:to-purple-800/30 rounded-3xl p-6 lg:p-8 shadow-lg hover:shadow-xl transition-shadow flex flex-col min-w-0 md:max-w-sm">
                     <div className="flex items-start gap-3 mb-6">
                       <span className="text-3xl lg:text-4xl flex-shrink-0">🚀</span>
-                      <h3 className="text-xl lg:text-2xl font-bold leading-tight break-words">Performance & DevOps</h3>
+                      <h3 className="text-xl lg:text-2xl font-bold leading-tight break-words dark:text-white">Performance & DevOps</h3>
                     </div>
                     <div className="space-y-4">
                       {[
@@ -485,10 +478,10 @@ export default function Portfolio() {
                       ].map((item) => (
                         <div key={item.skill}>
                           <div className="flex justify-between mb-2">
-                            <span className="font-medium">{item.skill}</span>
-                            <span className="font-bold">{item.level}%</span>
+                            <span className="font-medium dark:text-gray-200">{item.skill}</span>
+                            <span className="font-bold dark:text-white">{item.level}%</span>
                           </div>
-                          <div className="h-2 bg-purple-200 rounded-full overflow-hidden">
+                          <div className="h-2 bg-purple-200 dark:bg-purple-900/50 rounded-full overflow-hidden">
                             <motion.div
                               initial={{ width: 0 }}
                               whileInView={{ width: `${item.level}%` }}
@@ -503,10 +496,10 @@ export default function Portfolio() {
                   </div>
 
                   {/* Applied Machine Learning */}
-                  <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-3xl p-6 lg:p-8 shadow-lg hover:shadow-xl transition-shadow flex flex-col min-w-0 md:max-w-sm">
+                  <div className="bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-900/30 dark:to-orange-800/30 rounded-3xl p-6 lg:p-8 shadow-lg hover:shadow-xl transition-shadow flex flex-col min-w-0 md:max-w-sm">
                     <div className="flex items-start gap-3 mb-6">
                       <span className="text-3xl lg:text-4xl flex-shrink-0">🧠</span>
-                      <h3 className="text-xl lg:text-2xl font-bold leading-tight break-words">Applied Machine Learning</h3>
+                      <h3 className="text-xl lg:text-2xl font-bold leading-tight break-words dark:text-white">Applied Machine Learning</h3>
                     </div>
                     <div className="space-y-4">
                       {[
@@ -517,10 +510,10 @@ export default function Portfolio() {
                       ].map((item) => (
                         <div key={item.skill}>
                           <div className="flex justify-between mb-2">
-                            <span className="font-medium">{item.skill}</span>
-                            <span className="font-bold">{item.level}%</span>
+                            <span className="font-medium dark:text-gray-200">{item.skill}</span>
+                            <span className="font-bold dark:text-white">{item.level}%</span>
                           </div>
-                          <div className="h-2 bg-orange-200 rounded-full overflow-hidden">
+                          <div className="h-2 bg-orange-200 dark:bg-orange-900/50 rounded-full overflow-hidden">
                             <motion.div
                               initial={{ width: 0 }}
                               whileInView={{ width: `${item.level}%` }}
@@ -535,10 +528,10 @@ export default function Portfolio() {
                   </div>
 
                   {/* Cybersecurity */}
-                  <div className="bg-gradient-to-br from-red-50 to-red-100 rounded-3xl p-6 lg:p-8 shadow-lg hover:shadow-xl transition-shadow flex flex-col min-w-0 md:max-w-sm">
+                  <div className="bg-gradient-to-br from-red-50 to-red-100 dark:from-red-900/30 dark:to-red-800/30 rounded-3xl p-6 lg:p-8 shadow-lg hover:shadow-xl transition-shadow flex flex-col min-w-0 md:max-w-sm">
                     <div className="flex items-start gap-3 mb-6">
                       <span className="text-3xl lg:text-4xl flex-shrink-0">🔐</span>
-                      <h3 className="text-xl lg:text-2xl font-bold leading-tight break-words">Cybersecurity</h3>
+                      <h3 className="text-xl lg:text-2xl font-bold leading-tight break-words dark:text-white">Cybersecurity</h3>
                     </div>
                     <div className="space-y-4">
                       {[
@@ -549,10 +542,10 @@ export default function Portfolio() {
                       ].map((item) => (
                         <div key={item.skill}>
                           <div className="flex justify-between mb-2">
-                            <span className="font-medium">{item.skill}</span>
-                            <span className="font-bold">{item.level}%</span>
+                            <span className="font-medium dark:text-gray-200">{item.skill}</span>
+                            <span className="font-bold dark:text-white">{item.level}%</span>
                           </div>
-                          <div className="h-2 bg-red-200 rounded-full overflow-hidden">
+                          <div className="h-2 bg-red-200 dark:bg-red-900/50 rounded-full overflow-hidden">
                             <motion.div
                               initial={{ width: 0 }}
                               whileInView={{ width: `${item.level}%` }}
@@ -576,27 +569,27 @@ export default function Portfolio() {
               viewport={{ once: true }}
               className="mt-32 text-center"
             >
-              <h3 className="text-2xl font-bold mb-6">Get in touch:</h3>
+              <h3 className="text-2xl font-bold mb-6 dark:text-white">Get in touch:</h3>
               <div className="flex justify-center gap-6">
                 <Link 
                   href="https://github.com/alikhreis7" 
                   target="_blank"
-                  className="p-4 rounded-full bg-gray-100 hover:bg-gray-200 transition-all hover:scale-110"
+                  className="p-4 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all hover:scale-110"
                 >
-                  <Github className="w-7 h-7" />
+                  <Github className="w-7 h-7 dark:text-white" />
                 </Link>
                 <Link 
                   href="https://www.linkedin.com/in/alikhreis/" 
                   target="_blank"
-                  className="p-4 rounded-full bg-gray-100 hover:bg-gray-200 transition-all hover:scale-110"
+                  className="p-4 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all hover:scale-110"
                 >
-                  <Linkedin className="w-7 h-7" />
+                  <Linkedin className="w-7 h-7 dark:text-white" />
                 </Link>
                 <Link 
                   href="mailto:alikhreis12@gmail.com"
-                  className="p-4 rounded-full bg-gray-100 hover:bg-gray-200 transition-all hover:scale-110"
+                  className="p-4 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all hover:scale-110"
                 >
-                  <Mail className="w-7 h-7" />
+                  <Mail className="w-7 h-7 dark:text-white" />
                 </Link>
               </div>
             </motion.div>
@@ -607,8 +600,8 @@ export default function Portfolio() {
       {/* Sticky Navigation */}
       <div className="fixed bottom-4 left-0 right-0 flex justify-center z-50">
         <div className="max-w-2xl w-full mx-4">
-          <nav className="bg-gradient-to-b from-white/60 to-white/30 backdrop-blur-md rounded-full p-2 shadow-[0_4px_20px_-2px_rgba(0,0,0,0.1)] border border-white/20">
-            <ul className="flex items-center justify-center w-full gap-2 md:gap-6">
+          <nav className="bg-gradient-to-b from-white/60 to-white/30 dark:from-gray-800/60 dark:to-gray-900/30 backdrop-blur-md rounded-full p-2 shadow-[0_4px_20px_-2px_rgba(0,0,0,0.1)] dark:shadow-[0_4px_20px_-2px_rgba(0,0,0,0.4)] border border-white/20 dark:border-gray-700/30">
+            <ul className="flex items-center justify-center w-full gap-2 md:gap-4">
               <Image
                 src="/profile-pic.png"
                 alt="Ali Khreis"
@@ -617,24 +610,27 @@ export default function Portfolio() {
                 className="w-6 h-6 md:w-8 md:h-8 rounded-full object-cover"
               />
               <li>
-                <Link href="/" className="px-2 md:px-4 py-2 rounded-full hover:bg-gray-100/80 text-gray-800 transition-colors text-sm md:text-base font-medium">
+                <Link href="/" className="px-2 md:px-4 py-2 rounded-full hover:bg-gray-100/80 dark:hover:bg-gray-700/80 text-gray-800 dark:text-gray-200 transition-colors text-sm md:text-base font-medium">
                   About
                 </Link>
               </li>
               <li>
-                <Link href="/projects" className="px-2 md:px-4 py-2 rounded-full hover:bg-gray-100/80 text-gray-800 transition-colors text-sm md:text-base font-medium">
+                <Link href="/projects" className="px-2 md:px-4 py-2 rounded-full hover:bg-gray-100/80 dark:hover:bg-gray-700/80 text-gray-800 dark:text-gray-200 transition-colors text-sm md:text-base font-medium">
                   Projects
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="px-2 md:px-4 py-2 rounded-full hover:bg-gray-100/80 text-gray-800 transition-colors text-sm md:text-base font-medium">
+                <Link href="/blog" className="px-2 md:px-4 py-2 rounded-full hover:bg-gray-100/80 dark:hover:bg-gray-700/80 text-gray-800 dark:text-gray-200 transition-colors text-sm md:text-base font-medium">
                   Research
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="px-2 md:px-4 py-2 rounded-full hover:bg-gray-100/80 text-gray-800 transition-colors text-sm md:text-base font-medium">
+                <Link href="/contact" className="px-2 md:px-4 py-2 rounded-full hover:bg-gray-100/80 dark:hover:bg-gray-700/80 text-gray-800 dark:text-gray-200 transition-colors text-sm md:text-base font-medium">
                   Contact
                 </Link>
+              </li>
+              <li>
+                <ThemeToggle />
               </li>
             </ul>
           </nav>
