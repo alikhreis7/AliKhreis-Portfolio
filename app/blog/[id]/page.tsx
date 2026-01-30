@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useParams } from 'next/navigation'
 import { BookOpen, Github, Linkedin, Mail, Download } from 'lucide-react'
+import { ThemeToggle } from '../../components/ThemeToggle'
 
 type RichText = {
   plain_text: string;
@@ -78,31 +79,31 @@ export default function BlogPost() {
     
     switch (type) {
       case 'paragraph':
-        return <p className="text-gray-800">{block.paragraph?.rich_text?.map((t) => t.plain_text).join('') || ''}</p>;
+        return <p className="text-gray-800 dark:text-gray-200">{block.paragraph?.rich_text?.map((t) => t.plain_text).join('') || ''}</p>;
 
       case 'heading_1':
-        return <h1 className="text-4xl font-bold mt-8 mb-4">{block.heading_1?.rich_text?.map((t) => t.plain_text).join('') || ''}</h1>;
+        return <h1 className="text-4xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">{block.heading_1?.rich_text?.map((t) => t.plain_text).join('') || ''}</h1>;
 
       case 'heading_2':
-        return <h2 className="text-3xl font-bold mt-6 mb-3">{block.heading_2?.rich_text?.map((t) => t.plain_text).join('') || ''}</h2>;
+        return <h2 className="text-3xl font-bold mt-6 mb-3 text-gray-900 dark:text-white">{block.heading_2?.rich_text?.map((t) => t.plain_text).join('') || ''}</h2>;
 
       case 'heading_3':
-        return <h3 className="text-2xl font-bold mt-4 mb-2">{block.heading_3?.rich_text?.map((t) => t.plain_text).join('') || ''}</h3>;
+        return <h3 className="text-2xl font-bold mt-4 mb-2 text-gray-900 dark:text-white">{block.heading_3?.rich_text?.map((t) => t.plain_text).join('') || ''}</h3>;
 
       case 'bulleted_list_item':
-        return <li className="ml-6 list-disc">{block.bulleted_list_item?.rich_text?.map((t) => t.plain_text).join('') || ''}</li>;
+        return <li className="ml-6 list-disc text-gray-800 dark:text-gray-200">{block.bulleted_list_item?.rich_text?.map((t) => t.plain_text).join('') || ''}</li>;
 
       case 'numbered_list_item':
-        return <li className="ml-6 list-decimal">{block.numbered_list_item?.rich_text?.map((t) => t.plain_text).join('') || ''}</li>;
+        return <li className="ml-6 list-decimal text-gray-800 dark:text-gray-200">{block.numbered_list_item?.rich_text?.map((t) => t.plain_text).join('') || ''}</li>;
 
       case 'quote':
-        return <blockquote className="border-l-4 border-yellow-400 pl-4 italic">{block.quote?.rich_text?.map((t) => t.plain_text).join('') || ''}</blockquote>;
+        return <blockquote className="border-l-4 border-yellow-400 dark:border-yellow-500 pl-4 italic text-gray-700 dark:text-gray-300">{block.quote?.rich_text?.map((t) => t.plain_text).join('') || ''}</blockquote>;
 
       case 'code':
-        return <pre className="bg-gray-100 p-4 rounded-lg overflow-x-auto"><code>{block.code?.rich_text?.map((t) => t.plain_text).join('') || ''}</code></pre>;
+        return <pre className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg overflow-x-auto"><code className="text-gray-800 dark:text-gray-200">{block.code?.rich_text?.map((t) => t.plain_text).join('') || ''}</code></pre>;
 
       case 'callout':
-        return <div className="bg-gray-50 border-l-4 border-blue-400 p-4 rounded">{block.callout?.rich_text?.map((t) => t.plain_text).join('') || ''}</div>;
+        return <div className="bg-gray-50 dark:bg-gray-800 border-l-4 border-blue-400 dark:border-blue-500 p-4 rounded text-gray-800 dark:text-gray-200">{block.callout?.rich_text?.map((t) => t.plain_text).join('') || ''}</div>;
 
       case 'image':
         // Handle Notion image blocks
@@ -112,14 +113,14 @@ export default function BlogPost() {
           return (
             <div className="my-6 flex justify-center">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={imageUrl} alt="Content" className="max-w-2xl w-full rounded-lg" />
+              <img src={imageUrl} alt="Content" className="max-w-2xl w-full rounded-lg shadow-lg dark:shadow-xl dark:shadow-black/30" />
             </div>
           );
         }
         return null;
 
       case 'divider':
-        return <hr className="my-8 border-t-2 border-gray-200" />;
+        return <hr className="my-8 border-t-2 border-gray-200 dark:border-gray-700" />;
       
       default:
         return null; // Don't show unsupported block types
@@ -127,15 +128,15 @@ export default function BlogPost() {
   };
 
   return (
-    <div className="min-h-screen w-full bg-white">
+    <div className="min-h-screen w-full bg-white dark:bg-gradient-to-br dark:from-gray-900 dark:via-gray-900 dark:to-slate-900 transition-colors duration-300">
       {/* Header */}
       <div className="container mx-auto px-4 py-8 flex justify-between items-center">
-        <Link href="/blog" className="flex items-center gap-2 text-black hover:text-gray-600">
-          <span>← Back to blog</span>
+        <Link href="/blog" className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors">
+          <span className="text-lg">← Back to research</span>
         </Link>
         <div className="flex items-center gap-2">
-          <BookOpen className="w-6 h-6 text-yellow-400" />
-          <span className="font-medium">My Blog</span>
+          <BookOpen className="w-6 h-6 text-blue-500" />
+          <span className="font-semibold text-gray-800 dark:text-white">Research</span>
         </div>
       </div>
 
@@ -144,23 +145,23 @@ export default function BlogPost() {
         <div className="max-w-4xl mx-auto">
           {loading ? (
             <div className="text-center py-20">
-              <p>Loading post...</p>
+              <p className="text-gray-600 dark:text-gray-400">Loading post...</p>
             </div>
           ) : error ? (
             <div className="text-center py-20">
-              <h1 className="text-2xl font-bold mb-4 text-red-600">Error</h1>
-              <p className="text-gray-600">{error}</p>
+              <h1 className="text-2xl font-bold mb-4 text-red-600 dark:text-red-400">Error</h1>
+              <p className="text-gray-600 dark:text-gray-400">{error}</p>
               <p className="mt-4">
                 <button 
                   onClick={() => window.location.reload()} 
-                  className="px-4 py-2 bg-yellow-400 text-white rounded-md hover:bg-yellow-500"
+                  className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
                 >
                   Try Again
                 </button>
               </p>
             </div>
           ) : blogData ? (
-            <div className="prose prose-lg max-w-none">
+            <div className="prose prose-lg max-w-none dark:prose-invert">
               {blogData.blocks.map((block, index) => (
                 <div key={block.id || index} className="mb-4">
                   {renderBlock(block)}
@@ -169,8 +170,8 @@ export default function BlogPost() {
             </div>
           ) : (
             <div className="text-center py-20">
-              <h1 className="text-4xl font-bold mb-4">Post Not Found</h1>
-              <p className="text-gray-600">
+              <h1 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white">Post Not Found</h1>
+              <p className="text-gray-600 dark:text-gray-400">
                 The post you&apos;re looking for doesn&apos;t exist or has been removed.
               </p>
             </div>
@@ -179,37 +180,37 @@ export default function BlogPost() {
       </div>
 
       {/* Get in touch */}
-      <div className="relative z-10 container mx-auto px-4 mb-20">
-        <div className="flex justify-center items-center gap-6">
-          <span className="font-medium text-gray-800">Get in touch:</span>
+      <div className="relative z-10 container mx-auto px-4 mb-24 mt-16">
+        <div className="flex flex-wrap justify-center items-center gap-4">
+          <span className="font-medium text-gray-600 dark:text-gray-300">Get in touch:</span>
           <Link 
             href="https://github.com/alikhreis7" 
             target="_blank"
-            className="p-3 rounded-full hover:bg-gray-100 transition-colors"
+            className="p-3 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
           >
-            <Github className="w-6 h-6" />
+            <Github className="w-6 h-6 text-gray-700 dark:text-white" />
           </Link>
           <Link 
             href="https://www.linkedin.com/in/alikhreis/" 
             target="_blank"
-            className="p-3 rounded-full hover:bg-gray-100 transition-colors"
+            className="p-3 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
           >
-            <Linkedin className="w-6 h-6" />
+            <Linkedin className="w-6 h-6 text-gray-700 dark:text-white" />
           </Link>
           <Link 
             href="mailto:alikhreis12@gmail.com"
-            className="p-3 rounded-full hover:bg-gray-100 transition-colors"
+            className="p-3 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
           >
-            <Mail className="w-6 h-6" />
+            <Mail className="w-6 h-6 text-gray-700 dark:text-white" />
           </Link>
           <Link 
-            href="/Ali-K-Resume.pdf" 
-            target="_blank" 
+            href="/Ali-K-Resume.pdf"
+            target="_blank"
             download
-            className="p-3 rounded-full hover:bg-gray-100 transition-colors"
-            aria-label="Download Resume"
+            className="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-medium transition-all hover:scale-105"
           >
-            <Download className="w-6 h-6" />
+            <Download className="w-5 h-5" />
+            Download Resume
           </Link>
         </div>
       </div>
@@ -217,8 +218,8 @@ export default function BlogPost() {
       {/* Sticky Navigation */}
       <div className="fixed bottom-4 left-0 right-0 flex justify-center z-50">
         <div className="max-w-2xl w-full mx-4">
-          <nav className="bg-gradient-to-b from-white/60 to-white/30 backdrop-blur-md rounded-full p-2 shadow-[0_4px_20px_-2px_rgba(0,0,0,0.1)] border border-white/20">
-            <ul className="flex items-center justify-center w-full gap-2 md:gap-6">
+          <nav className="bg-gradient-to-b from-white/60 to-white/30 dark:from-gray-800/60 dark:to-gray-900/30 backdrop-blur-md rounded-full p-2 shadow-[0_4px_20px_-2px_rgba(0,0,0,0.1)] dark:shadow-[0_4px_20px_-2px_rgba(0,0,0,0.4)] border border-white/20 dark:border-gray-700/30">
+            <ul className="flex items-center justify-center w-full gap-2 md:gap-4">
               <Image
                 src="/profile-pic.png"
                 alt="Ali Khreis"
@@ -227,24 +228,27 @@ export default function BlogPost() {
                 className="w-6 h-6 md:w-8 md:h-8 rounded-full object-cover"
               />
               <li>
-                <Link href="/" className="px-2 md:px-4 py-2 rounded-full hover:bg-gray-100/80 text-gray-800 transition-colors text-sm md:text-base font-medium">
+                <Link href="/" className="px-2 md:px-4 py-2 rounded-full hover:bg-gray-100/80 dark:hover:bg-gray-700/80 text-gray-800 dark:text-gray-200 transition-colors text-sm md:text-base font-medium">
                   About
                 </Link>
               </li>
               <li>
-                <Link href="/projects" className="px-2 md:px-4 py-2 rounded-full hover:bg-gray-100/80 text-gray-800 transition-colors text-sm md:text-base font-medium">
+                <Link href="/projects" className="px-2 md:px-4 py-2 rounded-full hover:bg-gray-100/80 dark:hover:bg-gray-700/80 text-gray-800 dark:text-gray-200 transition-colors text-sm md:text-base font-medium">
                   Projects
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="px-2 md:px-4 py-2 rounded-full hover:bg-gray-100/80 text-gray-800 transition-colors text-sm md:text-base font-medium">
+                <Link href="/blog" className="px-2 md:px-4 py-2 rounded-full hover:bg-gray-100/80 dark:hover:bg-gray-700/80 text-gray-800 dark:text-gray-200 transition-colors text-sm md:text-base font-medium">
                   Research
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="px-2 md:px-4 py-2 rounded-full hover:bg-gray-100/80 text-gray-800 transition-colors text-sm md:text-base font-medium">
+                <Link href="/contact" className="px-2 md:px-4 py-2 rounded-full hover:bg-gray-100/80 dark:hover:bg-gray-700/80 text-gray-800 dark:text-gray-200 transition-colors text-sm md:text-base font-medium">
                   Contact
                 </Link>
+              </li>
+              <li>
+                <ThemeToggle />
               </li>
             </ul>
           </nav>
@@ -252,4 +256,4 @@ export default function BlogPost() {
       </div>
     </div>
   )
-} 
+}
