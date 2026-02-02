@@ -5,16 +5,22 @@ import Image from 'next/image'
 import { Github, Linkedin, Mail, Folder, Calendar, MapPin, User, Tag, Download } from 'lucide-react'
 import { projectsData } from '../projectsData'
 import { useParams, useSearchParams } from 'next/navigation'
-import { ThemeToggle } from '../../components/ThemeToggle'
+import { Navigation } from '../../components/Navigation'
 
 export default function ProjectDetail() {
   const { slug } = useParams()
   const searchParams = useSearchParams()
-  const fromFilter = searchParams.get('from')
+  const fromParam = searchParams.get('from')
   const project = projectsData[slug as keyof typeof projectsData]
 
-  // Build back URL with filter preserved
-  const backUrl = fromFilter ? `/projects?filter=${fromFilter}` : '/projects'
+  // Build back URL based on where user came from
+  const isFromExperience = fromParam === 'experience'
+  const backUrl = isFromExperience 
+    ? '/experience' 
+    : fromParam 
+      ? `/projects?filter=${fromParam}` 
+      : '/projects'
+  const backText = isFromExperience ? 'Back to experience' : 'Back to projects'
 
   if (!project) {
     return <div className="dark:bg-gray-900 dark:text-white min-h-screen flex items-center justify-center">Project not found</div>
@@ -25,7 +31,7 @@ export default function ProjectDetail() {
       {/* Header */}
       <div className="container mx-auto px-4 py-8 flex justify-between items-center">
         <Link href={backUrl} className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors">
-          <span className="text-lg">← Back to projects</span>
+          <span className="text-lg">← {backText}</span>
         </Link>
         <div className="flex items-center gap-2">
           <Folder className="w-6 h-6 text-yellow-500" />
@@ -184,7 +190,7 @@ export default function ProjectDetail() {
       </div>
 
       {/* Get in touch */}
-      <div className="relative z-10 container mx-auto px-4 mb-24 mt-16">
+      <div className="relative z-10 container mx-auto px-4 pb-24 mt-16">
         <div className="flex flex-wrap justify-center items-center gap-4">
           <span className="font-medium text-gray-600 dark:text-gray-300">Get in touch:</span>
           <Link 
@@ -219,45 +225,7 @@ export default function ProjectDetail() {
         </div>
       </div>
 
-      {/* Sticky Navigation */}
-      <div className="fixed bottom-4 left-0 right-0 flex justify-center z-50">
-        <div className="max-w-2xl w-full mx-4">
-          <nav className="bg-gradient-to-b from-white/60 to-white/30 dark:from-gray-800/60 dark:to-gray-900/30 backdrop-blur-md rounded-full p-2 shadow-[0_4px_20px_-2px_rgba(0,0,0,0.1)] dark:shadow-[0_4px_20px_-2px_rgba(0,0,0,0.4)] border border-white/20 dark:border-gray-700/30">
-            <ul className="flex items-center justify-center w-full gap-2 md:gap-4">
-              <Image
-                src="/profile-pic.png"
-                alt="Ali Khreis"
-                width={32}
-                height={32}
-                className="w-6 h-6 md:w-8 md:h-8 rounded-full object-cover"
-              />
-              <li>
-                <Link href="/" className="px-2 md:px-4 py-2 rounded-full hover:bg-gray-100/80 dark:hover:bg-gray-700/80 text-gray-800 dark:text-gray-200 transition-colors text-sm md:text-base font-medium">
-                  About
-                </Link>
-              </li>
-              <li>
-                <Link href="/projects" className="px-2 md:px-4 py-2 rounded-full hover:bg-gray-100/80 dark:hover:bg-gray-700/80 text-gray-800 dark:text-gray-200 transition-colors text-sm md:text-base font-medium">
-                  Projects
-                </Link>
-              </li>
-              <li>
-                <Link href="/blog" className="px-2 md:px-4 py-2 rounded-full hover:bg-gray-100/80 dark:hover:bg-gray-700/80 text-gray-800 dark:text-gray-200 transition-colors text-sm md:text-base font-medium">
-                  Research
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="px-2 md:px-4 py-2 rounded-full hover:bg-gray-100/80 dark:hover:bg-gray-700/80 text-gray-800 dark:text-gray-200 transition-colors text-sm md:text-base font-medium">
-                  Contact
-                </Link>
-              </li>
-              <li>
-                <ThemeToggle />
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </div>
+      <Navigation currentPath={isFromExperience ? "/experience" : "/projects"} />
     </div>
   )
 }

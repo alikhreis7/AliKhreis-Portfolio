@@ -1,11 +1,10 @@
 'use client'
 
 import { motion } from "framer-motion"
-import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Download, Github, Linkedin, Mail, ArrowDown } from 'lucide-react'
-import { ThemeToggle } from './components/ThemeToggle'
+import { Navigation } from './components/Navigation'
 
 export default function Portfolio() {
   return (
@@ -597,45 +596,7 @@ export default function Portfolio() {
         </div>
       </div>
 
-      {/* Sticky Navigation */}
-      <div className="fixed bottom-4 left-0 right-0 flex justify-center z-50">
-        <div className="max-w-2xl w-full mx-4">
-          <nav className="bg-gradient-to-b from-white/60 to-white/30 dark:from-gray-800/60 dark:to-gray-900/30 backdrop-blur-md rounded-full p-2 shadow-[0_4px_20px_-2px_rgba(0,0,0,0.1)] dark:shadow-[0_4px_20px_-2px_rgba(0,0,0,0.4)] border border-white/20 dark:border-gray-700/30">
-            <ul className="flex items-center justify-center w-full gap-2 md:gap-4">
-              <Image
-                src="/profile-pic.png"
-                alt="Ali Khreis"
-                width={32}
-                height={32}
-                className="w-6 h-6 md:w-8 md:h-8 rounded-full object-cover"
-              />
-              <li>
-                <Link href="/" className="px-2 md:px-4 py-2 rounded-full hover:bg-gray-100/80 dark:hover:bg-gray-700/80 text-gray-800 dark:text-gray-200 transition-colors text-sm md:text-base font-medium">
-                  About
-                </Link>
-              </li>
-              <li>
-                <Link href="/projects" className="px-2 md:px-4 py-2 rounded-full hover:bg-gray-100/80 dark:hover:bg-gray-700/80 text-gray-800 dark:text-gray-200 transition-colors text-sm md:text-base font-medium">
-                  Projects
-                </Link>
-              </li>
-              <li>
-                <Link href="/blog" className="px-2 md:px-4 py-2 rounded-full hover:bg-gray-100/80 dark:hover:bg-gray-700/80 text-gray-800 dark:text-gray-200 transition-colors text-sm md:text-base font-medium">
-                  Research
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="px-2 md:px-4 py-2 rounded-full hover:bg-gray-100/80 dark:hover:bg-gray-700/80 text-gray-800 dark:text-gray-200 transition-colors text-sm md:text-base font-medium">
-                  Contact
-                </Link>
-              </li>
-              <li>
-                <ThemeToggle />
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </div>
+      <Navigation currentPath="/" />
     </div>
   )
 }
