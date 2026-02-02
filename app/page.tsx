@@ -5,8 +5,10 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Download, Github, Linkedin, Mail, ArrowDown } from 'lucide-react'
 import { Navigation } from './components/Navigation'
+import { useLanguage } from './components/LanguageProvider'
 
 export default function Portfolio() {
+  const { t } = useLanguage()
   return (
     <div className="min-h-screen w-full bg-gradient-to-br from-blue-50 via-white to-pink-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 relative overflow-hidden transition-colors duration-300">
       {/* Hero Section */}
@@ -25,12 +27,12 @@ export default function Portfolio() {
               }}
               className="block bg-red-600 text-white rounded-full px-6 py-2 text-sm font-semibold shadow-md hover:bg-red-700 transition-colors cursor-pointer"
             >
-              🎓 uOttawa Alum | BASc
+              {t('hero.alumPill')}
             </button>
             {/* Tooltip */}
             <div className="absolute top-full mt-2 left-1/2 -translate-x-1/2 w-64 bg-gray-900 text-white text-xs rounded-lg px-4 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 shadow-xl pointer-events-none">
               <div className="text-center">
-                Click to view education details
+                {t('hero.clickToView')}
               </div>
               {/* Arrow */}
               <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-gray-900 rotate-45"></div>
@@ -60,7 +62,7 @@ export default function Portfolio() {
         >
           <div className="h-px w-16 bg-gradient-to-r from-transparent to-blue-400"></div>
           <p className="text-xl md:text-2xl text-blue-600 font-semibold">
-            Software Engineer | MEng ECE (Applied AI/ML)
+            {t('hero.subtitle')}
           </p>
           <div className="h-px w-16 bg-gradient-to-l from-transparent to-blue-400"></div>
         </motion.div>
@@ -72,7 +74,7 @@ export default function Portfolio() {
           transition={{ delay: 0.5 }}
           className="text-gray-700 dark:text-gray-300 text-lg max-w-3xl mb-8 leading-relaxed"
         >
-          Crafting innovative digital solutions with modern technologies and AI-driven insights
+          {t('hero.description')}
         </motion.p>
 
         {/* CTA Buttons */}
@@ -87,7 +89,7 @@ export default function Portfolio() {
             asChild
           >
             <Link href="/projects">
-              View My Work →
+              {t('hero.viewWork')}
             </Link>
           </Button>
           <Button 
@@ -96,7 +98,7 @@ export default function Portfolio() {
             asChild
           >
             <Link href="/contact">
-              Get in Touch
+              {t('hero.getInTouch')}
             </Link>
           </Button>
         </motion.div>
@@ -136,7 +138,7 @@ export default function Portfolio() {
           transition={{ duration: 2, repeat: Infinity }}
           className="flex flex-col items-center text-gray-500 dark:text-gray-400"
         >
-          <span className="text-sm mb-2">Scroll to explore</span>
+          <span className="text-sm mb-2">{t('hero.scrollToExplore')}</span>
           <ArrowDown className="w-5 h-5" />
         </motion.div>
       </div>
@@ -152,9 +154,9 @@ export default function Portfolio() {
               viewport={{ once: true }}
               className="text-center mb-16"
             >
-              <h2 className="text-5xl font-bold mb-4 dark:text-white">About Me</h2>
+              <h2 className="text-5xl font-bold mb-4 dark:text-white">{t('about.title')}</h2>
               <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-                Software Engineer passionate about AI, Machine Learning, and building innovative solutions
+                {t('about.subtitle')}
               </p>
             </motion.div>
 
@@ -173,17 +175,17 @@ export default function Portfolio() {
                 <div className="absolute bottom-0 left-0 w-48 h-48 bg-purple-500/10 rounded-full blur-3xl"></div>
                 <div className="relative z-10">
                   <div className="flex items-center gap-3 mb-4">
-                    <h3 className="text-2xl font-bold">Software Developer Intern</h3>
+                    <h3 className="text-2xl font-bold">{t('about.roleTitle')}</h3>
                     <span className="text-xs bg-green-400/30 text-green-300 px-2 py-0.5 rounded-full flex items-center gap-1">
                       <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></span>
-                      Ongoing
+                      {t('about.ongoing')}
                     </span>
                   </div>
                   <p className="text-gray-300 leading-relaxed mb-6">
-                    Currently balancing a full-time internship at Kinaxis while pursuing graduate studies at the University of Ottawa. Working towards a Master of Engineering in ECE, specializing in Applied Artificial Intelligence.
+                    {t('about.currentRole')}
                   </p>
                   <p className="text-gray-400 leading-relaxed">
-                    I&apos;m passionate about leveraging AI, data, and technology to solve complex challenges. My focus is on real-world applications to drive innovation through machine learning and artificial intelligence.
+                    {t('about.passion')}
                   </p>
                   <div className="mt-8">
                     <Link 
@@ -193,7 +195,7 @@ export default function Portfolio() {
                       className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-semibold transition-all hover:scale-105 shadow-lg"
                     >
                       <Download className="w-5 h-5" /> 
-                      Download Resume
+                      {t('about.downloadResume')}
                     </Link>
                   </div>
                 </div>
@@ -209,10 +211,9 @@ export default function Portfolio() {
               >
                 <div className="absolute -right-4 -bottom-4 text-8xl opacity-20">💼</div>
                 <div className="relative z-10">
-                  <span className="text-xs font-semibold bg-white/20 px-3 py-1 rounded-full">Current Role</span>
-                  <h3 className="text-xl font-bold mt-4 mb-2">Kinaxis</h3>
-                  <p className="text-orange-100 text-sm">Software Developer Intern</p>
-                  <p className="text-orange-100/80 text-xs mt-3">Building scalable enterprise solutions as part of the Application Excellence team. Advanced development on ServiceNow, Atlassian, agentic applications, and ML platforms!</p>
+                  <span className="text-xs font-semibold bg-white/20 px-3 py-1 rounded-full">{t('about.currentRoleLabel')}</span>
+                  <h3 className="text-xl font-bold mt-4 mb-1">Kinaxis</h3>
+                  <p className="text-orange-100/80 text-sm leading-relaxed">{t('about.kinaxisDesc')}</p>
                 </div>
               </motion.div>
 
@@ -227,15 +228,15 @@ export default function Portfolio() {
                 <div className="absolute -right-4 -bottom-4 text-8xl opacity-20">🎓</div>
                 <div className="relative z-10">
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-semibold bg-white/20 px-3 py-1 rounded-full">Education</span>
+                    <span className="text-xs font-semibold bg-white/20 px-3 py-1 rounded-full">{t('about.education')}</span>
                     <span className="text-xs bg-green-400/30 text-green-200 px-2 py-0.5 rounded-full flex items-center gap-1">
                       <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></span>
-                      Ongoing
+                      {t('about.ongoing')}
                     </span>
                   </div>
-                  <h3 className="text-xl font-bold mt-4 mb-2">M.Eng in ECE</h3>
-                  <p className="text-blue-100 text-sm">University of Ottawa</p>
-                  <p className="text-blue-100/80 text-xs mt-3">Applied Artificial Intelligence</p>
+                  <h3 className="text-xl font-bold mt-4 mb-2">{t('about.mengECE')}</h3>
+                  <p className="text-blue-100 text-sm">{t('about.uottawa')}</p>
+                  <p className="text-blue-100/80 text-xs mt-3">{t('about.appliedAI')}</p>
                 </div>
               </motion.div>
 
@@ -250,17 +251,17 @@ export default function Portfolio() {
                 <div className="absolute -right-4 -bottom-4 text-8xl opacity-20">🧠</div>
                 <div className="relative z-10">
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-semibold bg-white/20 px-3 py-1 rounded-full">Coursework</span>
+                    <span className="text-xs font-semibold bg-white/20 px-3 py-1 rounded-full">{t('about.coursework')}</span>
                     <span className="text-xs bg-green-400/30 text-green-200 px-2 py-0.5 rounded-full flex items-center gap-1">
                       <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></span>
-                      Ongoing
+                      {t('about.ongoing')}
                     </span>
                   </div>
-                  <h3 className="text-lg font-bold mt-4 mb-2">Advanced AI Courses</h3>
+                  <h3 className="text-lg font-bold mt-4 mb-2">{t('about.advancedCourses')}</h3>
                   <ul className="text-purple-100 text-xs space-y-1">
-                    <li>• Deep Learning</li>
-                    <li>• Reinforcement Learning</li>
-                    <li>• Cybersecurity in Applied AI</li>
+                    <li>• {t('about.deepLearning')}</li>
+                    <li>• {t('about.reinforcementLearning')}</li>
+                    <li>• {t('about.cybersecurityAI')}</li>
                   </ul>
                 </div>
               </motion.div>
@@ -276,11 +277,11 @@ export default function Portfolio() {
                 <div className="absolute -right-4 -bottom-4 text-8xl opacity-20">🚀</div>
                 <div className="relative z-10">
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-semibold bg-white/20 px-3 py-1 rounded-full">Project</span>
+                    <span className="text-xs font-semibold bg-white/20 px-3 py-1 rounded-full">{t('about.project')}</span>
                     <span className="text-xs text-emerald-200">Jan 2026</span>
                   </div>
-                  <h3 className="text-lg font-bold mt-4 mb-2">Portfolio Redesign</h3>
-                  <p className="text-emerald-100 text-xs">New design with Notion integration & modern UX</p>
+                  <h3 className="text-lg font-bold mt-4 mb-2">{t('about.portfolioRedesign')}</h3>
+                  <p className="text-emerald-100 text-xs">{t('about.portfolioDesc')}</p>
                 </div>
               </motion.div>
 
@@ -293,8 +294,8 @@ export default function Portfolio() {
                 className="md:col-span-2 lg:col-span-3 bg-gradient-to-br from-slate-900 to-slate-800 rounded-3xl p-8 overflow-hidden"
               >
                 <div className="text-center mb-6">
-                  <h3 className="text-xl font-bold text-white mb-2">What I&apos;m Working With</h3>
-                  <p className="text-gray-400 text-sm">Technologies & tools I use daily</p>
+                  <h3 className="text-xl font-bold text-white mb-2">{t('about.workingWith')}</h3>
+                  <p className="text-gray-400 text-sm">{t('about.techDescription')}</p>
                 </div>
                 
                 {/* Row 1 - Languages & Frameworks - Scrolls Left */}
@@ -344,7 +345,7 @@ export default function Portfolio() {
                 href="/projects" 
                 className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-semibold group"
               >
-                View All Projects
+                {t('about.viewAllProjects')}
                 <ArrowDown className="w-4 h-4 rotate-[-90deg] group-hover:translate-x-1 transition-transform" />
               </Link>
             </motion.div>
@@ -361,14 +362,14 @@ export default function Portfolio() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-4xl font-bold text-center mb-16 dark:text-white">Technical Expertise</h2>
+              <h2 className="text-4xl font-bold text-center mb-16 dark:text-white">{t('expertise.title')}</h2>
               
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-7xl mx-auto">
                 {/* Frontend Development */}
                 <div className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/30 dark:to-blue-800/30 rounded-3xl p-6 lg:p-8 shadow-lg hover:shadow-xl transition-shadow flex flex-col min-w-0">
                   <div className="flex items-start gap-3 mb-6">
                     <span className="text-3xl lg:text-4xl flex-shrink-0">🎨</span>
-                    <h3 className="text-xl lg:text-2xl font-bold leading-tight break-words dark:text-white">Frontend Development</h3>
+                    <h3 className="text-xl lg:text-2xl font-bold leading-tight break-words dark:text-white">{t('expertise.frontend')}</h3>
                   </div>
                   <div className="space-y-4">
                     {[
@@ -400,7 +401,7 @@ export default function Portfolio() {
                 <div className="bg-gradient-to-br from-indigo-50 to-indigo-100 dark:from-indigo-900/30 dark:to-indigo-800/30 rounded-3xl p-6 lg:p-8 shadow-lg hover:shadow-xl transition-shadow flex flex-col min-w-0">
                   <div className="flex items-start gap-3 mb-6">
                     <span className="text-3xl lg:text-4xl flex-shrink-0">⚙️</span>
-                    <h3 className="text-xl lg:text-2xl font-bold leading-tight break-words dark:text-white">Backend Development</h3>
+                    <h3 className="text-xl lg:text-2xl font-bold leading-tight break-words dark:text-white">{t('expertise.backend')}</h3>
                   </div>
                   <div className="space-y-4">
                     {[
@@ -432,7 +433,7 @@ export default function Portfolio() {
                 <div className="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/30 dark:to-green-800/30 rounded-3xl p-6 lg:p-8 shadow-lg hover:shadow-xl transition-shadow flex flex-col min-w-0">
                   <div className="flex items-start gap-3 mb-6">
                     <span className="text-3xl lg:text-4xl flex-shrink-0">⚡</span>
-                    <h3 className="text-xl lg:text-2xl font-bold leading-tight break-words dark:text-white">Backend & APIs</h3>
+                    <h3 className="text-xl lg:text-2xl font-bold leading-tight break-words dark:text-white">{t('expertise.apis')}</h3>
                   </div>
                   <div className="space-y-4">
                     {[
@@ -466,7 +467,7 @@ export default function Portfolio() {
                   <div className="bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/30 dark:to-purple-800/30 rounded-3xl p-6 lg:p-8 shadow-lg hover:shadow-xl transition-shadow flex flex-col min-w-0 md:max-w-sm">
                     <div className="flex items-start gap-3 mb-6">
                       <span className="text-3xl lg:text-4xl flex-shrink-0">🚀</span>
-                      <h3 className="text-xl lg:text-2xl font-bold leading-tight break-words dark:text-white">Performance & DevOps</h3>
+                      <h3 className="text-xl lg:text-2xl font-bold leading-tight break-words dark:text-white">{t('expertise.devops')}</h3>
                     </div>
                     <div className="space-y-4">
                       {[
@@ -498,7 +499,7 @@ export default function Portfolio() {
                   <div className="bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-900/30 dark:to-orange-800/30 rounded-3xl p-6 lg:p-8 shadow-lg hover:shadow-xl transition-shadow flex flex-col min-w-0 md:max-w-sm">
                     <div className="flex items-start gap-3 mb-6">
                       <span className="text-3xl lg:text-4xl flex-shrink-0">🧠</span>
-                      <h3 className="text-xl lg:text-2xl font-bold leading-tight break-words dark:text-white">Applied Machine Learning</h3>
+                      <h3 className="text-xl lg:text-2xl font-bold leading-tight break-words dark:text-white">{t('expertise.ml')}</h3>
                     </div>
                     <div className="space-y-4">
                       {[
@@ -530,7 +531,7 @@ export default function Portfolio() {
                   <div className="bg-gradient-to-br from-red-50 to-red-100 dark:from-red-900/30 dark:to-red-800/30 rounded-3xl p-6 lg:p-8 shadow-lg hover:shadow-xl transition-shadow flex flex-col min-w-0 md:max-w-sm">
                     <div className="flex items-start gap-3 mb-6">
                       <span className="text-3xl lg:text-4xl flex-shrink-0">🔐</span>
-                      <h3 className="text-xl lg:text-2xl font-bold leading-tight break-words dark:text-white">Cybersecurity</h3>
+                      <h3 className="text-xl lg:text-2xl font-bold leading-tight break-words dark:text-white">{t('expertise.cybersecurity')}</h3>
                     </div>
                     <div className="space-y-4">
                       {[
@@ -568,7 +569,7 @@ export default function Portfolio() {
               viewport={{ once: true }}
               className="mt-32 text-center"
             >
-              <h3 className="text-2xl font-bold mb-6 dark:text-white">Get in touch:</h3>
+              <h3 className="text-2xl font-bold mb-6 dark:text-white">{t('common.getInTouch')}</h3>
               <div className="flex justify-center gap-6">
                 <Link 
                   href="https://github.com/alikhreis7" 

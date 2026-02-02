@@ -1,40 +1,54 @@
+'use client'
+
+import { useLanguage } from '../components/LanguageProvider'
+import { Navigation } from '../components/Navigation'
+import Link from 'next/link'
+
 export default function PrivacyPolicy() {
+  const { t } = useLanguage()
+  
   return (
-    <div className="min-h-screen w-full bg-white py-16 px-4">
+    <div className="min-h-screen w-full bg-white dark:bg-gray-900 py-16 px-4 transition-colors duration-300">
       <div className="max-w-3xl mx-auto">
-        <h1 className="text-4xl font-bold mb-8">Privacy Policy</h1>
+        <Link href="/" className="text-blue-600 dark:text-blue-400 hover:underline mb-8 block">
+          {t('contact.backToHome')}
+        </Link>
         
-        <div className="space-y-6 text-gray-700">
+        <h1 className="text-4xl font-bold mb-8 dark:text-white">{t('privacy.title')}</h1>
+        
+        <div className="space-y-6 text-gray-700 dark:text-gray-300">
           <section>
-            <h2 className="text-2xl font-semibold mb-4">Introduction</h2>
-            <p>Last updated: {new Date().toLocaleDateString()}</p>
+            <h2 className="text-2xl font-semibold mb-4 dark:text-white">{t('privacy.introduction')}</h2>
+            <p>{t('privacy.lastUpdated')} {new Date().toLocaleDateString()}</p>
             <p className="mt-4">
-              This Privacy Policy describes how your personal information is collected, used, and shared when you visit my blog at alikhreis.ca/blog (&quot;the Blog&quot;).
+              {t('privacy.introText')}
             </p>
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold mb-4">Information Collection</h2>
+            <h2 className="text-2xl font-semibold mb-4 dark:text-white">{t('privacy.infoCollection')}</h2>
             <p>
-              The Blog does not directly collect any personal information. However, the Blog is hosted on Notion and may be subject to Notion&apos;s data collection practices. For more information, please refer to Notion&apos;s Privacy Policy.
+              {t('privacy.infoCollectionText')}
             </p>
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold mb-4">Use of Information</h2>
+            <h2 className="text-2xl font-semibold mb-4 dark:text-white">{t('privacy.useOfInfo')}</h2>
             <p>
-              No personal information is collected or used by the Blog. The Blog is purely for informational purposes.
+              {t('privacy.useOfInfoText')}
             </p>
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold mb-4">Contact</h2>
+            <h2 className="text-2xl font-semibold mb-4 dark:text-white">{t('privacy.contactSection')}</h2>
             <p>
-              For any questions about this Privacy Policy, please contact me at alikhreis12@gmail.com.
+              {t('privacy.contactText')}
             </p>
           </section>
         </div>
       </div>
+      
+      <Navigation currentPath="/privacy" />
     </div>
   )
-} 
+}

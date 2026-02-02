@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { BookOpen, Github, Linkedin, Mail, Download } from 'lucide-react'
 import { Navigation } from '../../components/Navigation'
+import { useLanguage } from '../../components/LanguageProvider'
 
 type RichText = {
   plain_text: string;
@@ -36,6 +37,7 @@ type BlogData = {
 }
 
 export default function BlogPost() {
+  const { t } = useLanguage()
   const { id } = useParams()
   const [blogData, setBlogData] = useState<BlogData | null>(null)
   const [loading, setLoading] = useState(true)
@@ -131,11 +133,11 @@ export default function BlogPost() {
       {/* Header */}
       <div className="container mx-auto px-4 py-8 flex justify-between items-center">
         <Link href="/blog" className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors">
-          <span className="text-lg">← Back to research</span>
+          <span className="text-lg">{t('blogPost.backToResearch')}</span>
         </Link>
         <div className="flex items-center gap-2">
           <BookOpen className="w-6 h-6 text-blue-500" />
-          <span className="font-semibold text-gray-800 dark:text-white">Research</span>
+          <span className="font-semibold text-gray-800 dark:text-white">{t('blogPost.research')}</span>
         </div>
       </div>
 
@@ -144,18 +146,18 @@ export default function BlogPost() {
         <div className="max-w-4xl mx-auto">
           {loading ? (
             <div className="text-center py-20">
-              <p className="text-gray-600 dark:text-gray-400">Loading post...</p>
+              <p className="text-gray-600 dark:text-gray-400">{t('blogPost.loadingPost')}</p>
             </div>
           ) : error ? (
             <div className="text-center py-20">
-              <h1 className="text-2xl font-bold mb-4 text-red-600 dark:text-red-400">Error</h1>
+              <h1 className="text-2xl font-bold mb-4 text-red-600 dark:text-red-400">{t('common.error')}</h1>
               <p className="text-gray-600 dark:text-gray-400">{error}</p>
               <p className="mt-4">
                 <button 
                   onClick={() => window.location.reload()} 
                   className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
                 >
-                  Try Again
+                  {t('common.tryAgain')}
                 </button>
               </p>
             </div>
@@ -169,9 +171,9 @@ export default function BlogPost() {
             </div>
           ) : (
             <div className="text-center py-20">
-              <h1 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white">Post Not Found</h1>
+              <h1 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white">{t('blogPost.postNotFound')}</h1>
               <p className="text-gray-600 dark:text-gray-400">
-                The post you&apos;re looking for doesn&apos;t exist or has been removed.
+                {t('blogPost.postNotFoundDesc')}
               </p>
             </div>
           )}
@@ -181,7 +183,7 @@ export default function BlogPost() {
       {/* Get in touch */}
       <div className="relative z-10 container mx-auto px-4 pb-24 mt-16">
         <div className="flex flex-wrap justify-center items-center gap-4">
-          <span className="font-medium text-gray-600 dark:text-gray-300">Get in touch:</span>
+          <span className="font-medium text-gray-600 dark:text-gray-300">{t('common.getInTouch')}</span>
           <Link 
             href="https://github.com/alikhreis7" 
             target="_blank"
@@ -209,7 +211,7 @@ export default function BlogPost() {
             className="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-medium transition-all hover:scale-105"
           >
             <Download className="w-5 h-5" />
-            Download Resume
+            {t('common.downloadResume')}
           </Link>
         </div>
       </div>

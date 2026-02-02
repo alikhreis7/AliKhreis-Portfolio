@@ -3,6 +3,7 @@ import './globals.css'
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Analytics } from "@vercel/analytics/react"
 import { ThemeProvider } from './components/ThemeProvider'
+import { LanguageProvider } from './components/LanguageProvider'
 
 const poppins = Poppins({ 
   weight: ['400', '500', '600', '700'],
@@ -33,7 +34,9 @@ export default function RootLayout({
       </head>
       <body className={poppins.className}>
         <ThemeProvider>
-          {children}
+          <LanguageProvider>
+            {children}
+          </LanguageProvider>
         </ThemeProvider>
         <SpeedInsights />
         <Analytics />
