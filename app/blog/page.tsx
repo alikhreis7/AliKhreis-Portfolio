@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { Github, Linkedin, Mail, BookOpen, Download, FileText, FlaskConical, ExternalLink, Award, GraduationCap } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { Navigation } from '../components/Navigation'
+import { useLanguage } from '../components/LanguageProvider'
 
 // Define the Post type to fix type errors
 type Post = {
@@ -24,6 +25,7 @@ type ErrorResponse = {
 }
 
 export default function Blog() {
+  const { t } = useLanguage()
   const [posts, setPosts] = useState<Post[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -48,10 +50,10 @@ export default function Blog() {
   const publishedPapers = [
     {
       id: 'arxiv-2601-15539',
-      title: 'A Machine Vision Approach to Preliminary Skin Lesion Assessments',
+      titleKey: 'papers.skinLesion.title',
       authors: 'Ali Khreis, Ro\'Yah Radaideh, Quinn McGill',
       date: 'January 21, 2026',
-      abstract: 'Early detection of malignant skin lesions is critical for improving patient outcomes in aggressive, metastatic skin cancers. This study evaluates a comprehensive system for preliminary skin lesion assessment that combines the clinically established ABCD rule of dermoscopy with machine learning classification.',
+      abstractKey: 'papers.skinLesion.abstract',
       arxivId: '2601.15539',
       arxivUrl: 'https://arxiv.org/abs/2601.15539',
       pdfUrl: 'https://arxiv.org/pdf/2601.15539',
@@ -60,10 +62,10 @@ export default function Blog() {
     },
     {
       id: 'arxiv-2601-11427',
-      title: 'Isotropy-Optimized Contrastive Learning for Semantic Course Recommendation',
+      titleKey: 'papers.courseRecommend.title',
       authors: 'Ali Khreis, Anthony Nasr, Yusuf Hilal',
       date: 'January 16, 2026',
-      abstract: 'This paper presents a semantic course recommendation system for students using a self-supervised contrastive learning approach built upon BERT. We propose a contrastive learning framework with data augmentation and isotropy regularization that produces more discriminative embeddings.',
+      abstractKey: 'papers.courseRecommend.abstract',
       arxivId: '2601.11427',
       arxivUrl: 'https://arxiv.org/abs/2601.11427',
       pdfUrl: 'https://arxiv.org/pdf/2601.11427',
@@ -174,11 +176,11 @@ export default function Blog() {
       <div className="container mx-auto px-4 py-12">
         <div className="flex justify-between items-center mb-8">
           <Link href="/" className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">
-            <span className="text-lg">← Back to home</span>
+            <span className="text-lg">{t('research.backToHome')}</span>
           </Link>
           <div className="flex items-center gap-2">
             <BookOpen className="w-6 h-6 text-blue-500" />
-            <span className="font-semibold text-xl dark:text-white">Research</span>
+            <span className="font-semibold text-xl dark:text-white">{t('research.title')}</span>
           </div>
         </div>
 
@@ -188,8 +190,8 @@ export default function Blog() {
           animate={{ opacity: 1, y: 0 }}
           className="mb-12 text-center"
         >
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 dark:text-white">Research</h1>
-          <p className="text-gray-600 dark:text-gray-400 text-lg">Explore my thoughts, insights, and research findings</p>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 dark:text-white">{t('research.title')}</h1>
+          <p className="text-gray-600 dark:text-gray-400 text-lg">{t('research.subtitle')}</p>
         </motion.div>
 
         {/* Google Scholar Banner */}
@@ -210,7 +212,7 @@ export default function Blog() {
               <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2" />
               <div className="absolute bottom-0 left-0 w-32 h-32 bg-white/10 rounded-full translate-y-1/2 -translate-x-1/2" />
               
-              <div className="relative flex flex-col md:flex-row items-center gap-6">
+                <div className="relative flex flex-col md:flex-row items-center gap-6">
                 {/* Icon */}
                 <div className="flex-shrink-0 w-16 h-16 md:w-20 md:h-20 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center">
                   <GraduationCap className="w-10 h-10 md:w-12 md:h-12 text-white" />
@@ -219,20 +221,20 @@ export default function Blog() {
                 {/* Content */}
                 <div className="flex-1 text-center md:text-left">
                   <h3 className="text-xl md:text-2xl font-bold text-white mb-2">
-                    Google Scholar Profile
+                    {t('research.googleScholar')}
                   </h3>
                   <p className="text-blue-100 text-sm md:text-base mb-3">
-                    View my complete academic publication history, citations, and research metrics
+                    {t('research.scholarDesc')}
                   </p>
                   <div className="flex flex-wrap gap-3 justify-center md:justify-start">
                     <span className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-white text-xs font-medium">
-                      Machine Learning
+                      {t('scholar.machineLearning')}
                     </span>
                     <span className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-white text-xs font-medium">
-                      Artificial Intelligence
+                      {t('scholar.artificialIntelligence')}
                     </span>
                     <span className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-white text-xs font-medium">
-                      University of Ottawa
+                      {t('scholar.uottawa')}
                     </span>
                   </div>
                 </div>
@@ -258,7 +260,7 @@ export default function Blog() {
               }`}
             >
               <FileText className="w-5 h-5" />
-              Blogs ({blogPosts.length})
+              {t('research.blogs')} ({blogPosts.length})
             </button>
             <button
               onClick={() => setActiveTab('research')}
@@ -269,7 +271,7 @@ export default function Blog() {
               }`}
             >
               <FlaskConical className="w-5 h-5" />
-              Research ({publishedPapers.length + researchPosts.length})
+              {t('research.researchTab')} ({publishedPapers.length + researchPosts.length})
             </button>
           </div>
         </div>
@@ -279,7 +281,7 @@ export default function Blog() {
           <div className="max-w-4xl mx-auto">
             {loading ? (
               <div className="text-center py-20">
-                <p className="text-gray-600 dark:text-gray-400">Loading posts...</p>
+                <p className="text-gray-600 dark:text-gray-400">{t('common.loading')}</p>
               </div>
             ) : error ? (
               <div className="text-center py-20">
@@ -302,11 +304,11 @@ export default function Blog() {
                 <div className="mb-8">
                   <h2 className="text-3xl font-bold mb-2 flex items-center gap-3 dark:text-white">
                     <FileText className="w-8 h-8 text-blue-500" />
-                    Blog Posts
+                    {t('research.blogPosts')}
                   </h2>
-                  <p className="text-gray-600 dark:text-gray-400 mb-2">Personal insights, tutorials, and thoughts</p>
+                  <p className="text-gray-600 dark:text-gray-400 mb-2">{t('research.blogDescription')}</p>
                   <p className="text-xs text-gray-500 dark:text-gray-500 italic">
-                    Content synced from Notion workspace
+                    {t('research.notionIntegrated')}
                   </p>
                 </div>
                 {blogPosts.length > 0 ? (
@@ -314,8 +316,8 @@ export default function Blog() {
                 ) : (
                   <div className="text-center py-20 bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700">
                     <FileText className="w-16 h-16 text-gray-300 dark:text-gray-600 mx-auto mb-4" />
-                    <h3 className="text-2xl font-bold mb-2 text-gray-700 dark:text-gray-200">No Blog Posts Yet</h3>
-                    <p className="text-gray-500 dark:text-gray-400">Check back soon for new blog content!</p>
+                    <h3 className="text-2xl font-bold mb-2 text-gray-700 dark:text-gray-200">{t('research.noBlogPosts')}</h3>
+                    <p className="text-gray-500 dark:text-gray-400">{t('research.stayTuned')}</p>
                   </div>
                 )}
               </div>
@@ -324,9 +326,9 @@ export default function Blog() {
                 <div className="mb-8">
                   <h2 className="text-3xl font-bold mb-2 flex items-center gap-3 dark:text-white">
                     <FlaskConical className="w-8 h-8 text-purple-500" />
-                    Published Research Papers
+                    {t('research.publishedPapers')}
                   </h2>
-                  <p className="text-gray-600 dark:text-gray-400">Peer-reviewed academic research and publications</p>
+                  <p className="text-gray-600 dark:text-gray-400">{t('research.peerReviewed')}</p>
                 </div>
 
                 {/* Published Papers Section */}
@@ -344,7 +346,7 @@ export default function Blog() {
                         <div className="flex flex-wrap items-center gap-3 mb-4">
                           <span className="px-3 py-1 bg-red-600 text-white text-xs font-bold rounded-full flex items-center gap-1">
                             <Award className="w-3 h-3" />
-                            Published
+                            {t('research.published')}
                           </span>
                           <span className="px-3 py-1 bg-purple-100 dark:bg-purple-900/50 text-purple-700 dark:text-purple-300 text-xs font-semibold rounded-full">
                             {paper.venue}
@@ -354,7 +356,7 @@ export default function Blog() {
 
                         {/* Title */}
                         <h3 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-3 leading-tight">
-                          {paper.title}
+                          {t(paper.titleKey)}
                         </h3>
 
                         {/* Authors */}
@@ -364,7 +366,7 @@ export default function Blog() {
 
                         {/* Abstract */}
                         <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-4 line-clamp-3">
-                          {paper.abstract}
+                          {t(paper.abstractKey)}
                         </p>
 
                         {/* Subjects/Tags */}
@@ -385,7 +387,7 @@ export default function Blog() {
                             className="inline-flex items-center gap-2 px-5 py-2.5 bg-purple-600 text-white rounded-full text-sm font-semibold hover:bg-purple-700 transition-colors"
                           >
                             <ExternalLink className="w-4 h-4" />
-                            View on arXiv
+                            {t('research.viewOnArxiv')}
                           </a>
                           <a
                             href={paper.pdfUrl}
@@ -394,7 +396,7 @@ export default function Blog() {
                             className="inline-flex items-center gap-2 px-5 py-2.5 bg-white dark:bg-gray-800 border border-purple-200 dark:border-purple-700 text-purple-700 dark:text-purple-300 rounded-full text-sm font-semibold hover:bg-purple-50 dark:hover:bg-purple-900/30 transition-colors"
                           >
                             <Download className="w-4 h-4" />
-                            Download PDF
+                            {t('research.downloadPdf')}
                           </a>
                         </div>
                       </div>
@@ -407,7 +409,7 @@ export default function Blog() {
                   <div>
                     <h3 className="text-2xl font-bold mb-4 flex items-center gap-3 dark:text-white">
                       <FileText className="w-6 h-6 text-purple-500" />
-                      Other Research Content
+                      {t('research.otherResearch')}
                     </h3>
                     {renderPosts(researchPosts)}
                   </div>
@@ -421,7 +423,7 @@ export default function Blog() {
       {/* Get in touch */}
       <div className="relative z-10 container mx-auto px-4 pb-24">
         <div className="flex flex-wrap justify-center items-center gap-4">
-          <span className="font-medium text-gray-800 dark:text-gray-300">Get in touch:</span>
+          <span className="font-medium text-gray-800 dark:text-gray-300">{t('common.getInTouch')}</span>
           <Link 
             href="https://github.com/alikhreis7" 
             target="_blank"
@@ -449,7 +451,7 @@ export default function Blog() {
             className="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-medium transition-all hover:scale-105"
           >
             <Download className="w-5 h-5" />
-            Download Resume
+            {t('common.downloadResume')}
           </Link>
         </div>
       </div>

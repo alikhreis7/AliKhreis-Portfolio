@@ -6,15 +6,16 @@ import { useSearchParams, useRouter } from 'next/navigation'
 import { Github, Linkedin, Mail, Folder, Download, ArrowRight, Code, Briefcase, Brain, Eye, Bot } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { Navigation } from '../components/Navigation'
+import { useLanguage } from '../components/LanguageProvider'
 
 type Project = {
   slug: string
-  title: string
-  shortDescription: string
-  category: string
-  developmentType: string
+  titleKey: string
+  shortDescKey: string
+  categoryKey: string
   image: string
   company?: string
+  companyKey?: string
   projectType: 'personal' | 'company' | 'ml' | 'mv' | 'genai'
   isPinned?: boolean
 }
@@ -23,10 +24,9 @@ const allProjects: Project[] = [
   // PINNED: Personal Portfolio - Always First
   {
     slug: 'portfolio',
-    title: 'Personal Portfolio 💼',
-    shortDescription: 'Personal website built to showcase my work and projects',
-    category: 'Frontend Development',
-    developmentType: 'Frontend Development',
+    titleKey: 'proj.portfolio.title',
+    shortDescKey: 'proj.portfolio.shortDesc',
+    categoryKey: 'proj.portfolio.category',
     image: '/portfoliopic.jpg',
     projectType: 'personal',
     isPinned: true
@@ -34,181 +34,167 @@ const allProjects: Project[] = [
   // January 2026 - GenAI & Agents Projects (Newest)
   {
     slug: 'sra-intelligence',
-    title: 'SRA Intelligence Agent',
-    shortDescription: 'AI-powered Security Risk Assessment agent built at Kinaxis Hackathon 2025',
-    category: 'GenAI & Agents',
-    developmentType: 'GenAI & Agents',
+    titleKey: 'proj.sraIntelligence.title',
+    shortDescKey: 'proj.sraIntelligence.shortDesc',
+    categoryKey: 'proj.sraIntelligence.category',
     image: '/sra-intelligence.jpg',
     company: 'Kinaxis',
     projectType: 'genai'
   },
   {
     slug: 'code-review-agent',
-    title: 'AI Code Review Agent',
-    shortDescription: 'Multi-agent GenAI system using GPT-4o and LangGraph for automated PR analysis',
-    category: 'GenAI & Agents',
-    developmentType: 'GenAI & Agents',
+    titleKey: 'proj.codeReviewAgent.title',
+    shortDescKey: 'proj.codeReviewAgent.shortDesc',
+    categoryKey: 'proj.codeReviewAgent.category',
     image: '/code-review-agent.jpg',
     projectType: 'genai'
   },
   {
     slug: 'genai-policy-agents',
-    title: 'Enterprise Policy Intelligence Agent',
-    shortDescription: 'Multi-agent GenAI system using RAG and LangGraph for policy decision support',
-    category: 'GenAI & Agents',
-    developmentType: 'GenAI & Agents',
+    titleKey: 'proj.policyAgents.title',
+    shortDescKey: 'proj.policyAgents.shortDesc',
+    categoryKey: 'proj.policyAgents.category',
     image: '/genai-policy-agents.jpg',
     projectType: 'genai'
   },
   {
     slug: 'fair-ai-data',
-    title: 'Fair AI Data Preprocessing Toolkit',
-    shortDescription: 'Bias mitigation techniques for fair machine learning - ELG 5195 Research Project',
-    category: 'GenAI & Agents',
-    developmentType: 'GenAI & Agents',
+    titleKey: 'proj.fairAI.title',
+    shortDescKey: 'proj.fairAI.shortDesc',
+    categoryKey: 'proj.fairAI.category',
     image: '/fair-ai-data.jpg',
     projectType: 'genai'
   },
   // January 2026 - Machine Learning Projects (Newest)
   {
     slug: 'unsupervisedlearning',
-    title: 'Neural Networks & Unsupervised Learning',
-    shortDescription: 'Project built during Masters in Applied AI/ML at uOttawa',
-    category: 'Machine Learning',
-    developmentType: 'Machine Learning',
+    titleKey: 'proj.unsupervisedLearning.title',
+    shortDescKey: 'proj.unsupervisedLearning.shortDesc',
+    categoryKey: 'proj.unsupervisedLearning.category',
     image: '/unsupervisedlearning.jpg',
     projectType: 'ml'
   },
   {
     slug: 'neuralnetworks',
-    title: 'Neural Networks & Power Forecasting',
-    shortDescription: 'Project built during Masters in Applied AI/ML at uOttawa',
-    category: 'Machine Learning',
-    developmentType: 'Machine Learning',
+    titleKey: 'proj.neuralNetworksPower.title',
+    shortDescKey: 'proj.neuralNetworksPower.shortDesc',
+    categoryKey: 'proj.neuralNetworksPower.category',
     image: '/neuralnetworks.jpg',
     projectType: 'ml'
   },
   {
     slug: 'logisticregression',
-    title: 'Logistic Regression Classification',
-    shortDescription: 'Project built during Masters in Applied AI/ML at uOttawa',
-    category: 'Machine Learning',
-    developmentType: 'Machine Learning',
+    titleKey: 'proj.logisticRegression.title',
+    shortDescKey: 'proj.logisticRegression.shortDesc',
+    categoryKey: 'proj.logisticRegression.category',
     image: '/logisticregression.jpg',
     projectType: 'ml'
   },
   {
     slug: 'linearregression',
-    title: 'Linear Regression Machine Learning Model',
-    shortDescription: 'Project built during Masters in Applied AI/ML at uOttawa',
-    category: 'Machine Learning',
-    developmentType: 'Machine Learning',
+    titleKey: 'proj.linearRegression.title',
+    shortDescKey: 'proj.linearRegression.shortDesc',
+    categoryKey: 'proj.linearRegression.category',
     image: '/linearregression.jpg',
     projectType: 'ml'
   },
   // January 2026 - Machine Vision Projects (Newest)
   {
     slug: 'mvchallenge',
-    title: 'Machine Vision Challenge',
-    shortDescription: 'Project built during Masters in Applied AI/ML at uOttawa',
-    category: 'Machine Vision',
-    developmentType: 'Machine Vision',
+    titleKey: 'proj.mvChallenge.title',
+    shortDescKey: 'proj.mvChallenge.shortDesc',
+    categoryKey: 'proj.mvChallenge.category',
     image: '/mvchallenge.jpg',
     projectType: 'mv'
   },
   {
     slug: 'motiondetection',
-    title: 'Motion Detection in Image Sequences',
-    shortDescription: 'Project built during Masters in Applied AI/ML at uOttawa',
-    category: 'Machine Vision',
-    developmentType: 'Machine Vision',
+    titleKey: 'proj.motionDetection.title',
+    shortDescKey: 'proj.motionDetection.shortDesc',
+    categoryKey: 'proj.motionDetection.category',
     image: '/motiondetection.jpg',
     projectType: 'mv'
   },
   {
     slug: 'edgedetection',
-    title: 'Image Filtering & Edge Detection Study',
-    shortDescription: 'Project built during Masters in Applied AI/ML at uOttawa',
-    category: 'Machine Vision',
-    developmentType: 'Machine Vision',
+    titleKey: 'proj.edgeDetection.title',
+    shortDescKey: 'proj.edgeDetection.shortDesc',
+    categoryKey: 'proj.edgeDetection.category',
     image: '/edgedetection.jpg',
     projectType: 'mv'
   },
   {
     slug: 'pinholecamera',
-    title: 'Color Pinhole Camera Simulator',
-    shortDescription: 'Project built during Masters in Applied AI/ML at uOttawa',
-    category: 'Machine Vision',
-    developmentType: 'Machine Vision',
+    titleKey: 'proj.pinholecamera.title',
+    shortDescKey: 'proj.pinholecamera.shortDesc',
+    categoryKey: 'proj.pinholecamera.category',
     image: '/pinholecamera.jpg',
     projectType: 'mv'
   },
   // December 2025
   {
     slug: 'syllabussync',
-    title: 'SyllabusSync',
-    shortDescription: 'Capstone project built final year during Bachelors in Software Engineering',
-    category: 'Full Stack Development',
-    developmentType: 'Full Stack Development',
+    titleKey: 'proj.syllabussync.title',
+    shortDescKey: 'proj.syllabussync.shortDesc',
+    categoryKey: 'proj.syllabussync.category',
     image: '/project1.jpg',
     projectType: 'personal'
   },
   // May-November 2024
   {
     slug: 'agroclimate',
-    title: 'Agroclimate Impact Reporter',
-    shortDescription: 'Built during CO-OP at Agriculture and Agri-Food Canada',
-    category: 'Full Stack Development',
-    developmentType: 'Full Stack Development',
+    titleKey: 'proj.agroclimate.title',
+    shortDescKey: 'proj.agroclimate.shortDesc',
+    categoryKey: 'proj.agroclimate.category',
     image: '/agroclimate.jpg',
     company: 'Agriculture and Agri-Food Canada',
+    companyKey: 'exp.aafc.company',
     projectType: 'company'
   },
   // October 2023
   {
     slug: 'calculator',
-    title: 'Calculator App',
-    shortDescription: 'App built second year during Bachelors in Software Engineering',
-    category: 'Backend Development',
-    developmentType: 'Backend Development',
+    titleKey: 'proj.calculator.title',
+    shortDescKey: 'proj.calculator.shortDesc',
+    categoryKey: 'proj.calculator.category',
     image: '/calculator.jpg',
     projectType: 'personal'
   },
   // May-September 2023
   {
     slug: 'cira',
-    title: 'Internet Performance Test',
-    shortDescription: 'Built during CO-OP at CIRA (Canadian Internet Registration Authority)',
-    category: 'Frontend Development',
-    developmentType: 'Frontend Development',
+    titleKey: 'proj.cira.title',
+    shortDescKey: 'proj.cira.shortDesc',
+    categoryKey: 'proj.cira.category',
     image: '/cira.jpg',
     company: 'CIRA',
+    companyKey: 'exp.cira.company',
     projectType: 'company'
   },
   // June 2023
   {
     slug: 'salon',
-    title: 'Elegance Salon',
-    shortDescription: 'Project built third year during Bachelors in Software Engineering',
-    category: 'Frontend Development',
-    developmentType: 'Frontend Development',
+    titleKey: 'proj.salon.title',
+    shortDescKey: 'proj.salon.shortDesc',
+    categoryKey: 'proj.salon.category',
     image: '/salon.jpg',
     projectType: 'personal'
   },
   // September 2022 - April 2023
   {
     slug: 'fishingbc',
-    title: 'FishingBC App',
-    shortDescription: 'Built during CO-OP at Fisheries and Oceans Canada',
-    category: 'Full Stack Development',
-    developmentType: 'Full Stack Development',
+    titleKey: 'proj.fishingbc.title',
+    shortDescKey: 'proj.fishingbc.shortDesc',
+    categoryKey: 'proj.fishingbc.category',
     image: '/fishingbc.jpg',
     company: 'Fisheries and Oceans Canada',
+    companyKey: 'exp.dfo.company',
     projectType: 'company'
   }
 ]
 
 export default function Projects() {
+  const { t } = useLanguage()
   const searchParams = useSearchParams()
   const router = useRouter()
   
@@ -299,11 +285,11 @@ export default function Projects() {
       <div className="container mx-auto px-4 py-12">
         <div className="flex justify-between items-center mb-8">
           <Link href="/" className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">
-            <span className="text-lg">← Back to home</span>
+            <span className="text-lg">{t('projects.backToHome')}</span>
           </Link>
           <div className="flex items-center gap-2">
             <Folder className="w-6 h-6 text-blue-500" />
-            <span className="font-semibold text-xl dark:text-white">My Projects</span>
+            <span className="font-semibold text-xl dark:text-white">{t('projectDetail.myProjects')}</span>
           </div>
         </div>
 
@@ -313,13 +299,13 @@ export default function Projects() {
           animate={{ opacity: 1, y: 0 }}
           className="mb-12"
         >
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 dark:text-white">Projects</h1>
-          <p className="text-gray-600 dark:text-gray-400 text-lg">Explore my work across different domains and technologies</p>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 dark:text-white">{t('projects.title')}</h1>
+          <p className="text-gray-600 dark:text-gray-400 text-lg">{t('projects.subtitle')}</p>
         </motion.div>
 
         {/* Filters Section */}
         <div className="mb-12">
-          <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-4">Filter by Project Type</h3>
+          <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-4">{t('projects.filterByType')}</h3>
           <div className="flex flex-wrap gap-3">
             <button
               onClick={() => handleFilterChange('all')}
@@ -329,7 +315,7 @@ export default function Projects() {
                   : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 shadow-sm'
               }`}
             >
-              All Projects
+              {t('projects.allProjects')}
             </button>
             <button
               onClick={() => handleFilterChange('personal')}
@@ -340,7 +326,7 @@ export default function Projects() {
               }`}
             >
               <Code className="w-4 h-4" />
-              Academic
+              {t('projects.academic')}
             </button>
             <button
               onClick={() => handleFilterChange('company')}
@@ -351,7 +337,7 @@ export default function Projects() {
               }`}
             >
               <Briefcase className="w-4 h-4" />
-              Company Projects
+              {t('projects.companyProjects')}
             </button>
             <button
               onClick={() => handleFilterChange('ml')}
@@ -362,7 +348,7 @@ export default function Projects() {
               }`}
             >
               <Brain className="w-4 h-4" />
-              Machine Learning
+              {t('projects.machineLearning')}
             </button>
             <button
               onClick={() => handleFilterChange('mv')}
@@ -373,7 +359,7 @@ export default function Projects() {
               }`}
             >
               <Eye className="w-4 h-4" />
-              Machine Vision
+              {t('projects.machineVision')}
             </button>
             <button
               onClick={() => handleFilterChange('genai')}
@@ -384,7 +370,7 @@ export default function Projects() {
               }`}
             >
               <Bot className="w-4 h-4" />
-              GenAI & Agents
+              {t('projects.genaiAgents')}
             </button>
           </div>
         </div>
@@ -393,7 +379,7 @@ export default function Projects() {
         <div className="max-w-4xl">
           {filteredProjects.length === 0 ? (
             <div className="text-center py-20">
-              <p className="text-gray-500 dark:text-gray-400 text-lg">No projects match your filters</p>
+              <p className="text-gray-500 dark:text-gray-400 text-lg">{t('projects.noProjects')}</p>
             </div>
           ) : (
             <div className="space-y-4">
@@ -416,22 +402,22 @@ export default function Projects() {
                               {getProjectIcon(project.projectType)}
                             </div>
                             <span className={`px-3 py-1 ${getCategoryBadgeColor(project.projectType)} rounded-full text-xs font-semibold`}>
-                              {project.category}
+                              {t(project.categoryKey)}
                             </span>
                             {project.company && (
                               <span className="text-sm text-gray-500 dark:text-gray-400">
-                                • {project.company}
+                                • {project.companyKey ? t(project.companyKey) : project.company}
                               </span>
                             )}
                           </div>
                           <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors mb-1">
-                            {project.title}
+                            {t(project.titleKey)}
                           </h3>
                           <p className="text-gray-600 dark:text-gray-400 text-sm md:text-base mb-2">
-                            {project.shortDescription}
+                            {t(project.shortDescKey)}
                           </p>
                           <p className="text-gray-400 dark:text-gray-500 text-xs md:text-sm">
-                            Click to view details →
+                            {t('projects.clickToView')}
                           </p>
                         </div>
                         <div className="flex items-center justify-end">
@@ -452,7 +438,7 @@ export default function Projects() {
       {/* Get in touch */}
       <div className="relative z-10 container mx-auto px-4 pb-24 mt-12">
         <div className="flex flex-wrap justify-center items-center gap-4">
-          <span className="font-medium text-gray-800 dark:text-gray-300">Get in touch:</span>
+          <span className="font-medium text-gray-800 dark:text-gray-300">{t('common.getInTouch')}</span>
           <Link 
             href="https://github.com/alikhreis7" 
             target="_blank"
@@ -480,7 +466,7 @@ export default function Projects() {
             className="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-medium transition-all hover:scale-105"
           >
             <Download className="w-5 h-5" />
-            Download Resume
+            {t('common.downloadResume')}
           </Link>
           <Link 
             href="/Ali-K-Resume.pdf" 

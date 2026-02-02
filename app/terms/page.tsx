@@ -1,47 +1,61 @@
+'use client'
+
+import { useLanguage } from '../components/LanguageProvider'
+import { Navigation } from '../components/Navigation'
+import Link from 'next/link'
+
 export default function TermsOfUse() {
+  const { t } = useLanguage()
+  
   return (
-    <div className="min-h-screen w-full bg-white py-16 px-4">
+    <div className="min-h-screen w-full bg-white dark:bg-gray-900 py-16 px-4 transition-colors duration-300">
       <div className="max-w-3xl mx-auto">
-        <h1 className="text-4xl font-bold mb-8">Terms of Use</h1>
+        <Link href="/" className="text-blue-600 dark:text-blue-400 hover:underline mb-8 block">
+          {t('contact.backToHome')}
+        </Link>
         
-        <div className="space-y-6 text-gray-700">
+        <h1 className="text-4xl font-bold mb-8 dark:text-white">{t('terms.title')}</h1>
+        
+        <div className="space-y-6 text-gray-700 dark:text-gray-300">
           <section>
-            <h2 className="text-2xl font-semibold mb-4">Introduction</h2>
-            <p>Last updated: {new Date().toLocaleDateString()}</p>
+            <h2 className="text-2xl font-semibold mb-4 dark:text-white">{t('terms.introduction')}</h2>
+            <p>{t('terms.lastUpdated')} {new Date().toLocaleDateString()}</p>
             <p className="mt-4">
-              These Terms of Use govern your access to and use of my blog at alikhreis.ca/blog (&quot;the Blog&quot;).
+              {t('terms.introText')}
             </p>
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold mb-4">Content Usage</h2>
+            <h2 className="text-2xl font-semibold mb-4 dark:text-white">{t('terms.contentUsage')}</h2>
             <p>
-              All content provided on the Blog is for informational purposes only. The content represents my personal opinions and experiences. You may not reproduce, distribute, modify, create derivative works of, publicly display, publicly perform, republish, download, store, or transmit any of the material on the Blog without my prior written consent.
+              {t('terms.contentUsageText')}
             </p>
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold mb-4">Third-Party Links</h2>
+            <h2 className="text-2xl font-semibold mb-4 dark:text-white">{t('terms.thirdPartyLinks')}</h2>
             <p>
-              The Blog may contain links to third-party websites or services that are not owned or controlled by me. I have no control over, and assume no responsibility for, the content, privacy policies, or practices of any third-party websites or services.
+              {t('terms.thirdPartyLinksText')}
             </p>
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold mb-4">Changes to Terms</h2>
+            <h2 className="text-2xl font-semibold mb-4 dark:text-white">{t('terms.changesToTerms')}</h2>
             <p>
-              I reserve the right to modify or replace these Terms of Use at any time. If a revision is material, I will try to provide at least 30 days&apos; notice prior to any new terms taking effect.
+              {t('terms.changesToTermsText')}
             </p>
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold mb-4">Contact</h2>
+            <h2 className="text-2xl font-semibold mb-4 dark:text-white">{t('terms.contactSection')}</h2>
             <p>
-              For any questions about these Terms of Use, please contact me at alikhreis12@gmail.com.
+              {t('terms.contactText')}
             </p>
           </section>
         </div>
       </div>
+      
+      <Navigation currentPath="/terms" />
     </div>
   )
-} 
+}
